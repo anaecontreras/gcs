@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - G.C.S.</title>
+    <link href="./assets/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="head">
+            <img class="logo1" src="./assets/cintillo Mincyt.png" alt="">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span id="user-welcome" style="color: white; font-weight: 600;"></span>
+                <button id="btn-logout" class="button1" style="padding: 0.3rem 1rem; font-size: 0.9rem;">Salir</button>
+            </div>
+        </div>
+        <nav class="navbar">
+            <ul class="navbar-menu" id="navbar-menu"></ul>
+            <h3>Usuario: <span id="user-name"></span> </h3>
+        </nav>
+    </header>
+
+    <main style="padding: 2rem; text-align: center;">
+        <img class="portada" src="./assets/portada.png" alt="">
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ana Contreras / Diana Sierra / Darwin Colmenares. Todos los derechos reservados.</p>
+    </footer>
+
+
+
+    <script src="./assets/bootstrap.bundle.min.js"></script>
+    <script src="./assets/script2.js"></script>
+
+    <!-- Modal (colócalo fuera del navbar, al final del body) -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Acerca de..</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    Plataforma Web Centralizada para la Gestión de Contingencias Satelitales<br><br>
+                    CANTV / GGPM / Gerencia Programa Plataforma Satelital
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cambiar Contraseña -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">Cambiar Contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="mb-3">
+                            <label for="current_password" class="form-label">Contraseña actual</label>
+                            <input type="password" class="form-control" id="current_password" required minlength="8">
+                        </div>
+                        <div class="mb-3">
+                            <label for="new_password" class="form-label">Nueva contraseña</label>
+                            <input type="password" class="form-control" id="new_password" required minlength="8">
+                        </div>
+                        <div class="mb-3">
+                            <label for="new_password_confirmation" class="form-label">Confirmar nueva contraseña</label>
+                            <input type="password" class="form-control" id="new_password_confirmation" required
+                                minlength="8">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="savePasswordBtn">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

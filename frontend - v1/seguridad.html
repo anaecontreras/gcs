@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seguridad - G.C.S.</title>
+    <link href="./assets/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="./assets/datatables.min.css">
+    <link rel="stylesheet" href="./assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="head">
+            <img class="logo1" src="./assets/cintillo Mincyt.png" alt="" />
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span id="user-welcome" style="color: white; font-weight: 600;"></span>
+                <!-- <button id="btn-logout" class="btn btn-sm button1">Salir</button> -->
+                <a href="./dashboard.html" class="btn btn-sm button1">← Volver al Dashboard</a>
+            </div>
+        </div>
+        <nav class="navbar">
+            <h3>Gestión de Usuarios</h3>
+            <h3>Usuario: <span id="user-name"></span></h3>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="container mt-4">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="tabla">
+                <thead class="table table-dark table-sm">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Unidad Operativa</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="users-table-body">
+                    <!-- Los datos se llenarán con JS -->
+                </tbody>
+            </table>
+            <div class="text-center mt-3 mb-0">
+                <!-- <a class="btn btn-sm btn-outline-primary d-block mx-auto" href="#" role="button">Agregar Usuario</a> -->
+                <button type="button" class="btn btn-sm btn-outline-primary d-block mx-auto" data-bs-toggle="modal"
+                    data-bs-target="#addUserModal">
+                    Agregar Usuario
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ana Contreras / Diana Sierra / Darwin Colmenares. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./assets/jquery-3.7.1.js"></script>
+    <script src="./assets/bootstrap.bundle.min.js"></script>
+    <script src="./assets/dataTables.js"></script>
+    <script src="./assets/dataTables.bootstrap5.js"></script>
+
+    <!-- Modal Agregar Usuario -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Agregar Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" minlength="8" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="password_confirmation" minlength="8"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rol_id" class="form-label">Rol</label>
+                            <select class="form-select" id="rol_id" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Supervisor</option>
+                                <option value="3">Operador</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="unidad_operativa" class="form-label">Unidad Operativa</label>
+                            <input type="text" class="form-control" id="unidad_operativa" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveUserBtn">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Usuario -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <input type="hidden" id="edit_user_id">
+                        <div class="mb-3">
+                            <label for="edit_name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="edit_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_rol_id" class="form-label">Rol</label>
+                            <select class="form-select" id="edit_rol_id" required>
+                                <option value="1">Administrador</option>
+                                <option value="2">Supervisor</option>
+                                <option value="3">Operador</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_unidad_operativa" class="form-label">Unidad Operativa</label>
+                            <input type="text" class="form-control" id="edit_unidad_operativa" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="updateUserBtn">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/script3.js"></script>
+
+</body>
+
+</html>

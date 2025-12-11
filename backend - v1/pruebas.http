@@ -1,0 +1,39 @@
+### Lista de estudiantes
+GET http://127.0.0.1:8000/api/students 
+
+### Carga un estudiante
+POST http://127.0.0.1:8000/api/students 
+content-type: application/json
+
+{
+    "name": "flash",
+    "email": "rapidin@gmail.com",
+    "phone": "2220",
+    "language": "Java"
+}
+
+### Muestra un solo estudiante
+GET http://127.0.0.1:8000/api/students/4
+
+### Borra un estudiante
+DELETE  http://127.0.0.1:8000/api/students/3
+
+### Modifica todos los datos de un estudiante
+PUT  http://127.0.0.1:8000/api/students/5 
+content-type: application/json
+
+{
+    "name": "Superman II",
+    "email": "Clark@gmail.com",
+    "phone": "000000",
+    "language": "Python"
+}
+
+### Modifica uno o mas datos de un estudiante
+PATCH http://127.0.0.1:8000/api/students/5
+content-type: application/json
+
+{
+    "phone": "252589"
+}
+

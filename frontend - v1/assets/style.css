@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg: #ffffff;
+    --bg-form: #000035;
+    --bg-input: #191949;
+    --text: #000000;
+    --text-blanco: #ffffff;
+    --btn-hover: #341f97;
+    --btn-llamativo: #ff5733;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+header .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.head .logo1 {
+    width: 14rem;
+    height: 4rem;
+}
+
+.head .logo2 {
+    width: 9rem;
+    height: 3.5rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--bg-input);
+    width: 100%;
+    height: 2rem;
+}
+
+.navbar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+.navbar-menu li {
+    margin: 0;
+}
+
+.navbar-menu a {
+    color: var(--text-blanco);
+    text-decoration: none;
+}
+
+.navbar-menu a:hover {
+    color: var(--btn-llamativo);
+    text-decoration: underline;
+}
+
+.navbar h3 {
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-blanco);
+}
+
+.navbar span {
+    margin-right: 0.5rem;
+    color: var(--text-blanco);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6rem;
+}
+
+.portada {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    max-width: 42rem;
+    width: 100%;
+    text-align: center;
+}
+
+.form {
+    max-width: 25rem;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: var(--bg-form);
+    border-radius: 25px;
+    transition: .4s ease-in-out;
+}
+
+.form:hover {
+    transform: scale(1.05);
+    border: 1px solid black;
+}
+
+#heading {
+    text-align: center;
+    margin: 2em;
+    color: var(--text-blanco);
+    font-size: 1.2em;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: var(--bg-form);
+    box-shadow: inset 2px 5px 10px var(--bg-input);
+}
+
+.input-icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: white;
+}
+
+.input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: var(--text-blanco);
+}
+
+.form .btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 2.5em;
+}
+
+.button1 {
+    padding: 0.5em 2.1em 0.5em 2.1em;
+    padding-right: 2.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-color: #252525;
+    color: white;
+    margin-bottom: 0.1rem;
+    text-decoration: none;
+}
+
+.btn-login {
+    margin-bottom: 0.8rem;
+}
+
+.button1:hover {
+    background-color: var(--btn-hover);
+    color: white;
+    cursor: pointer;
+}
+
+table th,
+table td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+}

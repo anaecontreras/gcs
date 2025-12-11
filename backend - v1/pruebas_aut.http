@@ -1,0 +1,64 @@
+### Login de usuario
+POST http://127.0.0.1:8000/api/auth/login 
+content-type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "12345678"
+}
+
+### Registro de usuario
+POST http://127.0.0.1:8000/api/auth/register 
+content-type: application/json
+Authorization: Bearer 40|O2zgnnv2A2BoUMjlKYn7kvFfLZBCRSRoNjuozDfR55d1e5c4
+
+{
+    "rol_id": 3,
+    "email": "dienciocho@gmail.com",
+    "password": "12345678",
+    "password_confirmation": "12345678",
+    "name": "Usuario dienciocho",
+    "unidad_operativa": "El Marquez"
+}
+
+### Cambio Contraseña de usuario activo
+POST http://127.0.0.1:8000/api/auth/change-password 
+content-type: application/json
+Authorization: Bearer 6|8OtsvwFbKgKFkCYBByF1unxkehdJkiNZhX8A9Desfe7e75c3
+
+{
+    "current_password": "87654321",
+    "new_password": "12345678",
+    "new_password_confirmation": "12345678"
+}
+
+### Cambio Datos Básicos de usuario (rol, name, unidad_operativa)
+POST http://127.0.0.1:8000/api/auth/change-data-basic 
+content-type: application/json
+Authorization: Bearer 12|pT9CPPyhfV9kQ3xOmrakQawNlTSUy2OA5xNZUiE6942fe4c8    
+
+{
+    "user_id": 2,
+    "name": "Lucas Adams"
+    "rol_id": 3
+    "unidad-operativa": "El Marquez"
+}
+
+### Inhabilitar Usuario
+POST http://127.0.0.1:8000/api/auth/disable-user 
+content-type: application/json
+Authorization: Bearer 12|pT9CPPyhfV9kQ3xOmrakQawNlTSUy2OA5xNZUiE6942fe4c8    
+
+{
+    "user_id": 3
+}
+
+### Listar todos los usuarios registrados
+GET http://127.0.0.1:8000/api/auth/showUsers 
+Content-Type: application/json
+Authorization: Bearer 35|V71IjL2buEbF2M3i7NbmmUmSeWJilaGxFcRXqMJ0ff7f99f3
+
+### Logout de usuario
+POST http://127.0.0.1:8000/api/auth/logout 
+Content-Type: application/json
+Authorization: Bearer 40|O2zgnnv2A2BoUMjlKYn7kvFfLZBCRSRoNjuozDfR55d1e5c4
