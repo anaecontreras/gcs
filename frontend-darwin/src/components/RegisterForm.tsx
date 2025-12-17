@@ -11,6 +11,7 @@ export default function RegisterForm() {
     nombre_completo: "",
     email: "",
     password: "",
+    password_confirmation: "",
     rol_id: "",
     unidad_operativa: "",
   })
@@ -29,12 +30,21 @@ export default function RegisterForm() {
     e.preventDefault()
     setError("")
     setSuccess("")
+
+    if (formData.password !== formData.password_confirmation) {
+      setError("Las contraseñas no coinciden")
+      return
+    }
+
     setLoading(true)
 
     try {
       await authService.register({
-        ...formData,
+        nombre_completo: formData.nombre_completo,
+        email: formData.email,
+        password: formData.password,
         rol_id: Number(formData.rol_id),
+        unidad_operativa: formData.unidad_operativa,
       })
       setSuccess("Usuario registrado exitosamente")
       window.location.href = "/"
@@ -93,6 +103,20 @@ export default function RegisterForm() {
             minLength={8}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Mínimo 8 caracteres"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña</label>
+          <input
+            type="password"
+            name="password_confirmation"
+            value={formData.password_confirmation}
+            onChange={handleChange}
+            required
+            minLength={8}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Repite tu contraseña"
           />
         </div>
 
