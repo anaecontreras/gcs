@@ -1,0 +1,5 @@
+### Lista de logs
+GET http://127.0.0.1:8000/api/logs/index 
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb

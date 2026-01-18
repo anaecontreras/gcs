@@ -24,4 +24,15 @@ class LogController extends Controller
             'log'     => $log,
         ], 201);
     }
+
+    public function index()
+    {
+        // Obtener todos los logs
+        $logs = Log::select('id', 'accion', 'usuario_correo', 'entidad_afectada', 'entidad_id', 'created_at')
+            ->get();
+
+        return response()->json([
+            'logs' => $logs,
+        ], 200);
+    }
 }

@@ -1,0 +1,73 @@
+### Lista de Documentos - API RESTful
+GET http://127.0.0.1:8000/api/documentos
+Accept: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+### Crear un Nuevo Documento - API RESTful
+POST http://127.0.0.1:8000/api/documentos/store
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+Accept: application/json
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="categoria_id"
+
+1
+--boundary
+Content-Disposition: form-data; name="titulo"
+
+Gúia de Bash
+--boundary
+Content-Disposition: form-data; name="version"
+
+1.0
+--boundary
+Content-Disposition: form-data; name="fecha_publicacion"
+
+2026-01-17
+
+--boundary
+Content-Disposition: form-data; name="archivo"; filename="manual2.pdf"
+Content-Type: application/pdf
+
+< ./manual2.pdf
+--boundary--
+
+### Editar Documento Existente - API RESTful
+POST http://127.0.0.1:8000/api/documentos/edit
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+Accept: application/json
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="id"
+
+1
+--boundary
+Content-Disposition: form-data; name="categoria_id"
+
+1
+--boundary
+Content-Disposition: form-data; name="titulo"
+
+Atajos VSCODE
+--boundary
+Content-Disposition: form-data; name="version"
+
+2.0
+--boundary
+Content-Disposition: form-data; name="archivo"; filename="nuevo_manual.pdf"
+Content-Type: application/pdf
+
+< ./manual.pdf
+--boundary--
+
+### Eliminar Documento y Archivo Físico
+DELETE http://127.0.0.1:8000/api/documentos/5
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+Accept: application/json
+
+### Descargar un Documento
+GET http://127.0.0.1:8000/api/documentos/download/6
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+Accept: application/json

@@ -1,0 +1,31 @@
+### Lista de roles
+GET http://127.0.0.1:8000/api/roles/index 
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+### Registro de rol
+POST http://127.0.0.1:8000/api/roles/store 
+Accept: application/json
+content-type: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+{
+    "rol": "Parasito"
+}
+
+### Editar un rol
+POST http://127.0.0.1:8000/api/roles/edit
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+{
+    "id": 5,
+    "rol": "Super Loco Supremo"
+}
+
+### Eliminar un rol
+DELETE http://127.0.0.1:8000/api/roles/delete/4
+Accept: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
