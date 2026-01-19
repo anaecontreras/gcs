@@ -63,4 +63,32 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function rol()
+    {
+        // Relación donde 'rol_id' en la tabla users apunta al 'id' de la tabla rol
+        return $this->belongsTo(Roles::class, 'rol_id');
+    }
+
+    // app/Models/User.php
+
+    public function documentos()
+    {
+        return $this->hasMany(Documento::class, 'usuario_creador_id');
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class, 'usuario_reporte_id');
+    }
+
+    public function eventosCalendario()
+    {
+        return $this->hasMany(Calendario::class, 'usuario_creador_id');
+    }
+
+    public function temasForo()
+    {
+        return $this->hasMany(TemasForo::class, 'usuario_creador_id');
+    }
 }

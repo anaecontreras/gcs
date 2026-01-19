@@ -17,4 +17,10 @@ class Blog extends Model
         'prioridad',
         'estado'
     ];
+
+    public function usuario()
+    {
+        // Relación donde 'usuario_reporte_id' apunta al 'id' de la tabla users
+        return $this->belongsTo(User::class, 'usuario_reporte_id');
+    }
 }

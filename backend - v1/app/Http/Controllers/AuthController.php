@@ -25,7 +25,7 @@ class AuthController extends Controller
         $password = $request->input('password');
 
         // Buscar al usuario por email
-        $user = User::where('email', $email)->first();
+        $user = User::with('rol')->where('email', $email)->first();
 
         // Si no existe o no está activo
         if (!$user || !$user->activo) {
@@ -338,19 +338,15 @@ class AuthController extends Controller
     {
         $user = $request->user();
 
-        // Validar que sea administrador
         if (!$user || $user->rol_id !== 1) {
-            return response()->json([
-                'message' => 'Acceso denegado. Solo administradores pueden ver la lista de usuarios.',
-            ], 403);
+            return response()->json(['message' => 'Acceso denegado.'], 403);
         }
 
-        // Obtener todos los usuarios, excluyendo el campo 'password'
-        $users = User::select('id', 'name', 'email', 'rol_id', 'unidad_operativa', 'activo', 'created_at', 'updated_at')
+        // Cargamos la relación 'rol'
+        $users = User::with('rol:id,rol') // Trae solo el ID y el nombre del rol
+            ->select('id', 'name', 'email', 'rol_id', 'unidad_operativa', 'activo', 'created_at', 'updated_at')
             ->get();
 
-        return response()->json([
-            'users' => $users,
-        ], 200);
+        return response()->json(['users' => $users], 200);
     }
 }

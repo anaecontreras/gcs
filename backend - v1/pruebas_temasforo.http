@@ -1,0 +1,35 @@
+@baseUrl = http://127.0.0.1:8000/api
+@token = 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+### Listar Temas
+GET {{baseUrl}}/temas-foro
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Crear Nuevo Tema
+POST {{baseUrl}}/temas-foro/store
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "titulo": "Discusion sobre las nuevas funcionalidades",
+    "estado": "Abierto"
+}
+
+### Editar Tema
+POST {{baseUrl}}/temas-foro/edit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": 1,
+    "titulo": "Discusion sobre normativa N3 (Actualizado)",
+    "estado": "Cerrado"
+}
+
+### Eliminar Tema
+DELETE {{baseUrl}}/temas-foro/delete/1
+Authorization: Bearer {{token}}
+Accept: application/json

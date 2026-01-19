@@ -11,8 +11,10 @@ class CalendarioController extends Controller
 {
     public function index()
     {
-        // Ordenado del más reciente al más viejo por fecha de creación
-        $eventos = Calendario::orderBy('created_at', 'desc')->get();
+        // Cargamos la relación 'creador' para mostrar quién agendó el evento
+        $eventos = Calendario::with('creador:id,name,email')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return response()->json([
             'calendario' => $eventos,

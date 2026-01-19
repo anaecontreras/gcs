@@ -10,13 +10,21 @@ use Illuminate\Support\Facades\Storage;
 
 class DocumentoController extends Controller
 {
+    // app/Http/Controllers/DocumentoController.php
+
     public function index()
     {
-        $documentos = Documento::all()->map(function ($doc) {
-            // Agregamos un campo virtual con la URL completa
-            $doc->url_archivo = asset('storage/' . $doc->ruta_archivo);
-            return $doc;
-        });
+        // Cargamos las relaciones 'categoria' y 'usuario' (solo campos necesarios)
+        $documentos = Documento::with([
+            'categoria:id,nombre_categoria',
+            'usuario:id,name,email'
+        ])
+            ->get()
+            ->map(function ($doc) {
+                // Agregamos la URL completa para el frontend
+                $doc->url_archivo = asset('storage/' . $doc->ruta_archivo);
+                return $doc;
+            });
 
         return response()->json($documentos, 200);
     }

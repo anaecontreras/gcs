@@ -11,4 +11,9 @@ class Categoriadoc extends Model
     protected $fillable = [
         'nombre_categoria'
     ];
+
+    public function documentos()
+    {
+        return $this->hasMany(Documento::class, 'categoria_id');
+    }
 }

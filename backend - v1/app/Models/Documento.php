@@ -16,4 +16,14 @@ class Documento extends Model
         'version',
         'fecha_publicacion'
     ];
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoriadoc::class, 'categoria_id');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'usuario_creador_id');
+    }
 }

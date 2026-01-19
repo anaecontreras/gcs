@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Calendario extends Model
+class TemasForo extends Model
 {
     use HasFactory;
 
-    protected $table = 'calendarios';
+    protected $table = 'temasforos';
 
     protected $fillable = [
         'usuario_creador_id',
         'titulo',
-        'fecha_inicio',
-        'fecha_fin'
+        'estado'
     ];
 
-    public function creador()
+    public function usuario()
     {
         // Relación donde 'usuario_creador_id' apunta al 'id' de la tabla users
         return $this->belongsTo(User::class, 'usuario_creador_id');

@@ -11,6 +11,8 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CalendarioController;
+use App\Http\Controllers\TemasforoController;
+use App\Http\Controllers\ComentariosforoController;
 
 Route::post('auth/login', [App\Http\Controllers\AuthController::class, 'login']);
 Route::post('auth/register', [App\Http\Controllers\AuthController::class, 'register']);
@@ -50,4 +52,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('calendario/store', [CalendarioController::class, 'store']);
     Route::post('calendario/edit', [CalendarioController::class, 'edit']);
     Route::delete('calendario/delete/{id}', [CalendarioController::class, 'destroy']);
+
+    Route::get('temas-foro', [TemasforoController::class, 'index']);
+    Route::post('temas-foro/store', [TemasforoController::class, 'store']);
+    Route::post('temas-foro/edit', [TemasforoController::class, 'edit']);
+    Route::delete('temas-foro/delete/{id}', [TemasforoController::class, 'destroy']);
+
+    Route::get('/comentarios', [ComentariosforoController::class, 'index']);
+    Route::post('/comentarios', [ComentariosforoController::class, 'store']);
+    Route::put('/comentarios', [ComentariosforoController::class, 'edit']);
+    Route::delete('/comentarios/{id}', [ComentariosforoController::class, 'destroy']);
 });

@@ -11,8 +11,10 @@ class BlogController extends Controller
 {
     public function index()
     {
-        // Ordenado del más reciente al más viejo
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        // Cargamos la relación 'usuario' trayendo solo id, name y email
+        $blogs = Blog::with('usuario:id,name,email')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return response()->json([
             'blogs' => $blogs,

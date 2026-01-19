@@ -56,7 +56,7 @@ Authorization: Bearer 12|pT9CPPyhfV9kQ3xOmrakQawNlTSUy2OA5xNZUiE6942fe4c8
 ### Listar todos los usuarios registrados
 GET http://127.0.0.1:8000/api/auth/showUsers 
 Content-Type: application/json
-Authorization: Bearer 102|NfJoQKumFmZWJYLzLdb53b7QQmTjWSzK3yg8x90r0c74eb90
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
 
 ### Logout de usuario
 POST http://127.0.0.1:8000/api/auth/logout 

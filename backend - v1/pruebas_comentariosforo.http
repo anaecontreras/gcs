@@ -1,0 +1,34 @@
+@baseUrl = http://localhost:8000/api
+@token = Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+### Listar Comentarios
+GET {{baseUrl}}/comentarios
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Crear Comentario
+POST {{baseUrl}}/comentarios
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "tema_id": 2,
+    "cuerpo": "Este es un segundo comentario para borrar"
+}
+
+### Editar Comentario
+PUT {{baseUrl}}/comentarios
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": 1,
+    "cuerpo": "Cuerpo del comentario actualizado."
+}
+
+### Eliminar Comentario
+DELETE {{baseUrl}}/comentarios/2
+Authorization: Bearer {{token}}
+Accept: application/json
