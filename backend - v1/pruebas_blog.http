@@ -1,0 +1,39 @@
+### Variables Globales
+@baseUrl = http://127.0.0.1:8000/api
+@token = 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+### 1. Listar Blogs (Ordenados del más reciente al más viejo)
+GET {{baseUrl}}/blog/index
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 2. Crear Nuevo Evento Crítico (Store)
+POST {{baseUrl}}/blog/store
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "usuario_reporte_id": 1,
+    "titulo": "Falla de Internet",
+    "prioridad": "Media",
+    "estado": "En Progreso"
+}
+
+### 3. Editar Evento (Cambiar a Cerrado)
+POST {{baseUrl}}/blog/edit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": 2,
+    "titulo": "Falla de servidor principal en Nodo N2",
+    "prioridad": "Alta",
+    "estado": "Cerrado"
+}
+
+### 5. Eliminar un Evento (Destroy)
+DELETE {{baseUrl}}/blog/delete/1
+Authorization: Bearer {{token}}
+Accept: application/json

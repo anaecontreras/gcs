@@ -1,0 +1,21 @@
+composer create-project laravel/laravel=^12.0 backend
+<< Ingresamos al directorio backend
+php artisan install:api
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+<< Creo las rutas en routes\api.php (get, post, put, delete)
+<< Creo la archivo de migración de la tabla a trabajar
+php artisan make:migration create_student_table
+<< Modificamos la tabla de migración y agregamos los campos requeridos
+php artisan migrate
+php artisan make:model Student
+<< Modificamos el modelo creado
+php artisan make:controller studentController
+
+.. config\app.php
+'timezone' => env('APP_TIMEZONE', 'UTC'),
+php artisan config:clear
+php artisan cache:clear
+
+.env
+APP_TIMEZONE=UTC
+DB_TIMEZONE=+00:00   // sólo para que la BD también declare UTC

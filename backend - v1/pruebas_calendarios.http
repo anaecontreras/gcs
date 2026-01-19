@@ -1,0 +1,34 @@
+@baseUrl = http://127.0.0.1:8000/api
+@token = 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+### Listar registros
+GET {{baseUrl}}/calendario/index
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Crear registro
+POST {{baseUrl}}/calendario/store
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "titulo": "Fiesta Celebracion",
+    "fecha_inicio": "2026-05-03 08:00:00",
+    "fecha_fin": "2026-05-03 12:00:00"
+}
+
+### Editar registro
+POST {{baseUrl}}/calendario/edit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "id": 1,
+    "titulo": "Mantenimiento Preventivo Core - ACTUALIZADO",
+    "fecha_inicio": "2026-03-01 09:00:00",
+    "fecha_fin": "2026-03-01 13:00:00"
+}
+
+### Eliminar registro
+DELETE {{baseUrl}}/calendario/delete/1
+Authorization: Bearer {{token}}

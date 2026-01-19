@@ -21,11 +21,18 @@
 }
 
 body {
-    display: grid;
+    /* display: grid;
     min-height: 100dvh;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr auto; */
     background-color: var(--bg);
     color: var(--text);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 header .head {
@@ -93,7 +100,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 6rem;
+    margin-top: 3rem;
+    margin-bottom: 10rem;
 }
 
 .portada {
@@ -206,4 +214,46 @@ footer {
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-size: 0.7rem;
+}
+
+/* Asegura que el contenedor de la tabla ocupe el 100% */
+.table-responsive {
+    width: 100% !important;
+    overflow-x: auto;
+}
+
+/* Forzar a la tabla a expandirse */
+#root table.dataTable {
+    width: 100% !important;
+    margin: 0 auto;
+    border-collapse: collapse !important;
+}
+
+/* Ajuste opcional para las celdas de acciones y que no se rompan en dos líneas */
+.edit-btn,
+.delete-btn {
+    white-space: nowrap;
+    margin: 2px;
+}
+
+.edit-btn {
+    background-color: #0dcaf0;
+    color: #ffffff;
+}
+
+.inhabilitar-btn {
+    background-color: #c7254e;
+    color: #ffffff;
+}
+
+.bg-editar {
+    background-color: #28a745;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.5rem;
+}
+
+.bg-inhabilitar {
+    background-color: #c7254e;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.5rem;
 }

@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class TemasForo extends Model
+{
+    use HasFactory;
+
+    protected $table = 'temasforos';
+
+    protected $fillable = [
+        'usuario_creador_id',
+        'titulo',
+        'estado'
+    ];
+
+    public function usuario()
+    {
+        // Relación donde 'usuario_creador_id' apunta al 'id' de la tabla users
+        return $this->belongsTo(User::class, 'usuario_creador_id');
+    }
+}
