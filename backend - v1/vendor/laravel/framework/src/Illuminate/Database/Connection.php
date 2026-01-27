@@ -646,16 +646,14 @@ class Connection implements ConnectionInterface
         return $this->withFreshQueryLog(function () use ($callback) {
             $this->pretending = true;
 
-            try {
-                // Basically to make the database connection "pretend", we will just return
-                // the default values for all the query methods, then we will return an
-                // array of queries that were "executed" within the Closure callback.
-                $callback($this);
+            // Basically to make the database connection "pretend", we will just return
+            // the default values for all the query methods, then we will return an
+            // array of queries that were "executed" within the Closure callback.
+            $callback($this);
 
-                return $this->queryLog;
-            } finally {
-                $this->pretending = false;
-            }
+            $this->pretending = false;
+
+            return $this->queryLog;
         });
     }
 

@@ -275,7 +275,7 @@ trait QueriesRelationships
             $type = Relation::getMorphedModel($type) ?? $type;
         }
 
-        return $this->where(function ($query) use ($relation, $callback, $operator, $count, $types, $checkMorphNull) {
+        return $this->where(function ($query) use ($relation, $callback, $operator, $count, $types) {
             foreach ($types as $type) {
                 $query->orWhere(function ($query) use ($relation, $callback, $operator, $count, $type) {
                     $belongsTo = $this->getBelongsToRelation($relation, $type);
@@ -290,9 +290,8 @@ trait QueriesRelationships
                         ->whereHas($belongsTo, $callback, $operator, $count);
                 });
             }
-
-            $query->when($checkMorphNull, fn (self $query) => $query->orWhereMorphedTo($relation, null));
-        }, null, null, $boolean);
+        }, null, null, $boolean)
+            ->when($checkMorphNull, fn (self $query) => $query->orWhereMorphedTo($relation, null));
     }
 
     /**

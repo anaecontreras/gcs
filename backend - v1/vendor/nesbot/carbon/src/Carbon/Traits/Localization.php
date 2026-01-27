@@ -275,7 +275,7 @@ trait Localization
 
                     if ($list) {
                         foreach ($$variable as $index => &$name) {
-                            $name .= '|'.$list[$index];
+                            $name .= '|'.$messages[$variable.'_standalone'][$index];
                         }
                     }
                 }
