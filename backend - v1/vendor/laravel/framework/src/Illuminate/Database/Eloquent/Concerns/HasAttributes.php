@@ -251,7 +251,7 @@ trait HasAttributes
     protected function addDateAttributesToArray(array $attributes)
     {
         foreach ($this->getDates() as $key) {
-            if (is_null($key) || ! isset($attributes[$key])) {
+            if (! isset($attributes[$key])) {
                 continue;
             }
 
@@ -1622,7 +1622,7 @@ trait HasAttributes
     /**
      * Get the attributes that should be converted to dates.
      *
-     * @return array<int, string|null>
+     * @return array
      */
     public function getDates()
     {

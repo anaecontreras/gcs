@@ -256,11 +256,7 @@ class ThrottlesExceptions
             return $this->prefix.$job->job->uuid();
         }
 
-        $jobName = method_exists($job, 'displayName')
-            ? $job->displayName()
-            : get_class($job);
-
-        return $this->prefix.hash('xxh128', $jobName);
+        return $this->prefix.hash('xxh128', get_class($job));
     }
 
     /**

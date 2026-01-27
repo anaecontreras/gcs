@@ -1748,12 +1748,10 @@ class Str
     public static function substrReplace($string, $replace, $offset = 0, $length = null)
     {
         if ($length === null) {
-            $length = static::length($string);
+            $length = strlen($string);
         }
 
-        return mb_substr($string, 0, $offset)
-            .$replace
-            .mb_substr($string, $offset + $length);
+        return substr_replace($string, $replace, $offset, $length);
     }
 
     /**

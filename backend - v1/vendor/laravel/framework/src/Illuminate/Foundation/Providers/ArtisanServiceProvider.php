@@ -70,7 +70,6 @@ use Illuminate\Foundation\Console\OptimizeCommand;
 use Illuminate\Foundation\Console\PackageDiscoverCommand;
 use Illuminate\Foundation\Console\PolicyMakeCommand;
 use Illuminate\Foundation\Console\ProviderMakeCommand;
-use Illuminate\Foundation\Console\ReloadCommand;
 use Illuminate\Foundation\Console\RequestMakeCommand;
 use Illuminate\Foundation\Console\ResourceMakeCommand;
 use Illuminate\Foundation\Console\RouteCacheCommand;
@@ -161,7 +160,6 @@ class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvid
         'QueueRetry' => QueueRetryCommand::class,
         'QueueRetryBatch' => QueueRetryBatchCommand::class,
         'QueueWork' => QueueWorkCommand::class,
-        'Reload' => ReloadCommand::class,
         'RouteCache' => RouteCacheCommand::class,
         'RouteClear' => RouteClearCommand::class,
         'RouteList' => RouteListCommand::class,

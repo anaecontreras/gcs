@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485
+class ComposerStaticInit537b43afe328ef4c2f7b370ae102b10d
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -534,9 +534,16 @@ class ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\LogActivityController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogActivityController.php',
+        'App\\Http\\Controllers\\LogController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogController.php',
+        'App\\Models\\Log' => __DIR__ . '/../..' . '/app/Models/Log.php',
+        'App\\Models\\LogActivity' => __DIR__ . '/../..' . '/app/Models/LogActivity.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
+        'App\\Services\\LogActivityService' => __DIR__ . '/../..' . '/app/Services/LogActivityService.php',
+        'App\\Services\\LogService' => __DIR__ . '/../..' . '/app/Services/LogService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
@@ -657,6 +664,7 @@ class ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\RoleSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -2264,7 +2272,6 @@ class ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485
         'Illuminate\\Foundation\\Console\\PolicyMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/PolicyMakeCommand.php',
         'Illuminate\\Foundation\\Console\\ProviderMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ProviderMakeCommand.php',
         'Illuminate\\Foundation\\Console\\QueuedCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/QueuedCommand.php',
-        'Illuminate\\Foundation\\Console\\ReloadCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ReloadCommand.php',
         'Illuminate\\Foundation\\Console\\RequestMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/RequestMakeCommand.php',
         'Illuminate\\Foundation\\Console\\ResourceMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ResourceMakeCommand.php',
         'Illuminate\\Foundation\\Console\\RouteCacheCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/RouteCacheCommand.php',
@@ -2387,7 +2394,6 @@ class ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485
         'Illuminate\\Http\\Client\\Events\\RequestSending' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Client/Events/RequestSending.php',
         'Illuminate\\Http\\Client\\Events\\ResponseReceived' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Client/Events/ResponseReceived.php',
         'Illuminate\\Http\\Client\\Factory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Client/Factory.php',
-        'Illuminate\\Http\\Client\\FluentPromise' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Client/FluentPromise.php',
         'Illuminate\\Http\\Client\\HttpClientException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Client/HttpClientException.php',
         'Illuminate\\Http\\Client\\PendingRequest' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php',
         'Illuminate\\Http\\Client\\Pool' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Client/Pool.php',
@@ -6810,9 +6816,9 @@ class ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd8f67b824a1bf31c8999ead558d9b485::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit537b43afe328ef4c2f7b370ae102b10d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit537b43afe328ef4c2f7b370ae102b10d::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit537b43afe328ef4c2f7b370ae102b10d::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -2447,11 +2447,11 @@ abstract class Model implements Arrayable, ArrayAccess, CanBeEscapedWhenCastToSt
 
         static::$modelsShouldPreventAccessingMissingAttributes = false;
 
-        try {
-            return ! is_null($this->getAttribute($offset));
-        } finally {
-            static::$modelsShouldPreventAccessingMissingAttributes = $shouldPrevent;
-        }
+        $result = ! is_null($this->getAttribute($offset));
+
+        static::$modelsShouldPreventAccessingMissingAttributes = $shouldPrevent;
+
+        return $result;
     }
 
     /**
