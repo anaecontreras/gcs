@@ -56,6 +56,11 @@ Content-Disposition: form-data; name="version"
 
 2.0
 --boundary
+Content-Disposition: form-data; name="fecha_publicacion"
+
+2026-01-17
+
+--boundary
 Content-Disposition: form-data; name="archivo"; filename="nuevo_manual.pdf"
 Content-Type: application/pdf
 

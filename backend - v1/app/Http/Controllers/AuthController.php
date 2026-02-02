@@ -210,65 +210,44 @@ class AuthController extends Controller
     {
         $admin = $request->user();
 
-        // Solo administradores (rol_id = 1)
         if (!$admin || $admin->rol_id !== 1) {
-            return response()->json([
-                'message' => 'Acceso denegado. Solo administradores pueden realizar esta acción.',
-            ], 403);
+            return response()->json(['message' => 'Acceso denegado.'], 403);
         }
 
-        // Validar datos de entrada
+        // Validamos permitiendo tanto el guion bajo como el medio para no romper nada
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'name' => 'sometimes|string|max:150',
-            'rol_id' => 'sometimes|integer|in:1,2,3', // ajusta los roles permitidos
+            'rol_id' => 'sometimes|integer|in:1,2,3,4', // Agregamos el 4 que faltaba
+            'unidad-operativa' => 'sometimes|string|max:50',
             'unidad_operativa' => 'sometimes|string|max:50',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Error de validacion',
-                'errors' => $validator->errors()
-            ], 422);
+            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422);
         }
 
-        $userId = $request->input('user_id');
-        $userData = $request->only(['name', 'rol_id', 'unidad_operativa']);
+        $user = User::findOrFail($request->input('user_id'));
 
-        // Evitar que un admin se auto-degrade (opcional)
-        if ($userId == $admin->id && isset($userData['rol_id']) && $userData['rol_id'] !== 1) {
-            return response()->json([
-                'message' => 'No puedes cambiar tu propio rol a uno no administrador.',
-            ], 400);
+        // MAPEO MANUAL: Aquí está la magia.
+        // Si viene 'unidad-operativa' (React), lo asignamos a 'unidad_operativa' (DB)
+        if ($request->has('name')) $user->name = $request->input('name');
+        if ($request->has('rol_id')) $user->rol_id = $request->input('rol_id');
+
+        // Priorizamos el que traiga el guion medio que es el que manda tu modal
+        if ($request->has('unidad-operativa')) {
+            $user->unidad_operativa = $request->input('unidad-operativa');
+        } elseif ($request->has('unidad_operativa')) {
+            $user->unidad_operativa = $request->input('unidad_operativa');
         }
 
-        // Actualizar solo los campos permitidos
-        $user = User::findOrFail($userId);
-        $oldValues = $user->only(['name', 'rol_id', 'unidad_operativa']);
-        $user->update($userData);
-        $newValues = $user->only(['name', 'rol_id', 'unidad_operativa']);
+        $user->save();
 
-        // Registrar en log
-        $changes = [];
-        foreach ($newValues as $key => $value) {
-            if ($oldValues[$key] != $value) {
-                $changes[] = "$key: {$oldValues[$key]} → $value";
-            }
-        }
-
-        Log::create([
-            'usuario_correo' => $admin->email,
-            'accion' => 'Actualizó datos básicos del usuario ' . $user->email . '. Cambios: ' . implode(', ', $changes),
-            'entidad_afectada' => 'users',
-            'entidad_id' => $user->id,
-        ]);
-
-        return response()->json([
-            'message' => 'Datos actualizados exitosamente.'
-        ], 200);
+        return response()->json(['message' => 'Datos actualizados exitosamente.'], 200);
     }
 
     // DESHABILITAR USUARIO (solo admin)
+    // TOGGLE ESTADO DE USUARIO (Habilitar/Deshabilitar - solo admin)
     public function disableUser(Request $request)
     {
         $admin = $request->user();
@@ -276,7 +255,7 @@ class AuthController extends Controller
         // Validar que sea administrador
         if (!$admin || $admin->rol_id !== 1) {
             return response()->json([
-                'message' => 'Acceso denegado. Solo administradores pueden deshabilitar usuarios.',
+                'message' => 'Acceso denegado. Solo administradores pueden cambiar el estado de usuarios.',
             ], 403);
         }
 
@@ -297,34 +276,30 @@ class AuthController extends Controller
         // Evitar que un admin se desactive a sí mismo
         if ($userId == $admin->id) {
             return response()->json([
-                'message' => 'No puedes deshabilitarte a ti mismo.',
+                'message' => 'No puedes cambiar tu propio estado de actividad.',
             ], 400);
         }
 
-        // Obtener usuario a deshabilitar
+        // Obtener usuario
         $user = User::findOrFail($userId);
 
-        // Si ya está deshabilitado, no hacer nada
-        if ($user->activo == 0) {
-            return response()->json([
-                'message' => 'El usuario ya está deshabilitado.',
-            ], 400);
-        }
-
-        // Deshabilitar
-        $user->activo = 0;
+        // Lógica Toggle: Si es 1 pasa a 0, si es 0 pasa a 1
+        $user->activo = $user->activo ? 0 : 1;
         $user->save();
+
+        // Determinar el texto para el log y la respuesta
+        $estadoTexto = $user->activo ? 'Habilitó' : 'Deshabilitó';
 
         // Registrar en log
         Log::create([
             'usuario_correo' => $admin->email,
-            'accion' => "Deshabilitó al usuario {$user->email}",
+            'accion' => "{$estadoTexto} al usuario {$user->email}",
             'entidad_afectada' => 'users',
             'entidad_id' => $user->id,
         ]);
 
         return response()->json([
-            'message' => 'Usuario deshabilitado exitosamente.',
+            'message' => "Usuario " . strtolower($estadoTexto) . " exitosamente.",
             'user' => [
                 'id' => $user->id,
                 'email' => $user->email,

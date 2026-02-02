@@ -11,8 +11,11 @@ class TemasforoController extends Controller
 {
     public function index()
     {
-        // Cargamos la relación 'usuario' para saber quién creó el tema
-        $temas = Temasforo::with('usuario:id,name')
+        // Cargamos el usuario creador del tema Y los comentarios (con sus respectivos autores)
+        $temas = Temasforo::with([
+            'usuario:id,name',
+            'comentarios.usuario:id,name' // Carga anidada: comentario -> usuario
+        ])
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -85,15 +88,19 @@ class TemasforoController extends Controller
 
         $tema = Temasforo::find($id);
 
+        // --- ELIMINACIÓN EN CASCADA MANUAL ---
+        // Esto borra todos los registros en 'comentariosforos' que tengan este tema_id
+        $tema->comentarios()->delete();
+
         Log::create([
             'usuario_correo'   => $request->user()->email,
-            'accion'           => "Eliminación de Tema de Foro: {$tema->titulo}",
+            'accion'           => "Eliminación de Tema de Foro y sus comentarios: {$tema->titulo}",
             'entidad_afectada' => 'temasforos',
             'entidad_id'       => $tema->id,
         ]);
 
         $tema->delete();
 
-        return response()->json(['message' => 'Tema eliminado correctamente'], 200);
+        return response()->json(['message' => 'Tema y sus comentarios eliminados correctamente'], 200);
     }
 }

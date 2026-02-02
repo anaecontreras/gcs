@@ -1,5 +1,5 @@
 @baseUrl = http://127.0.0.1:8000/api
-@token = 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+@token = 219|lm4QqrJqaQ5bsj0GhtlqYLghuB2WXgAXotTfof2E9d4a795b
 
 ### Listar Temas
 GET {{baseUrl}}/temas-foro
@@ -13,7 +13,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "titulo": "Discusion sobre las nuevas funcionalidades",
+    "titulo": "Peliculas de Dibujos Animados, dinos la mejor",
     "estado": "Abierto"
 }
 
@@ -24,12 +24,12 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "id": 1,
-    "titulo": "Discusion sobre normativa N3 (Actualizado)",
-    "estado": "Cerrado"
+    "id": 7,
+    "titulo": "Novelas Coreanas",
+    "estado": "Abierto"
 }
 
 ### Eliminar Tema
-DELETE {{baseUrl}}/temas-foro/delete/1
+DELETE {{baseUrl}}/temas-foro/delete/8
 Authorization: Bearer {{token}}
 Accept: application/json

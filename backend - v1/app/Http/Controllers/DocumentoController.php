@@ -7,6 +7,7 @@ use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class DocumentoController extends Controller
 {
@@ -19,6 +20,7 @@ class DocumentoController extends Controller
             'categoria:id,nombre_categoria',
             'usuario:id,name,email'
         ])
+            ->orderBy('fecha_publicacion', 'desc')
             ->get()
             ->map(function ($doc) {
                 // Agregamos la URL completa para el frontend
@@ -74,6 +76,7 @@ class DocumentoController extends Controller
             'categoria_id'      => 'required|exists:categoriadocs,id',
             'titulo'            => 'required|string|max:255',
             'version'           => 'required|string|max:10',
+            'fecha_publicacion' => 'sometimes|required|date',
             'archivo'           => 'nullable|file|mimes:pdf|max:3072', // nullable: opcional
         ]);
 
@@ -85,6 +88,11 @@ class DocumentoController extends Controller
 
         // Datos básicos a actualizar
         $data = $request->only(['categoria_id', 'titulo', 'version']);
+
+        // Si viene la fecha, la formateamos antes de guardar
+        if ($request->has('fecha_publicacion')) {
+            $data['fecha_publicacion'] = Carbon::parse($request->fecha_publicacion)->format('Y-m-d');
+        }
 
         // Lógica de archivo nuevo
         if ($request->hasFile('archivo')) {

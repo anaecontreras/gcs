@@ -1,5 +1,5 @@
 @baseUrl = http://127.0.0.1:8000/api
-@token = 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+@token = 219|lm4QqrJqaQ5bsj0GhtlqYLghuB2WXgAXotTfof2E9d4a795b
 
 ### Listar registros
 GET {{baseUrl}}/calendario/index

@@ -1,6 +1,6 @@
 ### Variables Globales
 @baseUrl = http://127.0.0.1:8000/api
-@token = 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+@token = 219|lm4QqrJqaQ5bsj0GhtlqYLghuB2WXgAXotTfof2E9d4a795b
 
 ### 1. Listar Blogs (Ordenados del más reciente al más viejo)
 GET {{baseUrl}}/blog/index
@@ -15,7 +15,7 @@ Accept: application/json
 
 {
     "usuario_reporte_id": 1,
-    "titulo": "Falla de Internet",
+    "titulo": "xzxsak jcjdfj ksldjsjd lkjdksajkl lsadj lksjslkdjsakl sakldjsaklj",
     "prioridad": "Media",
     "estado": "En Progreso"
 }
@@ -27,13 +27,13 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "id": 2,
-    "titulo": "Falla de servidor principal en Nodo N2",
-    "prioridad": "Alta",
+    "id": 17,
+    "titulo": "Tripin de pollin revolution",
+    "prioridad": "Baja",
     "estado": "Cerrado"
 }
 
 ### 5. Eliminar un Evento (Destroy)
-DELETE {{baseUrl}}/blog/delete/1
+DELETE {{baseUrl}}/blog/delete/13
 Authorization: Bearer {{token}}
 Accept: application/json

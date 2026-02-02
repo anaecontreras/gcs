@@ -1,30 +1,30 @@
 ### Login de usuario
-POST http://127.0.0.1:8000/api/auth/login 
+POST http://127.0.0.1:8000/api/auth/login
 content-type: application/json
 
 {
-    "email": "admin@gmail.com",
-    "password": "87654321"
+    "email": "superman@gmail.com",
+    "password": "12345678"
 }
 
 ### Registro de usuario
-POST http://127.0.0.1:8000/api/auth/register 
+POST http://127.0.0.1:8000/api/auth/register
 content-type: application/json
-Authorization: Bearer 40|O2zgnnv2A2BoUMjlKYn7kvFfLZBCRSRoNjuozDfR55d1e5c4
+Authorization: Bearer 167|IKs2MAZAsneFvhqUy3drLqJqW6VBSqM1NgeeIUja3a766d4d
 
 {
     "rol_id": 3,
-    "email": "dienciocho@gmail.com",
+    "email": "prueba456@gmail.com",
     "password": "12345678",
     "password_confirmation": "12345678",
-    "name": "Usuario dienciocho",
+    "name": "Usuario 456",
     "unidad_operativa": "El Marquez"
 }
 
 ### Cambio Contraseña de usuario activo
-POST http://127.0.0.1:8000/api/auth/change-password 
+POST http://127.0.0.1:8000/api/auth/change-password
 content-type: application/json
-Authorization: Bearer 6|8OtsvwFbKgKFkCYBByF1unxkehdJkiNZhX8A9Desfe7e75c3
+Authorization: Bearer 150|w4MBeHNWVto1pe6rGNGxL4jYs45OlRMvL8ypBszJbb5b1744
 
 {
     "current_password": "87654321",
@@ -33,32 +33,33 @@ Authorization: Bearer 6|8OtsvwFbKgKFkCYBByF1unxkehdJkiNZhX8A9Desfe7e75c3
 }
 
 ### Cambio Datos Básicos de usuario (rol, name, unidad_operativa)
-POST http://127.0.0.1:8000/api/auth/change-data-basic 
+POST http://127.0.0.1:8000/api/auth/change-data-basic
 content-type: application/json
-Authorization: Bearer 12|pT9CPPyhfV9kQ3xOmrakQawNlTSUy2OA5xNZUiE6942fe4c8    
+Authorization: Bearer 176|4Opl9QjI81aEqVpos98wvw1fg0izvxaMb8mGGAnMdd0139cb
 
 {
-    "user_id": 2,
-    "name": "Lucas Adams"
-    "rol_id": 3
-    "unidad-operativa": "El Marquez"
+    "user_id": 3,
+    "name": "Usuario 3 modificado",
+    "rol_id": 3,
+    "unidad-operativa": "Camatagua, edo Aragua"
 }
 
 ### Inhabilitar Usuario
-POST http://127.0.0.1:8000/api/auth/disable-user 
-content-type: application/json
-Authorization: Bearer 12|pT9CPPyhfV9kQ3xOmrakQawNlTSUy2OA5xNZUiE6942fe4c8    
+POST http://127.0.0.1:8000/api/auth/disable-user
+Content-Type: application/json
+Accept: application/json  <--- AGREGA ESTA LÍNEA
+Authorization: Bearer 176|4Opl9QjI81aEqVpos98wvw1fg0izvxaMb8mGGAnMdd0139cb
 
 {
-    "user_id": 3
+    "user_id": 26
 }
 
 ### Listar todos los usuarios registrados
-GET http://127.0.0.1:8000/api/auth/showUsers 
+GET http://127.0.0.1:8000/api/auth/showUsers
 Content-Type: application/json
-Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+Authorization: Bearer 176|4Opl9QjI81aEqVpos98wvw1fg0izvxaMb8mGGAnMdd0139cb
 
 ### Logout de usuario
-POST http://127.0.0.1:8000/api/auth/logout 
+POST http://127.0.0.1:8000/api/auth/logout
 Content-Type: application/json
 Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb

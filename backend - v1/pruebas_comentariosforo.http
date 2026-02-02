@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:8000/api
-@token = Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+@token = Bearer 161|krKrdk2fqEu7JRXnRgril1WkKjsHC4UIOphHVktse771d67f
 
 ### Listar Comentarios
 GET {{baseUrl}}/comentarios
@@ -13,8 +13,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "tema_id": 2,
-    "cuerpo": "Este es un segundo comentario para borrar"
+    "tema_id": 6,
+    "cuerpo": "Los Increibles, lo mejor"
 }
 
 ### Editar Comentario
@@ -24,11 +24,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "id": 1,
-    "cuerpo": "Cuerpo del comentario actualizado."
+    "id": 9,
+    "cuerpo": "Me gusta El Conjuro 1, 2 y 3"
 }
 
 ### Eliminar Comentario
-DELETE {{baseUrl}}/comentarios/2
+DELETE {{baseUrl}}/comentarios/10
 Authorization: Bearer {{token}}
 Accept: application/json
