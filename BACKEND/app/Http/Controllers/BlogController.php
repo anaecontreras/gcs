@@ -18,7 +18,7 @@ class BlogController extends Controller
 
         return response()->json([
             'blogs' => $blogs,
-        ], 200);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function store(Request $request)

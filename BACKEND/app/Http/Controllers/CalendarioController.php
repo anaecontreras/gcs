@@ -18,7 +18,7 @@ class CalendarioController extends Controller
 
         return response()->json([
             'calendario' => $eventos,
-        ], 200);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function store(Request $request)

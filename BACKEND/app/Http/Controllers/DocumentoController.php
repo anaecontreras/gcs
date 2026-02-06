@@ -29,7 +29,7 @@ class DocumentoController extends Controller
                 return $doc;
             });
 
-        return response()->json($documentos, 200);
+        return response()->json($documentos, 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function store(Request $request)

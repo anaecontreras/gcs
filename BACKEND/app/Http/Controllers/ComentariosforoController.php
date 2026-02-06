@@ -16,7 +16,7 @@ class ComentariosforoController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return response()->json(['comentarios' => $comentarios], 200);
+        return response()->json(['comentarios' => $comentarios], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function store(Request $request)

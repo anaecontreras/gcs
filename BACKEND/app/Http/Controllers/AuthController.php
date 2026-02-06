@@ -322,6 +322,6 @@ class AuthController extends Controller
             ->select('id', 'name', 'email', 'rol_id', 'unidad_operativa', 'activo', 'created_at', 'updated_at')
             ->get();
 
-        return response()->json(['users' => $users], 200);
+        return response()->json(['users' => $users], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

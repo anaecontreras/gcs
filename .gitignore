@@ -11,6 +11,8 @@
 .env.production
 .phpactor.json
 .phpunit.result.cache
+.git
+.gitignore
 Homestead.json
 Homestead.yaml
 npm-debug.log
@@ -22,5 +24,4 @@ yarn-error.log
 /.vscode
 /.zed
 /_viejo
-/comandos.txt
-/INFODESARROLLO
+/info
