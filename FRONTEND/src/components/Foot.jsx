@@ -29,7 +29,7 @@ function Foot({ tipo, token, setToken }) {
 
     return (
         <div className="footer-gcs">
-            <p>CANTV / GGPM / Gerencia de Programa Plataforma Satelital @ 2025/2026 Elaborado por Ana Contreras, Diana Sierra y Darwin Colmenares</p>
+            <p>© 2024 CANTV - Compañía Anónima Nacional Teléfonos de Venezuela | Elaborado por Ana Contreras, Diana Sierra y Darwin Colmenares</p>
             {tipo === "1" ? (
                 <a
                     href="#"

@@ -703,3 +703,41 @@ export const showError = (mensaje) => {
         confirmButtonColor: '#d33',
     });
 };
+
+export const mostrarDetalleEvento = (evento, formatearFecha, puedeEditar) => {
+    return Swal.fire({
+        title: 'Detalles del Mantenimiento',
+        html: `
+            <div style="text-align: left; font-size: 1rem; line-height: 1.6;">
+                <p><strong>Evento:</strong> ${evento.titulo}</p>
+                <p><strong>Inicia:</strong> ${formatearFecha(evento.fecha_inicio)}</p>
+                <p><strong>Finaliza:</strong> ${formatearFecha(evento.fecha_fin)}</p>
+                <p><strong>Estado:</strong> ${new Date(evento.fecha_fin) < new Date() ?
+                '<span style="color:red">Vencido</span>' :
+                '<span style="color:green">Vigente</span>'}</p>
+            </div>
+        `,
+        showCancelButton: puedeEditar,
+        showDenyButton: puedeEditar,
+        confirmButtonText: 'Cerrar',
+        cancelButtonText: 'Eliminar',
+        denyButtonText: 'Editar',
+        confirmButtonColor: '#183592',
+        denyButtonColor: '#f0ad4e', // Color naranja para editar
+        cancelButtonColor: '#d33',   // Color rojo para eliminar
+    });
+};
+
+// CONFIRMACIÓN PARA ELIMINAR EVENTO (CORRECTO)
+export const confirmarEliminarEvento = (titulo) => {
+    return Swal.fire({
+        title: '¿Estás seguro?',
+        text: `Vas a eliminar el evento: "${titulo}". Esta acción no se puede deshacer.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'No, cancelar'
+    });
+};

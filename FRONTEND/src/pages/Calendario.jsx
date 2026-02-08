@@ -5,45 +5,50 @@ import Menu from '../components/Menu';
 
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
+import Swal from 'sweetalert2'; // Importante para las validaciones de resultados
 
 import { NewCalendario, BtnEdit, BtnErase } from '../services/Icons';
-
 
 function Calendario({ userData, token }) {
     const [eventos, setEventos] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState("");
     const [ahora, setAhora] = useState(new Date());
+    const [currentDate, setCurrentDate] = useState(new Date());
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const recordsPerPage = 3;
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
-    // --- FUNCIÓN DE FORMATEO BLINDADA ---
+    const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+
+    const changeMonth = (offset) => {
+        setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + offset, 1));
+    };
+
+    const getEventosDia = (dia) => {
+        return eventos.filter(ev => {
+            const fechaEv = new Date(ev.fecha_inicio);
+            return fechaEv.getDate() === dia &&
+                fechaEv.getMonth() === currentDate.getMonth() &&
+                fechaEv.getFullYear() === currentDate.getFullYear();
+        });
+    };
+
+    const truncate = (str, n) => {
+        return (str && str.length > n) ? str.substr(0, n - 1) + "..." : str;
+    };
+
     const formatearFechaCorrecta = (fechaStr) => {
         try {
             if (!fechaStr || typeof fechaStr !== 'string') return "N/A";
-
-            const esUTC = fechaStr.includes('Z') || fechaStr.includes('+00');
             const fechaNormalizada = fechaStr.replace(' ', 'T');
             const partes = fechaNormalizada.split('T');
             const fechaPart = partes[0];
             const horaPart = partes[1].split('.')[0];
-
             const [año, mes, dia] = fechaPart.split('-');
-            let [horas, minutos, segundos] = horaPart.split(':');
-
-            let horaFinalNum = parseInt(horas);
-
-            if (esUTC) {
-                horaFinalNum = horaFinalNum - 4;
-                if (horaFinalNum < 0) horaFinalNum += 24;
-            }
-
-            const horasFinalStr = String(horaFinalNum).padStart(2, '0');
-            return `${dia}/${mes}/${año}-${horasFinalStr}:${minutos}:${segundos}`;
-
+            const [horas, minutos, segundos] = horaPart.split(':');
+            return `${dia}/${mes}/${año}-${horas}:${minutos}:${segundos}`;
         } catch (e) {
-            console.error("Error formateando:", e);
             return fechaStr;
         }
     };
@@ -52,70 +57,74 @@ function Calendario({ userData, token }) {
         if (!token) return;
         const cargarDatos = async () => {
             try {
+                setLoading(true);
                 const data = await Api.getCalendario(token);
                 setEventos(Array.isArray(data) ? data : []);
             } catch (error) {
-                Mensajes.showErrorPersonalizado(error.message);
+                Mensajes.showError(error.message);
             } finally {
                 setLoading(false);
             }
         };
         cargarDatos();
-
         const interval = setInterval(() => setAhora(new Date()), 60000);
         return () => clearInterval(interval);
     }, [token]);
 
-    const obtenerEstado = (inicio, fin) => {
-        const fechaInicio = new Date(inicio);
-        const fechaFin = new Date(fin);
+    const hayEventosAnteriores = () => {
+        const primerDiaMesActual = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        return eventos.some(ev => new Date(ev.fecha_inicio) < primerDiaMesActual);
+    };
 
-        if (isNaN(fechaInicio) || isNaN(fechaFin)) return { texto: "Error", color: "#666", orden: 3 };
+    const hayEventosPosteriores = () => {
+        const ultimoDiaMesActual = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59);
+        return eventos.some(ev => new Date(ev.fecha_inicio) > ultimoDiaMesActual);
+    };
 
-        if (ahora < fechaInicio) {
-            return { texto: "Vigente", color: "#1f66eb", orden: 1 };
-        } else if (ahora >= fechaInicio && ahora <= fechaFin) {
-            return { texto: "Ocurriendo", color: "#168128", orden: 0 };
-        } else {
-            return { texto: "Vencido", color: "#d33", orden: 2 };
+    const handleVerDetalle = async (evento) => {
+        const fechaFinEvento = new Date(evento.fecha_fin);
+        const estaVencido = fechaFinEvento < ahora;
+        const tienePermisos = userData.rol_id === 1 || userData.rol_id === 2;
+        const puedeAccionar = !estaVencido && tienePermisos;
+
+        // 1. Mostramos el detalle usando tu servicio
+        const result = await Mensajes.mostrarDetalleEvento(evento, formatearFechaCorrecta, puedeAccionar);
+
+        // 2. LÓGICA PARA EDITAR (Botón Denied)
+        if (result.isDenied) {
+            const edicion = await Mensajes.mostrarModalEditarEvento(evento);
+            if (edicion.isConfirmed) {
+                try {
+                    const res = await Api.updateEvento(token, edicion.value);
+                    Mensajes.showSuccess(res.message || "Evento actualizado");
+                    const dataActualizada = await Api.getCalendario(token);
+                    setEventos(dataActualizada);
+                } catch (error) {
+                    Mensajes.showError(error.message);
+                }
+            }
+        }
+
+        // 3. LÓGICA PARA ELIMINAR (Botón Cancel / Dismiss)
+        // Usamos la nueva función de Mensajes.js
+        else if (result.dismiss === Swal.DismissReason.cancel) {
+
+            const confirmacion = await Mensajes.confirmarEliminarEvento(evento.titulo);
+
+            if (confirmacion.isConfirmed) {
+                try {
+                    const res = await Api.deleteEvento(token, evento.id);
+                    Mensajes.showSuccess(res.message || "Evento eliminado");
+
+                    // Refrescar datos
+                    const dataActualizada = await Api.getCalendario(token);
+                    setEventos(dataActualizada);
+                } catch (error) {
+                    Mensajes.showError(error.message);
+                }
+            }
         }
     };
-
-    const filteredEventos = [...eventos]
-        .sort((a, b) => {
-            const fechaFinA = new Date(a.fecha_fin);
-            const fechaFinB = new Date(b.fecha_fin);
-            const estaVencidoA = ahora > fechaFinA;
-            const estaVencidoB = ahora > fechaFinB;
-
-            if (estaVencidoA !== estaVencidoB) {
-                return estaVencidoA ? 1 : -1;
-            }
-
-            const inicioA = new Date(a.fecha_inicio);
-            const inicioB = new Date(b.fecha_inicio);
-            return inicioA - inicioB;
-        })
-        .filter(evento => {
-            const term = searchTerm.toLowerCase();
-            return (
-                (evento.titulo || "").toLowerCase().includes(term) ||
-                (evento.creador?.name || 'Sistema').toLowerCase().includes(term)
-            );
-        });
-
-    const lastIndex = currentPage * recordsPerPage;
-    const firstIndex = lastIndex - recordsPerPage;
-    const currentRecords = filteredEventos.slice(firstIndex, lastIndex);
-    const totalPages = Math.ceil(filteredEventos.length / recordsPerPage);
-
-    const handleSearch = (e) => {
-        setSearchTerm(e.target.value);
-        setCurrentPage(1);
-    };
-
-    const nextPage = () => { if (currentPage < totalPages) setCurrentPage(currentPage + 1); };
-    const prevPage = () => { if (currentPage > 1) setCurrentPage(currentPage - 1); };
 
     const handleNuevoRegistro = async () => {
         const resultado = await Mensajes.mostrarModalNuevoEvento();
@@ -126,37 +135,7 @@ function Calendario({ userData, token }) {
                 const dataActualizada = await Api.getCalendario(token);
                 setEventos(dataActualizada);
             } catch (error) {
-                Mensajes.showErrorPersonalizado(error.message);
-            }
-        }
-    };
-
-    const handleEditarRegistro = async (evento) => {
-        const resultado = await Mensajes.mostrarModalEditarEvento(evento);
-        if (resultado.isConfirmed) {
-            try {
-                const response = await Api.updateEvento(token, resultado.value);
-                Mensajes.showSuccess(response.message);
-                const dataActualizada = await Api.getCalendario(token);
-                setEventos(dataActualizada);
-            } catch (error) {
-                Mensajes.showErrorPersonalizado(error.message);
-            }
-        }
-    };
-
-    const handleEliminarRegistro = async (id, titulo) => {
-        const resultado = await Mensajes.confirmarEliminacion(titulo);
-        if (resultado.isConfirmed) {
-            try {
-                await Api.deleteEvento(token, id);
-                Mensajes.showSuccess("Evento eliminado");
-                setEventos(prev => prev.filter(e => e.id !== id));
-                if (currentRecords.length === 1 && currentPage > 1) {
-                    setCurrentPage(currentPage - 1);
-                }
-            } catch (error) {
-                Mensajes.showErrorPersonalizado(error.message);
+                Mensajes.showError(error.message);
             }
         }
     };
@@ -165,139 +144,58 @@ function Calendario({ userData, token }) {
         <div className="contenedor-ppal">
             <Head />
             <Menu tipo="2" userData={userData} />
-
-            <div className="contenedor-medio contenedor-blog">
+            <div className="contenedor-medio contenedor-foro">
                 <div className="header-seccion-blog">
-                    <h1>Calendario de Mantenimientos</h1>
-                    <input
-                        type="text"
-                        placeholder="🔍 Buscar evento o usuario..."
-                        className="input-busqueda"
-                        value={searchTerm}
-                        onChange={handleSearch}
-                    />
-                    {userData.rol_id === 1 || userData.rol_id === 2 ?
-                        <button className="btn-agregar-reg" onClick={handleNuevoRegistro} title='Cargar Datos de Nuevo Evento'>
+                    <h1>{meses[currentDate.getMonth()]} {currentDate.getFullYear()}</h1>
+                    <div className="paginacion" style={{ margin: 0 }}>
+                        <button
+                            onClick={() => changeMonth(-1)}
+                            disabled={!hayEventosAnteriores()}
+                            style={{ opacity: hayEventosAnteriores() ? 1 : 0.5, cursor: hayEventosAnteriores() ? 'pointer' : 'not-allowed' }}
+                        >⏪ Anterior</button>
+                        <button onClick={() => setCurrentDate(new Date())} style={{ cursor: 'pointer' }}>Hoy</button>
+                        <button
+                            onClick={() => changeMonth(1)}
+                            disabled={!hayEventosPosteriores()}
+                            style={{ opacity: hayEventosPosteriores() ? 1 : 0.5, cursor: hayEventosPosteriores() ? 'pointer' : 'not-allowed' }}
+                        >Siguiente ⏩</button>
+                    </div>
+                    {(userData.rol_id === 1 || userData.rol_id === 2) && (
+                        <button className="btn-agregar-reg" onClick={handleNuevoRegistro}>
                             <NewCalendario /> Programar Evento
                         </button>
-                        :
-                        ""
-                    }
-
+                    )}
                 </div>
 
                 {loading ? (
                     <p>Cargando eventos...</p>
                 ) : (
-                    <>
-                        <table className="tabla-custom">
-                            <thead>
-                                <tr>
-                                    {userData.rol_id !== 4 && userData.rol_id !== 3 ?
-                                        <>
-                                            <th style={{ width: '10rem' }}>Usuario Creador</th>
-                                            <th style={{ width: '35rem' }}>Mantenimiento Programado</th>
-                                            <th style={{ width: '9rem' }}>Fecha Inicio</th>
-                                            <th style={{ width: '9rem' }}>Fecha Fin</th>
-                                        </>
-
-                                        :
-                                        <>
-                                            <th style={{ width: '20rem' }}>Usuario Creador</th>
-                                            <th style={{ width: '220rem' }}>Evento Programado</th>
-                                            <th style={{ width: '28rem' }}>Fecha Inicio Evento</th>
-                                            <th style={{ width: '28rem' }}>Fecha Fin Evento</th>
-                                        </>
-
-                                    }
-
-
-                                    {userData.rol_id !== 4 && userData.rol_id !== 3 ?
-                                        <th style={{ textAlign: 'center' }}>Acciones</th>
-                                        :
-                                        ""
-                                    }
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {currentRecords.length > 0 ? (
-                                    currentRecords.map((evento) => {
-                                        const estado = obtenerEstado(evento.fecha_inicio, evento.fecha_fin);
-                                        const estaVencido = estado.texto === "Vencido";
-
-                                        return (
-                                            <tr key={evento.id}>
-                                                <td style={{ color: '#168128' }}>
-                                                    {evento.creador?.name || 'Sistema'}
-                                                </td>
-                                                <td style={{ fontWeight: '600' }}>
-                                                    {evento.titulo}
-                                                    <span style={{
-                                                        marginLeft: '10px',
-                                                        fontSize: '0.75rem',
-                                                        color: estado.color,
-                                                        border: `1px solid ${estado.color}`,
-                                                        padding: '2px 6px',
-                                                        borderRadius: '4px',
-                                                        textTransform: 'uppercase'
-                                                    }}>
-                                                        {estado.texto}
-                                                    </span>
-                                                </td>
-                                                <td className="fecha-tabla">
-                                                    {formatearFechaCorrecta(evento.fecha_inicio)}
-                                                </td>
-                                                <td className="fecha-tabla">
-                                                    {formatearFechaCorrecta(evento.fecha_fin)}
-                                                </td>
-                                                <td className="celda-acciones" style={{ textAlign: 'center' }}>
-
-
-                                                    {userData.rol_id !== 4 && userData.rol_id !== 3 ?
-                                                        <>
-                                                            {!estaVencido && (
-                                                                <button
-                                                                    className='butt'
-                                                                    onClick={() => handleEditarRegistro(evento)}
-                                                                >
-                                                                    <BtnEdit />
-                                                                    <span>Editar Programación</span>
-                                                                </button>
-                                                            )}
-
-                                                            <button
-                                                                className='butt danger'
-                                                                onClick={() => handleEliminarRegistro(evento.id, evento.titulo)}
-                                                            >
-                                                                <BtnErase />
-                                                                <span>Eliminar Programación</span>
-                                                            </button>
-                                                        </>
-                                                        :
-                                                        ""
-                                                    }
-
-                                                </td>
-                                            </tr>
-                                        );
-                                    })
-                                ) : (
-                                    <tr>
-                                        <td colSpan="5" style={{ textAlign: 'center', padding: '2rem' }}>
-                                            {searchTerm ? `No se encontraron eventos para "${searchTerm}"` : "No hay eventos registrados"}
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-
-                        <div className="paginacion">
-                            <button onClick={prevPage} disabled={currentPage === 1}>⏪ Anterior</button>
-                            <span>Página {currentPage} de {totalPages || 1}</span>
-                            <button onClick={nextPage} disabled={currentPage === totalPages || totalPages === 0}>Siguiente ⏩</button>
-                        </div>
-                    </>
+                    <div className="calendario-grid">
+                        {diasSemana.map(d => <div key={d} className="cal-header">{d}</div>)}
+                        {[...Array(firstDayOfMonth)].map((_, i) => <div key={`empty-${i}`} className="cal-dia empty"></div>)}
+                        {[...Array(daysInMonth)].map((_, i) => {
+                            const dia = i + 1;
+                            const eventosDia = getEventosDia(dia);
+                            const esHoy = dia === ahora.getDate() && currentDate.getMonth() === ahora.getMonth() && currentDate.getFullYear() === ahora.getFullYear();
+                            return (
+                                <div key={dia} className={`cal-dia ${esHoy ? 'hoy' : ''}`}>
+                                    <span className="num-dia">{dia}</span>
+                                    <div className="eventos-container">
+                                        {eventosDia.map(ev => (
+                                            <div
+                                                key={ev.id}
+                                                className="evento-item"
+                                                title={ev.titulo}
+                                                onClick={() => handleVerDetalle(ev)}
+                                            >
+                                                {truncate(ev.titulo, 15)}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
                 )}
             </div>
             <Foot tipo="2" />

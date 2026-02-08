@@ -4,7 +4,7 @@ import Foot from '../components/Foot';
 import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
-import { NewUsuario } from '../services/Icons';
+import { NewUsuario, BtnHabilitar, BtnDeshabilitar, BtnEdit } from '../services/Icons';
 
 
 function Usuarios({ userData, token }) {
@@ -172,20 +172,24 @@ function Usuarios({ userData, token }) {
                                             </td>
                                             <td className="td celda-acciones">
                                                 {user.activo ?
-                                                    <button
-                                                        className="btn-edit"
-                                                        onClick={() => handleEditarUsuario(user)}
-                                                        title="Editar"
-                                                    >
-                                                        ✏️
-                                                    </button>
+                                                    <>
+                                                        <button
+                                                            className='butt'
+                                                            onClick={() => handleEditarUsuario(user)}
+                                                        >
+                                                            <BtnEdit />
+                                                            <span>Editar</span>
+                                                        </button>
+                                                    </>
                                                     : ""}
+
                                                 <button
-                                                    className="btn-delete"
+                                                    className={user.activo ? 'butt danger' : 'butt primary'}
                                                     onClick={() => handleInhabilitarUsuario(user)}
-                                                    title={user.activo ? "Inhabilitar" : "Habilitar"}
                                                 >
-                                                    {user.activo ? '🚫' : '✅'}
+                                                    {user.activo ? <BtnDeshabilitar /> : <BtnHabilitar />}
+                                                    {user.activo ? <span>InHabilitar</span> : <span>Habilitar</span>}
+
                                                 </button>
                                             </td>
                                         </tr>

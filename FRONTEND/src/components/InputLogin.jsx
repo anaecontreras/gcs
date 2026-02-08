@@ -1,15 +1,23 @@
-import React from 'react'
+import { ImgUser, ImgPassword } from '../services/Icons';
 
-function InputLogin({ tipo, place, val, change }) {
+function InputLogin({ Imagen, tipo, place, val, change }) {
     return (
-        <input
-            type={tipo}
-            autoComplete='off'
-            className="login-input"
-            placeholder={place}
-            value={val}
-            onChange={change}
-        />
+        <>
+            <div className="group-login">
+                < Imagen />
+
+                <input
+                    type={tipo}
+                    autoComplete='off'
+                    className="login-input"
+                    placeholder={place}
+                    value={val}
+                    onChange={change}
+                />
+            </div>
+
+        </>
+
     )
 }
 

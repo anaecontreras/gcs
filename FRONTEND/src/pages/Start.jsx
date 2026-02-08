@@ -8,6 +8,10 @@ import ButtonLogin from './../components/ButtonLogin'
 
 import * as Mensajes from '../services/Mensajes';
 import * as Api from '../services/Api';
+import cantv from '../assets/image/Cantv.PNG'
+
+import { ImgUser, ImgPassword, ImgSatelite } from '../services/Icons';
+
 
 function Start({ setIsAuthenticated, setUserData, setToken }) {
     const [user, setUser] = useState('');
@@ -45,26 +49,52 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
         <div className='contenedor-ppal'>
             <Head />
 
-            <div className='contenedor-medio contenedor-login'>
-                <h1 style={{ marginBottom: '1rem' }}>LOGIN</h1>
+            <div class="contenedor-login">
+                <div class="div1">
+                    <h1 style={{ marginBottom: '0.2rem' }}>Plataforma Web Centralizada</h1>
+                    <h1 style={{ marginBottom: '2rem', fontSize: '1.3rem' }}>Gestión de Contingencias Satelitales</h1>
 
-                <form onSubmit={handleLogin} className='form-login'>
-                    <InputLogin
-                        tipo="text"
-                        place="Usuario"
-                        val={user}
-                        change={(e) => setUser(e.target.value)}
-                    />
+                    <form onSubmit={handleLogin} className='form-login'>
+                        <InputLogin
+                            Imagen={ImgUser}
+                            tipo="text"
+                            place="Usuario"
+                            val={user}
+                            change={(e) => setUser(e.target.value)}
+                        />
 
-                    <InputLogin
-                        tipo="password"
-                        place="Contraseña"
-                        val={pass}
-                        change={(e) => setPass(e.target.value)}
-                    />
+                        <InputLogin
+                            Imagen={ImgPassword}
+                            tipo="password"
+                            place="Contraseña"
+                            val={pass}
+                            change={(e) => setPass(e.target.value)}
+                        />
 
-                    <ButtonLogin tipo="submit" texto="Entrar" btnType="one" />
-                </form>
+                        <ButtonLogin tipo="submit" texto="Entrar" btnType="one" />
+                    </form>
+
+                    <a href="#" className='olvido'>¿ Olvido su Contraseña ?</a>
+
+                    <p className='acepta-politicas'>Al iniciar sesión, acepta las políticas de uso interno de CANTV</p>
+                </div>
+
+                <div class="div2">
+                    <ImgSatelite />
+
+                    <p>Sistema integral de gestión para las operaciones de la Plataforma Satelital de CANTV. Monitoreo en tiempo real de las sedes Camatagua, Baemari y Caracas.</p>
+
+                    <div className="notificaciones">
+                        <div className="noti">
+                            <p>3</p>
+                            <span>Sedes Activas</span>
+                        </div>
+                        <div className="noti">
+                            <p>24/7</p>
+                            <span>Monitoreo</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <Foot />
