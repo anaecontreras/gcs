@@ -22,7 +22,7 @@ class LogController extends Controller
         return response()->json([
             'message' => 'Log registrado',
             'log'     => $log,
-        ], 201);
+        ], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function index()
@@ -33,6 +33,6 @@ class LogController extends Controller
 
         return response()->json([
             'logs' => $logs,
-        ], 200);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

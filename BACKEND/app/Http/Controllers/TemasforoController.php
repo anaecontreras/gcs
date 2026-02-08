@@ -32,7 +32,7 @@ class TemasforoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422);
+            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $tema = Temasforo::create([
@@ -48,7 +48,7 @@ class TemasforoController extends Controller
             'entidad_id'       => $tema->id,
         ]);
 
-        return response()->json(['message' => 'Tema creado exitosamente', 'tema' => $tema], 201);
+        return response()->json(['message' => 'Tema creado exitosamente', 'tema' => $tema], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function edit(Request $request)
@@ -60,7 +60,7 @@ class TemasforoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422);
+            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $tema = Temasforo::find($request->id);
@@ -73,7 +73,7 @@ class TemasforoController extends Controller
             'entidad_id'       => $tema->id,
         ]);
 
-        return response()->json(['message' => 'Tema actualizado exitosamente', 'tema' => $tema], 200);
+        return response()->json(['message' => 'Tema actualizado exitosamente', 'tema' => $tema], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function destroy(Request $request, $id)
@@ -83,7 +83,7 @@ class TemasforoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'El tema no existe'], 404);
+            return response()->json(['message' => 'El tema no existe'], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $tema = Temasforo::find($id);
@@ -101,6 +101,6 @@ class TemasforoController extends Controller
 
         $tema->delete();
 
-        return response()->json(['message' => 'Tema y sus comentarios eliminados correctamente'], 200);
+        return response()->json(['message' => 'Tema y sus comentarios eliminados correctamente'], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

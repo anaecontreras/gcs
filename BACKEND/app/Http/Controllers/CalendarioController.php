@@ -32,7 +32,7 @@ class CalendarioController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['errors' => $validator->errors()], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $evento = Calendario::create([
@@ -49,7 +49,7 @@ class CalendarioController extends Controller
             'entidad_id'       => $evento->id,
         ]);
 
-        return response()->json(['message' => 'Fecha registrada', 'evento' => $evento], 201);
+        return response()->json(['message' => 'Fecha registrada', 'evento' => $evento], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function edit(Request $request)
@@ -62,7 +62,7 @@ class CalendarioController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['errors' => $validator->errors()], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $evento = Calendario::find($request->id);
@@ -75,7 +75,7 @@ class CalendarioController extends Controller
             'entidad_id'       => $evento->id,
         ]);
 
-        return response()->json(['message' => 'Fecha actualizada', 'evento' => $evento], 200);
+        return response()->json(['message' => 'Fecha actualizada', 'evento' => $evento], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function destroy(Request $request, $id)
@@ -85,7 +85,7 @@ class CalendarioController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'No existe el registro'], 404);
+            return response()->json(['message' => 'No existe el registro'], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $evento = Calendario::find($id);
@@ -99,6 +99,6 @@ class CalendarioController extends Controller
 
         $evento->delete();
 
-        return response()->json(['message' => 'Registro eliminado'], 200);
+        return response()->json(['message' => 'Registro eliminado'], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

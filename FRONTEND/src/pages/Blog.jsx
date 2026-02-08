@@ -4,6 +4,7 @@ import Foot from '../components/Foot';
 import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
+import { NewContingencia, BtnEdit, BtnClose, BtnErase } from '../services/Icons';
 
 function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
     const [blogs, setBlogs] = useState([]);
@@ -147,7 +148,7 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
 
             <div className="contenedor-medio contenedor-blog">
                 <div className="header-seccion-blog">
-                    <h1>Blog de Eventos</h1>
+                    <h1>Contingencia</h1>
 
                     <input
                         type="text"
@@ -158,7 +159,7 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
                     />
                     {userData.rol_id !== 4 ?
                         <button className="btn-agregar-reg" onClick={handleNuevoRegistro} title='Agregar Nuevo Evento'>
-                            ➕ Nuevo Evento
+                            <NewContingencia /> Nueva Contingencia
                         </button>
                         :
                         ""
@@ -173,14 +174,14 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
                         <table className="tabla-custom">
                             <thead>
                                 <tr>
-                                    <th style={{ width: '60rem' }}>Evento</th>
+                                    <th style={{ width: '60rem' }}>Alertas, mantenimientos y novedades del sistema</th>
                                     <th style={{ width: '6rem' }}>Prioridad</th>
                                     <th style={{ width: '7rem' }}>Estado</th>
-                                    <th style={{ width: '7rem' }}>Usuario que reporta</th>
-                                    <th style={{ width: '10rem' }}>Fecha Ocurrencia</th>
+                                    <th style={{ width: '7rem', textAlign: 'center' }}>Usuario que reporta</th>
+                                    <th style={{ width: '10rem' }}>Fecha de Ocurrencia</th>
 
                                     {userData.rol_id !== 4 ?
-                                        <th style={{ width: '11rem' }}>Acciones</th>
+                                        <th style={{ width: '11rem', textAlign: 'center' }}>Acciones</th>
                                         :
                                         ""
                                     }
@@ -207,23 +208,39 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
                                             {userData.rol_id !== 4 ?
                                                 <>
                                                     <td className='celda-acciones'>
-                                                        {/* BOTÓN NUEVO: CERRAR EVENTO (Solo se muestra si no está cerrado) */}
                                                         {item.estado.toLowerCase() !== 'cerrado' && (
                                                             <>
                                                                 {userData.id === item.usuario_reporte_id || userData.rol_id === 1 ?
                                                                     <>
-                                                                        <button className="btn-edit" onClick={() => handleEditarRegistro(item)} title="Editar">✏️</button>
-                                                                        <button className="btn-close-event" onClick={() => handleCerrarEvento(item)} title="Cerrar Evento">🚫</button>
+                                                                        <button
+                                                                            className='butt'
+                                                                            onClick={() => handleEditarRegistro(item)}
+                                                                        >
+                                                                            <BtnEdit />
+                                                                            <span>Editar</span>
+                                                                        </button>
+
+                                                                        <button
+                                                                            className='butt primary'
+                                                                            onClick={() => handleCerrarEvento(item)}
+                                                                        >
+                                                                            <BtnClose />
+                                                                            <span>Cerrar Evento</span>
+                                                                        </button>
                                                                     </>
                                                                     :
                                                                     ""}
-
-
                                                             </>
 
                                                         )}
                                                         {userData.id === item.usuario_reporte_id || userData.rol_id === 1 ?
-                                                            <button className="btn-delete" onClick={() => handleEliminarRegistro(item.id, item.titulo)} title="Eliminar">🗑️</button>
+                                                            <button
+                                                                className='butt danger'
+                                                                onClick={() => handleEliminarRegistro(item.id, item.titulo)}
+                                                            >
+                                                                <BtnErase />
+                                                                <span>Eliminar Evento</span>
+                                                            </button>
                                                             :
                                                             ""
                                                         }

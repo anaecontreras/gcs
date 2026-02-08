@@ -29,7 +29,7 @@ class ComentariosforoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['errors' => $validator->errors()], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $comentario = Comentariosforo::create([
@@ -45,7 +45,7 @@ class ComentariosforoController extends Controller
             'entidad_id'       => $comentario->id,
         ]);
 
-        return response()->json(['message' => 'Comentario creado', 'comentario' => $comentario], 201);
+        return response()->json(['message' => 'Comentario creado', 'comentario' => $comentario], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function edit(Request $request)
@@ -56,7 +56,7 @@ class ComentariosforoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['errors' => $validator->errors()], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $comentario = Comentariosforo::find($request->id);
@@ -69,7 +69,7 @@ class ComentariosforoController extends Controller
             'entidad_id'       => $comentario->id,
         ]);
 
-        return response()->json(['message' => 'Comentario actualizado', 'comentario' => $comentario], 200);
+        return response()->json(['message' => 'Comentario actualizado', 'comentario' => $comentario], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function destroy(Request $request, $id)
@@ -79,7 +79,7 @@ class ComentariosforoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'Comentario no encontrado'], 404);
+            return response()->json(['message' => 'Comentario no encontrado'], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $comentario = Comentariosforo::findOrFail($id);
@@ -93,6 +93,6 @@ class ComentariosforoController extends Controller
 
         $comentario->delete();
 
-        return response()->json(['message' => 'Comentario eliminado'], 200);
+        return response()->json(['message' => 'Comentario eliminado'], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

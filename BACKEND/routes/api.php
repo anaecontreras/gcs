@@ -15,6 +15,7 @@ use App\Http\Controllers\TemasforoController;
 use App\Http\Controllers\ComentariosforoController;
 
 Route::post('auth/login', [App\Http\Controllers\AuthController::class, 'login']);
+Route::post('/auth/init-admin', [AuthController::class, 'createFirstAdmin']);
 Route::post('auth/register', [App\Http\Controllers\AuthController::class, 'register']);
 Route::post('/logs/intento-login', [LogController::class, 'intentoLogin']);
 

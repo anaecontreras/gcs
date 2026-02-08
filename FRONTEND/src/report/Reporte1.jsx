@@ -47,14 +47,14 @@ function Reporte1({ userData, token }) {
 
             // Título centrado
             doc.setFontSize(16);
-            doc.text("* Reporte de Eventos en Blog *", 105, 15, { align: 'center' });
+            doc.text("* Reporte de Contingencia *", 105, 15, { align: 'center' });
 
             // Subtítulo
             doc.setFontSize(11);
             doc.text(`(en el rango de fecha: ${fechaInicio} - ${fechaFin})`, 105, 22, { align: 'center' });
 
             // Encabezados según tu solicitud
-            const tableColumn = ["Titulo", "Prioridad", "Estado Reporte", "Fecha Ocurrencia", "Usuario que Reporta"];
+            const tableColumn = ["Alertas, mantenimientos y novedades del sistema", "Prioridad", "Estado", "Fecha Ocurrencia", "Usuario que Reporta"];
             const tableRows = datosFiltrados.map(blog => [
                 blog.titulo,
                 blog.prioridad,
@@ -72,8 +72,8 @@ function Reporte1({ userData, token }) {
                 styles: { fontSize: 9 }
             });
 
-            doc.save(`Reporte_Blog_${fechaInicio}_a_${fechaFin}.pdf`);
-            Mensajes.showSuccess("PDF generado correctamente.");
+            doc.save(`Reporte_Contingencia_${fechaInicio}_a_${fechaFin}.pdf`);
+            Mensajes.showSuccess("Reporte de Contingencia generado correctamente.");
 
         } catch (error) {
             console.error("Error en Reporte1:", error);
@@ -89,7 +89,7 @@ function Reporte1({ userData, token }) {
             <Menu tipo="2" userData={userData} token={token} />
 
             <div className="contenedor-medio">
-                <h1>Reporte de Eventos en Blog</h1>
+                <h1>Reporte de Contingencias</h1>
                 <h3>(Seleccione un rango de fecha)</h3>
 
                 {/* Estilos aplicados con className para evitar advertencias de React */}

@@ -4,6 +4,8 @@ import Foot from '../components/Foot';
 import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
+import { NewUsuario } from '../services/Icons';
+
 
 function Usuarios({ userData, token }) {
     const [usuarios, setUsuarios] = useState([]);
@@ -132,7 +134,7 @@ function Usuarios({ userData, token }) {
                     />
 
                     <button className="btn-agregar-reg" onClick={handleNuevoUsuario} title='Cargar Nuevo Usuario'>
-                        + Nuevo Usuario
+                        <NewUsuario /> Nuevo Usuario
                     </button>
                 </div>
 

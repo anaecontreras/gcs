@@ -33,7 +33,7 @@ class RolController extends Controller
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $validator->errors()
-            ], 422);
+            ], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $rol = Roles::create($request->only(['rol']));
@@ -46,7 +46,7 @@ class RolController extends Controller
             'entidad_id'       => $rol->id,
         ]);
 
-        return response()->json(['message' => 'Rol creado exitosamente', 'rol' => $rol], 201);
+        return response()->json(['message' => 'Rol creado exitosamente', 'rol' => $rol], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function edit(Request $request)
@@ -61,7 +61,7 @@ class RolController extends Controller
             return response()->json([
                 'message' => 'Error de validación',
                 'errors'  => $validator->errors()
-            ], 422);
+            ], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // 2. Buscar y actualizar
@@ -78,7 +78,7 @@ class RolController extends Controller
             'entidad_id'       => $rol->id,
         ]);
 
-        return response()->json(['message' => 'Rol actualizado exitosamente', 'rol' => $rol], 200);
+        return response()->json(['message' => 'Rol actualizado exitosamente', 'rol' => $rol], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function destroy(Request $request, $id)
@@ -92,7 +92,7 @@ class RolController extends Controller
             return response()->json([
                 'message' => 'El ID del rol no es válido o no existe',
                 'errors' => $validator->errors()
-            ], 404);
+            ], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // 2. Buscar el objeto
@@ -111,6 +111,6 @@ class RolController extends Controller
 
         return response()->json([
             'message' => "El rol '{$rol->rol}' ha sido eliminado correctamente"
-        ], 200);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

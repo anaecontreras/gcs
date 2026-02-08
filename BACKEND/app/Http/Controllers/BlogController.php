@@ -35,7 +35,7 @@ class BlogController extends Controller
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $validator->errors()
-            ], 422);
+            ], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $blog = Blog::create([
@@ -52,7 +52,7 @@ class BlogController extends Controller
             'entidad_id'       => $blog->id,
         ]);
 
-        return response()->json(['message' => 'Evento creado exitosamente', 'blog' => $blog], 201);
+        return response()->json(['message' => 'Evento creado exitosamente', 'blog' => $blog], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function edit(Request $request)
@@ -65,7 +65,7 @@ class BlogController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422);
+            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $blog = Blog::find($request->id);
@@ -78,7 +78,7 @@ class BlogController extends Controller
             'entidad_id'       => $blog->id,
         ]);
 
-        return response()->json(['message' => 'Evento actualizado exitosamente', 'blog' => $blog], 200);
+        return response()->json(['message' => 'Evento actualizado exitosamente', 'blog' => $blog], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function destroy(Request $request, $id)
@@ -88,7 +88,7 @@ class BlogController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'El evento no existe'], 404);
+            return response()->json(['message' => 'El evento no existe'], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $blog = Blog::find($id);
@@ -102,6 +102,6 @@ class BlogController extends Controller
 
         $blog->delete();
 
-        return response()->json(['message' => 'Evento eliminado correctamente'], 200);
+        return response()->json(['message' => 'Evento eliminado correctamente'], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

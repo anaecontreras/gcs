@@ -3,22 +3,41 @@ POST http://127.0.0.1:8000/api/auth/login
 content-type: application/json
 
 {
-    "email": "superman@gmail.com",
+    "email": "admin@gmail.com",
     "password": "12345678"
 }
+
+### CREAR ADMINISTRADOR INICIAL (Solo si no existe)
+POST http://127.0.0.1:8000/api/auth/init-admin
+Accept: application/json
+Content-Type: application/json
+
+{
+    "password": "12345678"
+}
+
+### PROBAR LOGIN CON EL NUEVO ADMIN
+POST http://127.0.0.1:8000/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "admin12345678"
+}
+
 
 ### Registro de usuario
 POST http://127.0.0.1:8000/api/auth/register
 content-type: application/json
-Authorization: Bearer 167|IKs2MAZAsneFvhqUy3drLqJqW6VBSqM1NgeeIUja3a766d4d
 
 {
-    "rol_id": 3,
-    "email": "prueba456@gmail.com",
+    "rol_id": 1,
+    "email": "admin@gmail.com",
     "password": "12345678",
-    "password_confirmation": "12345678",
-    "name": "Usuario 456",
-    "unidad_operativa": "El Marquez"
+    "password_confirmation": "admin",
+    "name": "Usuario Admin",
+    "unidad_operativa": "Dev"
 }
 
 ### Cambio Contraseña de usuario activo
@@ -57,7 +76,7 @@ Authorization: Bearer 176|4Opl9QjI81aEqVpos98wvw1fg0izvxaMb8mGGAnMdd0139cb
 ### Listar todos los usuarios registrados
 GET http://127.0.0.1:8000/api/auth/showUsers
 Content-Type: application/json
-Authorization: Bearer 176|4Opl9QjI81aEqVpos98wvw1fg0izvxaMb8mGGAnMdd0139cb
+Authorization: Bearer 7|Khctt0Gphp4a099jQbpIMszIarBr1KqJ2sfUxnAe7e222212
 
 ### Logout de usuario
 POST http://127.0.0.1:8000/api/auth/logout

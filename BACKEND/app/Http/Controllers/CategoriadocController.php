@@ -33,7 +33,7 @@ class CategoriadocController extends Controller
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $validator->errors()
-            ], 422);
+            ], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $categoria = Categoriadoc::create($request->only(['nombre_categoria']));
@@ -60,7 +60,7 @@ class CategoriadocController extends Controller
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $validator->errors()
-            ], 422);
+            ], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $categoriadoc = Categoriadoc::findOrFail($request->id);
@@ -78,7 +78,7 @@ class CategoriadocController extends Controller
 
         return response()->json([
             'message' => 'Datos actualizados exitosamente.'
-        ], 200);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function destroy(Request $request, $id)
@@ -89,7 +89,7 @@ class CategoriadocController extends Controller
         $categoriadoc = Categoriadoc::find($id);
 
         if (!$categoriadoc) {
-            return response()->json(['message' => 'Categoría no encontrada'], 404);
+            return response()->json(['message' => 'Categoría no encontrada'], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // 2. Opcional: Verificar si tiene documentos asociados antes de borrar
@@ -109,6 +109,6 @@ class CategoriadocController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Categoría eliminada correctamente'
-        ], 200);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

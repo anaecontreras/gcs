@@ -4,6 +4,9 @@ import { useState } from 'react';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 
+import { BtnReturn } from '../services/Icons';
+
+
 function Menu({ setIsAuthenticated, tipo, userData, token }) {
     const navigate = useNavigate();
     const [showDropdown, setShowDropdown] = useState(false); // visibilidad del menú dropdown
@@ -44,9 +47,9 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
             <ul>
                 {tipo !== "2" ? (
                     <>
-                        <li><Link to="/Blog">Blog</Link></li>
-                        <li><Link to="/Foro">Foro</Link></li>
+                        <li><Link to="/Blog">Contingencia</Link></li>
                         <li><Link to="/Doc">Documentos</Link></li>
+                        <li><Link to="/Foro">Foro-Técnico</Link></li>
                         <li><Link to="/Calendario">Calendario</Link></li>
                         <>
                             <li
@@ -65,9 +68,9 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
 
                                 {showDropdown2 && (
                                     <ul className="dropdown-menu-repo">
-                                        <li><Link to="/Reporte1">Reporte de Eventos en Blog</Link></li>
-                                        <li><Link to="/Reporte2">Reporte del Temas en Foro</Link></li>
-                                        <li><Link to="/Reporte3">Reporte de Eventos Programados</Link></li>
+                                        <li><Link to="/Reporte1">Reporte de Contingencias</Link></li>
+                                        <li><Link to="/Reporte2">Reporte del Foro-Técnico</Link></li>
+                                        <li><Link to="/Reporte3">Reporte de Calendario de Mantenimientos</Link></li>
                                     </ul>
                                 )}
                             </li>
@@ -102,7 +105,7 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
 
                             {showDropdown && (
                                 <ul className="dropdown-menu">
-                                    <li><Link to="/Usuarios">Usuarios y Roles</Link></li>
+                                    <li><Link to="/Usuarios">Usuarios</Link></li>
                                     <li><Link to="/Logs">Historial de Actividades</Link></li>
                                     <li><Link to="/Reporte4">Reporte de Histórial Actividades</Link></li>
                                 </ul>
@@ -130,7 +133,7 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
                             onClick={handleReturn}
                             className="logout-link"
                         >
-                            ⬅ Regresar
+                            <BtnReturn /> <span style={{ marginLeft: '10px', fontSize: '1.2rem' }}>Regresar</span>
                         </a>
                     </li>
                 ) : null}

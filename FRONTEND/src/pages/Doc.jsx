@@ -5,6 +5,8 @@ import Menu from '../components/Menu';
 
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
+import { NewDoc, BtnEye, BtnEdit, BtnErase } from '../services/Icons';
+
 
 function Doc({ userData, token }) {
     const [documentos, setDocumentos] = useState([]);
@@ -27,7 +29,7 @@ function Doc({ userData, token }) {
                 setDocumentos(resDocs);
                 setCategorias(resCats);
             } catch (error) {
-                Mensajes.showErrorPersonalizado(error.message);
+                Mensajes.showError(error.message);
             } finally {
                 setLoading(false);
             }
@@ -68,28 +70,41 @@ function Doc({ userData, token }) {
         if (url) {
             window.open(url, '_blank', 'noopener,noreferrer');
         } else {
-            Mensajes.showErrorPersonalizado("No se encontró la ubicación del archivo.");
+            Mensajes.showError("No se encontró la ubicación del archivo.");
         }
     };
 
     const handleNuevoDocumento = async () => {
         const resultado = await Mensajes.mostrarModalNuevoDocumento(categorias);
+
         if (resultado.isConfirmed) {
+            // 1. Extraemos con los nombres EXACTOS que retorna el modal
             const { titulo, categoria_id, version, fecha_publicacion, archivo } = resultado.value;
+
+            // 2. Creamos el FormData
             const formData = new FormData();
+
+            // 3. Append de datos (asegurando tipos)
             formData.append('titulo', titulo);
-            formData.append('categoria_id', categoria_id);
+            formData.append('categoria_id', categoria_id); // Laravel espera el ID
             formData.append('version', version);
             formData.append('fecha_publicacion', fecha_publicacion);
-            formData.append('archivo', archivo);
+
+            // 4. El Archivo (Clave: debe llamarse 'archivo' como en tu Validator de PHP)
+            if (archivo) {
+                formData.append('archivo', archivo);
+            }
 
             try {
                 await Api.storeDocumento(token, formData);
                 Mensajes.showSuccess("Documento cargado correctamente");
+
+                // Recargar la lista
                 const data = await Api.getDocumentos(token);
                 setDocumentos(data);
             } catch (error) {
-                Mensajes.showErrorPersonalizado(error.message);
+                // Ahora que corregimos el catch, aquí verás el error real de Laravel
+                Mensajes.showError(error.message);
             }
         }
     };
@@ -107,7 +122,7 @@ function Doc({ userData, token }) {
                     setCurrentPage(nuevaCantidadPaginas);
                 }
             } catch (error) {
-                Mensajes.showErrorPersonalizado(error.message);
+                Mensajes.showError(error.message);
             }
         }
     };
@@ -130,7 +145,7 @@ function Doc({ userData, token }) {
                 const data = await Api.getDocumentos(token);
                 setDocumentos(data);
             } catch (error) {
-                Mensajes.showErrorPersonalizado(error.message);
+                Mensajes.showError(error.message);
             }
         }
     };
@@ -142,7 +157,7 @@ function Doc({ userData, token }) {
 
             <div className="contenedor-medio contenedor-blog">
                 <div className="header-seccion-blog">
-                    <h1>Gestión de Documentos</h1>
+                    <h2 style={{ fontSize: "1.7rem", fontWeight: 'bold' }}>Gestión de Documentación Técnica</h2>
 
                     {/* BUSCADOR INTEGRADO */}
                     <input
@@ -156,7 +171,7 @@ function Doc({ userData, token }) {
                         <>
                             {userData.rol_id === 1 || userData.rol_id === 2 ?
                                 <button className="btn-agregar-reg" onClick={handleNuevoDocumento} title='Cargar un Documento'>
-                                    ➕ Subir un Documento
+                                    <NewDoc /> Subir un Documento
                                 </button>
                                 :
                                 ""
@@ -176,9 +191,9 @@ function Doc({ userData, token }) {
                         <table className="tabla-custom">
                             <thead>
                                 <tr>
-                                    <th style={{ width: '9rem' }}>Categoría</th>
-                                    <th style={{ width: '28rem' }}>Título</th>
-                                    <th style={{ width: '6rem' }}>Versión Doc</th>
+                                    <th style={{ width: '9rem' }}>Tipo</th>
+                                    <th style={{ width: '28rem' }}>Título del Documento</th>
+                                    <th style={{ width: '6rem', textAlign: 'left' }}>Versión Doc</th>
                                     <th>Cargado por</th>
                                     <th>Fecha Publicación</th>
                                     <th style={{ textAlign: 'center' }}>Acciones</th>
@@ -202,18 +217,31 @@ function Doc({ userData, token }) {
                                                 {doc.fecha_publicacion}
                                             </td>
                                             <td className="td celda-acciones">
-                                                <button className="btn-edit" title="Ver PDF en otra Pestaña" onClick={() => handleVerDocumento(doc.url_archivo)}>
-                                                    👁️
+                                                <button
+                                                    className='butt secondary'
+                                                    onClick={() => handleVerDocumento(doc.url_archivo)}
+                                                >
+                                                    <BtnEye />
+                                                    <span>Ver PDF</span>
                                                 </button>
                                                 {userData.rol_id !== 4 ?
                                                     <>
                                                         {userData.rol_id === 1 || userData.rol_id === 2 ?
                                                             <>
-                                                                <button className="btn-edit" title="Editar" onClick={() => handleEditar(doc)}>
-                                                                    ✏️
+                                                                <button
+                                                                    className='butt'
+                                                                    onClick={() => handleEditar(doc)}
+                                                                >
+                                                                    <BtnEdit />
+                                                                    <span>Editar</span>
                                                                 </button>
-                                                                <button className="btn-delete" title="Eliminar" onClick={() => handleEliminar(doc.id, doc.titulo)}>
-                                                                    🗑️
+
+                                                                <button
+                                                                    className='butt danger'
+                                                                    onClick={() => handleEliminar(doc.id, doc.titulo)}
+                                                                >
+                                                                    <BtnErase />
+                                                                    <span>Eliminar</span>
                                                                 </button>
                                                             </>
                                                             :

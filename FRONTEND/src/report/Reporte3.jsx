@@ -47,14 +47,14 @@ function Reporte3({ userData, token }) {
 
             // Título
             doc.setFontSize(16);
-            doc.text("* Reporte de Eventos en Calendario *", 105, 15, { align: 'center' });
+            doc.text("* Reporte de Calendario de Mantenimientos *", 105, 15, { align: 'center' });
 
             // Subtítulo
             doc.setFontSize(11);
             doc.text(`(en el rango de fecha: ${fechaInicio} - ${fechaFin})`, 105, 22, { align: 'center' });
 
             // Encabezados: Evento Programado, Usuario Creador, Fecha Inicio, Fecha Fin
-            const tableColumn = ["Evento Programado", "Usuario Creador", "Fecha Inicio", "Fecha Fin"];
+            const tableColumn = ["Mantenimiento Programado", "Usuario Creador", "Fecha Inicio", "Fecha Fin"];
             const tableRows = datosFiltrados.map(evento => [
                 evento.titulo,
                 evento.creador ? evento.creador.name : 'N/A',
@@ -71,8 +71,8 @@ function Reporte3({ userData, token }) {
                 styles: { fontSize: 9 }
             });
 
-            doc.save(`Reporte_Calendario_${fechaInicio}_a_${fechaFin}.pdf`);
-            Mensajes.showSuccess("Reporte de calendario generado con éxito.");
+            doc.save(`Reporte_Calendario-Mantenimiento_${fechaInicio}_a_${fechaFin}.pdf`);
+            Mensajes.showSuccess("Reporte de calendario de mantenimiento generado con éxito.");
 
         } catch (error) {
             console.error("Error en Reporte3:", error);
@@ -88,7 +88,7 @@ function Reporte3({ userData, token }) {
             <Menu tipo="2" userData={userData} token={token} />
 
             <div className="contenedor-medio">
-                <h1>Reporte de Eventos Programados en Calendario</h1>
+                <h1>Reporte de Calendario de Mantenimientos</h1>
                 <h3>(Seleccione un rango de fecha)</h3>
 
                 <div className="seccion-reportes">

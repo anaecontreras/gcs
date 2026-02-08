@@ -46,7 +46,7 @@ function Reporte2({ userData, token }) {
 
             // Título
             doc.setFontSize(16);
-            doc.text("* Reporte de Temas en el Foro *", 105, 15, { align: 'center' });
+            doc.text("* Reporte del Foro-Técnico *", 105, 15, { align: 'center' });
 
             // Subtítulo
             doc.setFontSize(11);
@@ -70,8 +70,8 @@ function Reporte2({ userData, token }) {
                 styles: { fontSize: 9 }
             });
 
-            doc.save(`Reporte_Foro_${fechaInicio}_a_${fechaFin}.pdf`);
-            Mensajes.showSuccess("Reporte de foro generado con éxito.");
+            doc.save(`Reporte_Foro-Técnico_${fechaInicio}_a_${fechaFin}.pdf`);
+            Mensajes.showSuccess("Reporte de foro técnico generado con éxito.");
 
         } catch (error) {
             console.error("Error en Reporte2:", error);
@@ -87,7 +87,7 @@ function Reporte2({ userData, token }) {
             <Menu tipo="2" userData={userData} token={token} />
 
             <div className="contenedor-medio">
-                <h1>Reporte de Temas en el Foro</h1>
+                <h1>Reporte de Temas-Ténicos</h1>
                 <h3>(Seleccione un rango de fecha)</h3>
 
                 <div className="seccion-reportes">

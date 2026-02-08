@@ -4,6 +4,11 @@ import Foot from '../components/Foot';
 import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
+import { NewForo } from '../services/Icons';
+
+import { BtnMessage, BtnClose, BtnEdit, BtnErase } from '../services/Icons';
+
+
 
 function Foro({ userData, token }) {
     const [temas, setTemas] = useState([]);
@@ -172,7 +177,7 @@ function Foro({ userData, token }) {
                         ?
                         <>
                             <button className="btn-agregar-reg" onClick={handleNuevoTema} title='Abrir Tema Nuevo en Foro'>
-                                + Nuevo Tema
+                                <NewForo /> Nuevo Tema
                             </button>
                         </>
                         :
@@ -199,18 +204,36 @@ function Foro({ userData, token }) {
                                                 </p>
                                             </div>
 
-                                            <div className="acciones-tema">
+                                            <div className="acciones-tema altura-acciones">
 
 
 
                                                 {userData.rol_id !== 4 && tema.estado === 'Abierto' && (
                                                     <>
-                                                        <button className="btn-edit" title="Comentar" onClick={() => handleNuevoComentario(tema.id, tema.titulo)}>💬</button>
+                                                        <button
+                                                            className='butt secondary'
+                                                            onClick={() => handleNuevoComentario(tema.id, tema.titulo)}
+                                                        >
+                                                            <BtnMessage />
+                                                            <span>Comentar</span>
+                                                        </button>
 
                                                         {userData.id === tema.usuario_creador_id || userData.rol_id === 1 ?
                                                             <>
-                                                                <button className="btn-edit" title="Cerrar Tema" onClick={() => handleCerrarTema(tema)}>🔒</button>
-                                                                <button className="btn-edit" title="Editar Tema" onClick={() => handleEditarTema(tema)}>✏️</button>
+                                                                <button
+                                                                    className='butt primary'
+                                                                    onClick={() => handleCerrarTema(tema)}
+                                                                >
+                                                                    <BtnClose />
+                                                                    <span>Cerrar Tema</span>
+                                                                </button>
+                                                                <button
+                                                                    className='butt'
+                                                                    onClick={() => handleEditarTema(tema)}
+                                                                >
+                                                                    <BtnEdit />
+                                                                    <span>Editar</span>
+                                                                </button>
                                                             </>
                                                             :
                                                             ""
@@ -223,7 +246,13 @@ function Foro({ userData, token }) {
                                                     <>
                                                         {userData.id === tema.usuario_creador_id || userData.rol_id === 1 ?
                                                             <>
-                                                                <button className="btn-delete" title="Eliminar Tema" onClick={() => handleBorrarTema(tema.id, tema.titulo)}>🗑️</button>
+                                                                <button
+                                                                    className='butt danger'
+                                                                    onClick={() => handleBorrarTema(tema.id, tema.titulo)}
+                                                                >
+                                                                    <BtnErase />
+                                                                    <span>Eliminar</span>
+                                                                </button>
                                                             </>
                                                             :
                                                             ""
@@ -250,9 +279,22 @@ function Foro({ userData, token }) {
                                                             {userData.id === com.usuario_creador_id || userData.rol_id === 1 ?
                                                                 <>
                                                                     {userData.rol_id !== 4 && tema.estado === 'Abierto' && (
-                                                                        <div className="acciones-comentario">
-                                                                            <button className="btn-mini-edit" title="Editar comentario" onClick={() => handleEditarComentario(com, tema.titulo)}>🖋️</button>
-                                                                            <button className="btn-mini-delete" title="Eliminar comentario" onClick={() => handleBorrarComentario(com.id)}>❌</button>
+                                                                        <div className="acciones-comentario altura-acciones">
+                                                                            <button
+                                                                                className='butt'
+                                                                                onClick={() => handleEditarComentario(com, tema.titulo)}
+                                                                            >
+                                                                                <BtnEdit />
+                                                                                <span>Editar Comentario</span>
+                                                                            </button>
+
+                                                                            <button
+                                                                                className='butt danger'
+                                                                                onClick={() => handleBorrarComentario(com.id)}
+                                                                            >
+                                                                                <BtnErase />
+                                                                                <span>Eliminar Comentario</span>
+                                                                            </button>
                                                                         </div>
                                                                     )}
                                                                 </>

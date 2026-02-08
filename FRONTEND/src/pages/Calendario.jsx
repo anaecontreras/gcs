@@ -6,6 +6,9 @@ import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 
+import { NewCalendario, BtnEdit, BtnErase } from '../services/Icons';
+
+
 function Calendario({ userData, token }) {
     const [eventos, setEventos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -165,7 +168,7 @@ function Calendario({ userData, token }) {
 
             <div className="contenedor-medio contenedor-blog">
                 <div className="header-seccion-blog">
-                    <h1>Calendario de Eventos</h1>
+                    <h1>Calendario de Mantenimientos</h1>
                     <input
                         type="text"
                         placeholder="🔍 Buscar evento o usuario..."
@@ -175,7 +178,7 @@ function Calendario({ userData, token }) {
                     />
                     {userData.rol_id === 1 || userData.rol_id === 2 ?
                         <button className="btn-agregar-reg" onClick={handleNuevoRegistro} title='Cargar Datos de Nuevo Evento'>
-                            ➕ Programar Evento
+                            <NewCalendario /> Programar Evento
                         </button>
                         :
                         ""
@@ -193,9 +196,9 @@ function Calendario({ userData, token }) {
                                     {userData.rol_id !== 4 && userData.rol_id !== 3 ?
                                         <>
                                             <th style={{ width: '10rem' }}>Usuario Creador</th>
-                                            <th style={{ width: '35rem' }}>Evento Programado-</th>
-                                            <th style={{ width: '9rem' }}>Fecha Inicio Evento</th>
-                                            <th style={{ width: '9rem' }}>Fecha Fin Evento</th>
+                                            <th style={{ width: '35rem' }}>Mantenimiento Programado</th>
+                                            <th style={{ width: '9rem' }}>Fecha Inicio</th>
+                                            <th style={{ width: '9rem' }}>Fecha Fin</th>
                                         </>
 
                                         :
@@ -255,20 +258,20 @@ function Calendario({ userData, token }) {
                                                         <>
                                                             {!estaVencido && (
                                                                 <button
-                                                                    className="btn-edit"
+                                                                    className='butt'
                                                                     onClick={() => handleEditarRegistro(evento)}
-                                                                    title="Editar Evento"
                                                                 >
-                                                                    ✏️
+                                                                    <BtnEdit />
+                                                                    <span>Editar Programación</span>
                                                                 </button>
                                                             )}
 
                                                             <button
-                                                                className="btn-delete"
+                                                                className='butt danger'
                                                                 onClick={() => handleEliminarRegistro(evento.id, evento.titulo)}
-                                                                title="Eliminar Evento"
                                                             >
-                                                                🗑️
+                                                                <BtnErase />
+                                                                <span>Eliminar Programación</span>
                                                             </button>
                                                         </>
                                                         :

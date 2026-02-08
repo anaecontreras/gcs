@@ -5,7 +5,7 @@ Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
 
 ### Crear un Nuevo Documento - API RESTful
 POST http://127.0.0.1:8000/api/documentos/store
-Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+Authorization: Bearer 7|Khctt0Gphp4a099jQbpIMszIarBr1KqJ2sfUxnAe7e222212
 Accept: application/json
 Content-Type: multipart/form-data; boundary=boundary
 
@@ -30,7 +30,7 @@ Content-Disposition: form-data; name="fecha_publicacion"
 Content-Disposition: form-data; name="archivo"; filename="manual2.pdf"
 Content-Type: application/pdf
 
-< ./manual2.pdf
+< ./manual.pdf
 --boundary--
 
 ### Editar Documento Existente - API RESTful

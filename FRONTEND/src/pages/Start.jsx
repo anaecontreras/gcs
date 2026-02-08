@@ -15,18 +15,6 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-
-
-    // const handleLogin = (e) => {
-    //     e.preventDefault();
-    //     if (user === 'admin' && pass === 'admin') {
-    //         setIsAuthenticated(true);
-    //         navigate('/Dashboard'); // Redirige a la matriz
-    //     } else {
-    //         Mensajes.showErrorCredenciales()
-    //     }
-    // };
-
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -58,7 +46,7 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
             <Head />
 
             <div className='contenedor-medio contenedor-login'>
-                <h1>LOGIN</h1>
+                <h1 style={{ marginBottom: '1rem' }}>LOGIN</h1>
 
                 <form onSubmit={handleLogin} className='form-login'>
                     <InputLogin

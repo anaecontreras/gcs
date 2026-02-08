@@ -73,7 +73,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'user' => $user,
             'token_type' => 'Bearer',
-        ], 201);
+        ], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     // FUNCION DE REGISTRO
@@ -125,7 +125,7 @@ class AuthController extends Controller
             'entidad_id'       => $user->id,
         ]);
 
-        return response()->json(['message' => 'Usuario creado exitosamente', 'user' => $user], 201);
+        return response()->json(['message' => 'Usuario creado exitosamente', 'user' => $user], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     // FUNCION DE LOGOUT
@@ -150,9 +150,9 @@ class AuthController extends Controller
             /** @var \App\Models\User $user **/
             $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
 
-            return response()->json(['message' => 'Success'], 200);
+            return response()->json(['message' => 'Success'], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['error' => $e->getMessage()], 500, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
     }
 
@@ -170,14 +170,14 @@ class AuthController extends Controller
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $validator->errors()
-            ], 422);
+            ], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // Verificar que la contraseña actual sea correcta
         if (!Hash::check($request->current_password, $user->password)) {
             return response()->json([
                 'message' => 'La contraseña actual es incorrecta.',
-            ], 400);
+            ], 400, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // Actualizar la contraseña
@@ -202,7 +202,7 @@ class AuthController extends Controller
             'message' => 'Contrasena actualizada exitosamente.',
             'access_token' => $newToken, // Opcional: si no lo necesitas, omite esta línea
             'token_type' => 'Bearer',
-        ], 200);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     // ACTUALIZAR DATOS BÁSICOS DE UN USUARIO (solo admin)
@@ -224,7 +224,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422);
+            return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $user = User::findOrFail($request->input('user_id'));
@@ -243,7 +243,7 @@ class AuthController extends Controller
 
         $user->save();
 
-        return response()->json(['message' => 'Datos actualizados exitosamente.'], 200);
+        return response()->json(['message' => 'Datos actualizados exitosamente.'], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     // DESHABILITAR USUARIO (solo admin)
@@ -256,7 +256,7 @@ class AuthController extends Controller
         if (!$admin || $admin->rol_id !== 1) {
             return response()->json([
                 'message' => 'Acceso denegado. Solo administradores pueden cambiar el estado de usuarios.',
-            ], 403);
+            ], 403, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // Validar entrada
@@ -268,7 +268,7 @@ class AuthController extends Controller
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $validator->errors()
-            ], 422);
+            ], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $userId = $request->input('user_id');
@@ -277,7 +277,7 @@ class AuthController extends Controller
         if ($userId == $admin->id) {
             return response()->json([
                 'message' => 'No puedes cambiar tu propio estado de actividad.',
-            ], 400);
+            ], 400, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // Obtener usuario
@@ -305,7 +305,7 @@ class AuthController extends Controller
                 'email' => $user->email,
                 'activo' => $user->activo,
             ],
-        ], 200);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     // LISTAR TODOS LOS USUARIOS (solo admin)
@@ -314,7 +314,7 @@ class AuthController extends Controller
         $user = $request->user();
 
         if (!$user || $user->rol_id !== 1) {
-            return response()->json(['message' => 'Acceso denegado.'], 403);
+            return response()->json(['message' => 'Acceso denegado.'], 403, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // Cargamos la relación 'rol'
@@ -323,5 +323,48 @@ class AuthController extends Controller
             ->get();
 
         return response()->json(['users' => $users], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    // MÉTODO PARA CREAR EL PRIMER ADMINISTRADOR (Sin necesidad de Token)
+    public function createFirstAdmin(Request $request)
+    {
+        $emailAdmin = 'admin@gmail.com';
+
+        // 1. Verificar si el admin ya existe
+        $exists = User::where('email', $emailAdmin)->exists();
+
+        if ($exists) {
+            return response()->json([
+                'message' => 'El usuario administrador ya existe en el sistema.'
+            ], 400, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
+        }
+
+        // 2. Validar que al menos envíen la contraseña
+        $request->validate([
+            'password' => 'required|string|min:8',
+        ]);
+
+        // 3. Crear el usuario con los datos fijos solicitados
+        $user = User::create([
+            'name'             => 'Usuario Admin',
+            'email'            => $emailAdmin,
+            'password'         => Hash::make($request->password),
+            'rol_id'           => 1, // Rol Admin
+            'unidad_operativa' => 'Dev',
+            'activo'           => 1,
+        ]);
+
+        // 4. Registrar Log
+        Log::create([
+            'usuario_correo'   => 'SYSTEM',
+            'accion'           => "Creación inicial del administrador maestro: {$emailAdmin}",
+            'entidad_afectada' => 'users',
+            'entidad_id'       => $user->id,
+        ]);
+
+        return response()->json([
+            'message' => 'Administrador creado exitosamente. Ya puede iniciar sesión.',
+            'user'    => $user
+        ], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 }

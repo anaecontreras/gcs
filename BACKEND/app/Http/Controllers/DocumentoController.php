@@ -37,13 +37,13 @@ class DocumentoController extends Controller
         $validator = Validator::make($request->all(), [
             'categoria_id'       => 'required|exists:categoriadocs,id',
             'titulo'             => 'required|string|max:255',
-            'archivo'       => 'required|file|mimes:pdf|max:3072', // Máx 3MB
+            'archivo'       => 'required|file|mimes:pdf|max:10240', // Máx 3MB
             'version'            => 'required|string|max:10',
             'fecha_publicacion'  => 'required|date',
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($validator->errors(), 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $rutaCarga = $request->file('archivo')->store('documentos', 'public');
@@ -68,7 +68,7 @@ class DocumentoController extends Controller
             return $doc;
         });
 
-        return response()->json($documento, 201);
+        return response()->json($documento, 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function edit(Request $request)
@@ -83,7 +83,7 @@ class DocumentoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($validator->errors(), 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $doc = Documento::find($request->id);
@@ -121,14 +121,14 @@ class DocumentoController extends Controller
             'entidad_id'       => $doc->id,
         ]);
 
-        return response()->json(['message' => 'Documento actualizado con éxito', 'documento' => $doc], 200);
+        return response()->json(['message' => 'Documento actualizado con éxito', 'documento' => $doc], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function destroy(Request $request, $id)
     {
         $validator = Validator::make(['id' => $id], ['id' => 'required|integer|exists:documentos,id']);
         if ($validator->fails()) {
-            return response()->json(['message' => 'No encontrado'], 404);
+            return response()->json(['message' => 'No encontrado'], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $doc = Documento::findOrFail($id);
@@ -153,14 +153,14 @@ class DocumentoController extends Controller
         // 2. Eliminar de la base de datos
         $doc->delete();
 
-        return response()->json(['message' => 'Documento y archivo eliminados correctamente'], 200);
+        return response()->json(['message' => 'Documento y archivo eliminados correctamente'], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function download($id)
     {
         $validator = Validator::make(['id' => $id], ['id' => 'required|integer|exists:documentos,id']);
         if ($validator->fails()) {
-            return response()->json(['message' => 'Documento no encontrado en BD'], 404);
+            return response()->json(['message' => 'Documento no encontrado en BD'], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $doc = Documento::findOrFail($id);
@@ -170,7 +170,7 @@ class DocumentoController extends Controller
         $fullPath = storage_path('app/public/' . $doc->ruta_archivo);
 
         if (!file_exists($fullPath)) {
-            return response()->json(['message' => 'Archivo físico no encontrado'], 404);
+            return response()->json(['message' => 'Archivo físico no encontrado'], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // Usamos response()->download() que es más directo para archivos locales

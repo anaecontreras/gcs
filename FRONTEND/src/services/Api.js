@@ -303,24 +303,27 @@ export const getCategoriasDoc = async (token) => {
 };
 
 export const storeDocumento = async (token, formData) => {
+    const response = await fetch(`${BASE_URL}/documentos/store`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/json",
+        },
+        body: formData,
+    });
+
+    const text = await response.text(); // Leemos como texto primero
+    console.log("LOG CRITICO - RESPUESTA BRUTA:", text);
+
     try {
-        const response = await fetch(`${BASE_URL}/documentos/store`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Accept": "application/json",
-                // Nota: No se pone Content-Type manual para que el navegador
-                // genere el boundary automáticamente con el FormData.
-            },
-            body: formData,
-        });
-
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.message || "Error al subir el documento");
-
+        const data = JSON.parse(text);
+        if (!response.ok) {
+            const detallado = data.errors ? JSON.stringify(data.errors) : data.message;
+            throw new Error(detallado || "Error 422");
+        }
         return data;
-    } catch (error) {
-        throw error;
+    } catch (e) {
+        throw new Error("Respuesta del servidor: " + text);
     }
 };
 
