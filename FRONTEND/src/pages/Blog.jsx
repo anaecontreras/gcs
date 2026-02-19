@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Head from '../components/Head';
 import Foot from '../components/Foot';
-import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 import { NewContingencia, BtnEdit, BtnClose, BtnErase } from '../services/Icons';
+import BarraMenu from '../components/BarraMenu';
+import './Blog.css'
 
 function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
     const [blogs, setBlogs] = useState([]);
@@ -12,7 +13,7 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
     const [searchTerm, setSearchTerm] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
-    const recordsPerPage = 3;
+    const recordsPerPage = 6;
 
     const formatearFechaCorrecta = (fechaStr) => {
         try {
@@ -142,9 +143,9 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
     };
 
     return (
-        <div className="contenedor-ppal">
+        <div className="contenedor-ppal-blog">
             <Head />
-            <Menu tipo="2" userData={userData} />
+            <BarraMenu tipo="2" userData={userData} />
 
             <div className="contenedor-medio contenedor-blog">
                 <div className="header-seccion-blog">
@@ -276,7 +277,6 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
                     </>
                 )}
             </div>
-            <Foot />
         </div>
     );
 }

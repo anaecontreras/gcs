@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import Head from '../components/Head';
 import Foot from '../components/Foot';
-import Menu from '../components/Menu';
 
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 import Swal from 'sweetalert2'; // Importante para las validaciones de resultados
+import './Calendario.css'
 
 import { NewCalendario, BtnEdit, BtnErase } from '../services/Icons';
+import BarraMenu from './../components/BarraMenu';
 
 function Calendario({ userData, token }) {
     const [eventos, setEventos] = useState([]);
@@ -141,9 +142,9 @@ function Calendario({ userData, token }) {
     };
 
     return (
-        <div className="contenedor-ppal">
+        <div className="contenedor-ppal-calendario">
             <Head />
-            <Menu tipo="2" userData={userData} />
+            <BarraMenu tipo="2" userData={userData} />
             <div className="contenedor-medio contenedor-foro">
                 <div className="header-seccion-blog">
                     <h1>{meses[currentDate.getMonth()]} {currentDate.getFullYear()}</h1>
@@ -198,7 +199,6 @@ function Calendario({ userData, token }) {
                     </div>
                 )}
             </div>
-            <Foot tipo="2" />
         </div>
     );
 }

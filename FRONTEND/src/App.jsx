@@ -8,6 +8,7 @@ import Calendario from './pages/Calendario';
 import Doc from './pages/Doc';
 import Foro from './pages/Foro';
 import Logs from './pages/Logs';
+import Perfil from './pages/Perfil';
 import Usuarios from './pages/Usuarios';
 import Reporte1 from './report/Reporte1';
 import Reporte2 from './report/Reporte2';
@@ -100,6 +101,17 @@ function App() {
           element={
             isAuthenticated ? (
               <Logs isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} userData={userData} token={token} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+
+        <Route
+          path='/Perfil'
+          element={
+            isAuthenticated ? (
+              <Perfil isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} userData={userData} token={token} setUserData={setUserData} setToken={setToken} />
             ) : (
               <Navigate to="/" />
             )

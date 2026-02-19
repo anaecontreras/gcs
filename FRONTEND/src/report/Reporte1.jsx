@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Head from '../components/Head';
 import Foot from '../components/Foot';
-import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 
 // Librerías para el PDF
 import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable';
+import BarraMenu from './../components/BarraMenu';
+import './Reportes.css';
 
 function Reporte1({ userData, token }) {
     const [fechaInicio, setFechaInicio] = useState('');
@@ -84,15 +85,14 @@ function Reporte1({ userData, token }) {
     };
 
     return (
-        <div className="contenedor-ppal">
+        <div className="contenedor-ppal-reporte">
             <Head />
-            <Menu tipo="2" userData={userData} token={token} />
+            <BarraMenu tipo="2" userData={userData} token={token} />
 
-            <div className="contenedor-medio">
+            <div className="contenedor-medio-reporte">
                 <h1>Reporte de Contingencias</h1>
                 <h3>(Seleccione un rango de fecha)</h3>
 
-                {/* Estilos aplicados con className para evitar advertencias de React */}
                 <div className="seccion-reportes">
                     <div className="fila-filtros">
                         <div className="grupo-input">
@@ -126,7 +126,6 @@ function Reporte1({ userData, token }) {
                 </div>
             </div>
 
-            <Foot />
         </div>
     );
 }

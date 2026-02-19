@@ -1,0 +1,12 @@
+.footer-gcs {
+    margin-top: 6rem;
+    width: 100%;
+    border-top: 2px solid var(--fg-grey);
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--fg-grey);
+}
+
+.footer-gcs p {
+    margin-top: 1px;
+}

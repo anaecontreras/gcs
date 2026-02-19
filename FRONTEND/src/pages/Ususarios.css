@@ -1,0 +1,24 @@
+.contenedor-medio {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-user {
+    width: 80rem;
+    margin-top: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 0.5rem;
+}
+
+.header-seccion-user {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 1rem;
+}

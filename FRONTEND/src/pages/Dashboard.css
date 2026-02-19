@@ -1,0 +1,116 @@
+.contenedor-ppal {
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    width: 100%;
+}
+
+.contenedor-vertical {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    flex: 1;
+    width: 100%;
+}
+
+.izquierda {
+    overflow: auto;
+}
+
+.derecha {
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.derecha::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 4rem;
+    width: 185%;
+    height: 90%;
+    margin-top: 0.9rem;
+
+    background-image: url('../assets/image/portada.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right center;
+
+    opacity: 0.7;
+
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Grid específico para las 4 cards */
+.grid-dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 50px;
+    z-index: 1;
+    /* Por encima del ::before */
+}
+
+.card {
+    width: 290px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.shadow {
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+        0 0 0 2px rgb(190, 190, 190),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+    border-radius: 20px;
+}
+
+.shadow:hover {
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.15),
+        0 0 0 2px rgb(150, 150, 150),
+        0.5em 0.5em 1.5em rgba(0, 0, 0, 0.4);
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #000000;
+}
+
+.card strong {
+    margin: 0.5rem 0;
+    font-size: 2em;
+    color: #000000 !important;
+}
+
+.card a {
+    margin-top: 1rem;
+    color: #051ce6;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.card a:hover {
+    text-decoration: underline;
+    color: #2705e6 !important;
+    font-size: 1rem;
+}

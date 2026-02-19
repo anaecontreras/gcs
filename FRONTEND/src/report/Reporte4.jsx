@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Head from '../components/Head';
 import Foot from '../components/Foot';
-import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 
 // Librerías para el PDF
 import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable';
+import BarraMenu from '../components/BarraMenu';
 
 function Reporte4({ userData, token }) {
     const [fechaInicio, setFechaInicio] = useState('');
@@ -85,11 +85,11 @@ function Reporte4({ userData, token }) {
     };
 
     return (
-        <div className="contenedor-ppal">
+        <div className="contenedor-ppal-reporte">
             <Head />
-            <Menu tipo="2" userData={userData} token={token} />
+            <BarraMenu tipo="2" userData={userData} token={token} />
 
-            <div className="contenedor-medio">
+            <div className="contenedor-medio-reporte">
                 <h1>Reporte de Historial Actividades</h1>
                 <h3>(Seleccione un rango de fecha)</h3>
 
@@ -126,7 +126,6 @@ function Reporte4({ userData, token }) {
                 </div>
             </div>
 
-            <Foot />
         </div>
     );
 }

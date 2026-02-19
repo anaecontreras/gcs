@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Head from '../components/Head';
-import Foot from '../components/Foot';
-import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 import { NewUsuario, BtnHabilitar, BtnDeshabilitar, BtnEdit } from '../services/Icons';
+import BarraMenu from './../components/BarraMenu';
+import './Ususarios.css'
 
 
 function Usuarios({ userData, token }) {
@@ -15,7 +15,7 @@ function Usuarios({ userData, token }) {
 
     // --- ESTADOS PARA PAGINACIÓN ---
     const [currentPage, setCurrentPage] = useState(1);
-    const recordsPerPage = 6;
+    const recordsPerPage = 8;
 
     useEffect(() => {
         if (!token) return;
@@ -118,10 +118,10 @@ function Usuarios({ userData, token }) {
     return (
         <div className="contenedor-ppal">
             <Head />
-            <Menu tipo="2" userData={userData} />
+            <BarraMenu tipo="2" userData={userData} />
 
             <div className="contenedor-medio contenedor-user">
-                <div className="header-seccion-blog">
+                <div className="header-seccion-user">
                     <h1>Gestión de Usuarios</h1>
 
                     {/* BUSCADOR INTEGRADO */}
@@ -222,7 +222,6 @@ function Usuarios({ userData, token }) {
                     </>
                 )}
             </div>
-            <Foot />
         </div>
     );
 }

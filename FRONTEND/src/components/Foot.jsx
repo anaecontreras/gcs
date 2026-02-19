@@ -1,5 +1,6 @@
 import * as Mensajes from '../services/Mensajes';
 import * as Api from '../services/Api';
+import './Foot.css'
 
 function Foot({ tipo, token, setToken }) {
     const handleCambiarContraseña = async (e) => {
@@ -30,7 +31,7 @@ function Foot({ tipo, token, setToken }) {
     return (
         <div className="footer-gcs">
             <p>© 2024 CANTV - Compañía Anónima Nacional Teléfonos de Venezuela | Elaborado por Ana Contreras, Diana Sierra y Darwin Colmenares</p>
-            {tipo === "1" ? (
+            {/* {tipo === "1" ? (
                 <a
                     href="#"
                     onClick={handleCambiarContraseña}
@@ -42,7 +43,7 @@ function Foot({ tipo, token, setToken }) {
                 >
                     Cambiar Contraseña
                 </a>
-            ) : null}
+            ) : null} */}
         </div>
     )
 }

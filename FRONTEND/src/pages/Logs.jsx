@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Head from '../components/Head';
-import Foot from '../components/Foot';
-import Menu from '../components/Menu';
 
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
+import BarraMenu from './../components/BarraMenu';
+import './Logs.css'
 
 function Logs({ userData, token }) {
     const [logs, setLogs] = useState([]);
@@ -13,7 +13,7 @@ function Logs({ userData, token }) {
 
     // --- ESTADOS PARA PAGINACIÓN ---
     const [currentPage, setCurrentPage] = useState(1);
-    const recordsPerPage = 5;
+    const recordsPerPage = 9;
 
     const fetchLogs = async () => {
         if (!token) return;
@@ -87,11 +87,11 @@ function Logs({ userData, token }) {
     const prevPage = () => { if (currentPage > 1) setCurrentPage(currentPage - 1); };
 
     return (
-        <div className="contenedor-ppal">
+        <div className="contenedor-ppal-logs">
             <Head />
-            <Menu tipo="2" userData={userData} />
+            <BarraMenu tipo="2" userData={userData} />
 
-            <div className="contenedor-medio contenedor-blog">
+            <div className="contenedor-medio contenedor-logs">
                 <div className="header-seccion-blog">
                     <h1>Historial de Actividades</h1>
 
@@ -165,7 +165,6 @@ function Logs({ userData, token }) {
                 )}
             </div>
 
-            <Foot tipo="2" />
         </div>
     );
 }

@@ -1,0 +1,16 @@
+.head-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.cintillo {
+    width: 15rem;
+    height: 3.5rem;
+}
+
+.logo {
+    width: 8.5rem;
+    height: 3.5rem;
+}

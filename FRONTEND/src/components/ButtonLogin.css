@@ -1,0 +1,74 @@
+.btn-one {
+    line-height: 1;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
+    padding: 0.75em 1em;
+    padding-right: 1.25em;
+    color: #fff;
+    border: 1px solid transparent;
+    font-weight: 700;
+    border-radius: 2em;
+    font-size: 1rem;
+    box-shadow: 0 0.7em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
+    transition: transform 0.3s;
+    margin-top: 1rem;
+
+    background: linear-gradient(90deg,
+            rgba(77, 54, 208, 1) 0%,
+            rgba(132, 116, 254, 1) 100%);
+}
+
+.btn-one-icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.btn-one:hover {
+    border-color: #f4f5f2;
+}
+
+.btn-one:active {
+    transform: scale(0.98);
+    box-shadow: 0 0.5em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
+}
+
+.btn-two {
+    line-height: 1;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    padding: 0.75em 1em;
+    padding-right: 1.25em;
+    color: #fff;
+    border: 1px solid transparent;
+    font-weight: 700;
+    border-radius: 2em;
+    font-size: 1rem;
+    box-shadow: 0 0.7em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
+    transition: transform 0.3s;
+    margin-top: 1rem;
+
+    background: linear-gradient(90deg,
+            rgba(77, 77, 77, 1) 0%,
+            rgba(55, 55, 55, 1) 100%);
+}
+
+.btn-two-icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.btn-two:hover {
+    border-color: #f4f5f2;
+}
+
+.btn-two:active {
+    transform: scale(0.98);
+    box-shadow: 0 0.5em 1.5em -0.5em hsla(0, 0%, 25%, 0.745);
+}

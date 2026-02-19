@@ -13,6 +13,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\TemasforoController;
 use App\Http\Controllers\ComentariosforoController;
+use App\Http\Controllers\SummaryController;
 
 Route::post('auth/login', [App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/auth/init-admin', [AuthController::class, 'createFirstAdmin']);
@@ -63,4 +64,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/comentarios', [ComentariosforoController::class, 'store']);
     Route::put('/comentarios', [ComentariosforoController::class, 'edit']);
     Route::delete('/comentarios/{id}', [ComentariosforoController::class, 'destroy']);
+
+    Route::get('/dashboard/stats', [SummaryController::class, 'getDashboardStats']);
 });

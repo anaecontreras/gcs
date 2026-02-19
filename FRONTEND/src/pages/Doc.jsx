@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import Head from '../components/Head';
 import Foot from '../components/Foot';
-import Menu from '../components/Menu';
+import BarraMenu from './../components/BarraMenu';
 
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 import { NewDoc, BtnEye, BtnEdit, BtnErase } from '../services/Icons';
+import './Doc.css';
 
 
 function Doc({ userData, token }) {
@@ -151,9 +152,9 @@ function Doc({ userData, token }) {
     };
 
     return (
-        <div className="contenedor-ppal">
+        <div className="contenedor-ppal-doc">
             <Head />
-            <Menu tipo="2" userData={userData} />
+            <BarraMenu tipo="2" userData={userData} />
 
             <div className="contenedor-medio contenedor-blog">
                 <div className="header-seccion-blog">
@@ -274,7 +275,6 @@ function Doc({ userData, token }) {
                     </>
                 )}
             </div>
-            <Foot />
         </div>
     );
 }

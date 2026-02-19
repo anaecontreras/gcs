@@ -1,0 +1,35 @@
+.contenedor-ppal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
+
+.contenedor-medio {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-acerca {
+    width: 50%;
+    height: auto;
+    margin: 2rem 2rem;
+    background-color: var(--bg-form);
+    padding: 0 3rem 0 3rem;
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+.contenedor-acerca p,
+h1,
+h3,
+h5 {
+    text-align: center;
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.7rem;
+}

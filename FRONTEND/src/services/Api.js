@@ -47,29 +47,25 @@ export const logout = async (token) => {
     }
 };
 
-export const changePassword = async (token, passwords) => {
-    try {
-        const response = await fetch(`${BASE_URL}/auth/change-password`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: JSON.stringify({
-                current_password: passwords.currentPassword,
-                new_password: passwords.newPassword,
-                new_password_confirmation: passwords.newPassword // El modal ya valida que sean iguales
-            }),
-        });
+export const changePassword = async (token, data) => {
+    const response = await fetch('http://127.0.0.1:8000/api/auth/change-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    });
 
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.message || "Error al actualizar la contraseña");
+    const result = await response.json();
 
-        return data; // Retorna el mensaje y el nuevo access_token
-    } catch (error) {
-        throw error;
+    if (!response.ok) {
+        // Esto te dirá exactamente qué campo falló (password_actual, etc)
+        const errorMsg = result.message || "Error en la validación";
+        throw new Error(errorMsg);
     }
+
+    return result;
 };
 
 export const getBlogs = async (token) => {
@@ -613,6 +609,28 @@ export const toggleUserStatus = async (token, userId) => {
         }
 
         return data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getDashboardStats = async (token) => {
+    try {
+        const response = await fetch(`${BASE_URL}/dashboard/stats`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Error al obtener estadísticas');
+        }
+
+        return await response.json();
     } catch (error) {
         throw error;
     }

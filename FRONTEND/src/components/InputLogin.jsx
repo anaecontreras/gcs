@@ -1,5 +1,4 @@
-import { ImgUser, ImgPassword } from '../services/Icons';
-
+import './InputLogin.css'
 function InputLogin({ Imagen, tipo, place, val, change }) {
     return (
         <>

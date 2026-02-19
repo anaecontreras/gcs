@@ -1,0 +1,78 @@
+.menu-barra {
+    margin-top: 1rem;
+    background-color: var(--bg-form);
+    border-radius: 5px;
+    font-size: 0.9rem;
+
+    height: 2rem;
+    width: 97%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.menu-barra h2 {
+    color: var(--bg-basic);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.menu-barra hr {
+    border-top: 0.5px solid rgba(9, 16, 46, 0.1);
+    width: 90%;
+    opacity: 0.7;
+}
+
+.menu-barra ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    height: 100%;
+}
+
+.menu-barra li {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 2.5rem;
+}
+
+.menu-barra ul li:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.menu-barra ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0 0.2rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    /* Transición suave */
+}
+
+.menu-barra ul li a:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Efecto de fondo */
+    border-radius: 3px;
+    width: 11rem;
+}
+
+.menu-barra span {
+    color: #ffffff;
+}
+
+.menu-barra span strong {
+    color: #93f834bb !important;
+}

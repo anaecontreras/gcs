@@ -1,5 +1,6 @@
 import cintillo from '../assets/image/cintillo Mincyt.png'
 import cantv from '../assets/image/Cantv.PNG'
+import './Head.css'
 
 function Head() {
     return (

@@ -46,11 +46,22 @@ export const showOKchangePassword = () => {
     });
 };
 
-// MENSAJE DE OK AL CARGAR ENTRADA
+// MENSAJE DE OK
 export const showSuccess = (mensaje) => {
     Swal.fire({
         icon: 'success',
         title: '¡Éxito!',
+        text: mensaje,
+        timer: 2000,
+        showConfirmButton: false
+    });
+};
+
+// MENSAJE DE OK
+export const showErrorMsg = (mensaje) => {
+    Swal.fire({
+        icon: 'error',
+        title: '¡Érror!',
         text: mensaje,
         timer: 2000,
         showConfirmButton: false

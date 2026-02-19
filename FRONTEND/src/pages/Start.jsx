@@ -5,13 +5,10 @@ import Head from '../components/Head';
 import Foot from '../components/Foot';
 import InputLogin from './../components/InputLogin';
 import ButtonLogin from './../components/ButtonLogin'
-
 import * as Mensajes from '../services/Mensajes';
 import * as Api from '../services/Api';
-import cantv from '../assets/image/Cantv.PNG'
-
 import { ImgUser, ImgPassword, ImgSatelite } from '../services/Icons';
-
+import './Start.css'
 
 function Start({ setIsAuthenticated, setUserData, setToken }) {
     const [user, setUser] = useState('');
@@ -46,13 +43,13 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
     };
 
     return (
-        <div className='contenedor-ppal'>
+        <div className='contenedor-ppal-start'>
             <Head />
 
             <div class="contenedor-login">
                 <div class="div1">
                     <h1 style={{ marginBottom: '0.2rem' }}>Plataforma Web Centralizada</h1>
-                    <h1 style={{ marginBottom: '2rem', fontSize: '1.3rem' }}>Gestión de Contingencias Satelitales</h1>
+                    <h1 style={{ marginBottom: '1.5rem', fontSize: '1.3rem' }}>Gestión de Contingencias Satelitales</h1>
 
                     <form onSubmit={handleLogin} className='form-login'>
                         <InputLogin

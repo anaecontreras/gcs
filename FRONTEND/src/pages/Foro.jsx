@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import Head from '../components/Head';
 import Foot from '../components/Foot';
-import Menu from '../components/Menu';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 import { NewForo } from '../services/Icons';
 
 import { BtnMessage, BtnClose, BtnEdit, BtnErase } from '../services/Icons';
+import BarraMenu from './../components/BarraMenu';
+import './Foro.css';
 
 
 
@@ -16,7 +17,7 @@ function Foro({ userData, token }) {
     const [searchTerm, setSearchTerm] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
-    const recordsPerPage = 3;
+    const recordsPerPage = 4;
 
     useEffect(() => {
         if (!token) return;
@@ -159,9 +160,9 @@ function Foro({ userData, token }) {
     };
 
     return (
-        <div className="contenedor-ppal">
+        <div className="contenedor-ppal-foro">
             <Head />
-            <Menu tipo="2" userData={userData} />
+            <BarraMenu tipo="2" userData={userData} />
 
             <div className="contenedor-medio contenedor-foro">
                 <div className="header-seccion-blog">
@@ -204,7 +205,7 @@ function Foro({ userData, token }) {
                                                 </p>
                                             </div>
 
-                                            <div className="acciones-tema altura-acciones">
+                                            <div className="altura-acciones">
 
 
 
@@ -326,7 +327,6 @@ function Foro({ userData, token }) {
                     </>
                 )}
             </div>
-            <Foot />
         </div>
     );
 }

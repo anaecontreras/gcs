@@ -1,0 +1,209 @@
+.contenedor-ppal-blog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.contenedor-medio {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-blog {
+    width: 80rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 0.5rem;
+}
+
+.header-seccion-blog {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 0;
+}
+
+.input-busqueda {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.input-busqueda:focus {
+    border-color: #168128;
+}
+
+.btn-agregar-reg {
+    background-color: var(--bg-btn-agregar);
+    color: var(--bg-basic);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-agregar-reg:hover {
+    background-color: var(--bg-basic);
+    color: var(--bg-form);
+    border: 1px solid var(--bg-form);
+}
+
+.tabla-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.2rem;
+    background: white;
+    color: #333;
+}
+
+.tabla-custom th,
+.tabla-custom td {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-custom td {
+    height: 4rem;
+}
+
+.tabla-custom .td {
+    height: 2.6rem;
+    padding: 0 6px 0 6px;
+    margin: 0 1px 0 1px;
+}
+
+.tabla-custom thead {
+    background-color: var(--bg-form);
+    color: white;
+}
+
+.celda-acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.butt {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    height: 40px;
+    overflow: hidden;
+
+    background-color: #12832e;
+    color: #000000 !important;
+    border: none;
+
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    transition: width 0.3s;
+    padding: 0;
+}
+
+.primary {
+    background-color: #1713eb;
+    color: #000000 !important;
+    border: none;
+}
+
+.danger {
+    background-color: #ca122a;
+    color: #000000 !important;
+    border: none;
+}
+
+.secondary {
+    background-color: #e94e10;
+    color: #000000 !important;
+    border: none;
+}
+
+.butt svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-left: 2px;
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+
+
+.butt span {
+    display: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    width: 100%;
+}
+
+.butt:hover {
+    width: 90px;
+    cursor: pointer;
+}
+
+.butt:hover svg {
+    display: none;
+}
+
+.butt:hover span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-bottom: 1rem;
+    color: white;
+}
+
+.paginacion button {
+    background-color: var(--bg-btn-agregar);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--bg-basic);
+    transition: background 0.3s;
+}
+
+.paginacion button:hover:not(:disabled) {
+    background-color: var(--bg-basic);
+    color: var(--bg-form);
+    border: 1px solid var(--bg-form);
+}
+
+.paginacion button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.paginacion span {
+    font-size: 0.9rem;
+    color: var(--fg-dark);
+}
