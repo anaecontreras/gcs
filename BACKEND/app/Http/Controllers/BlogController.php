@@ -12,7 +12,7 @@ class BlogController extends Controller
     public function index()
     {
         // Cargamos la relación 'usuario' trayendo solo id, name y email
-        $blogs = Blog::with('usuario:id,name,email')
+        $blogs = Blog::with('usuario:id,name,email,unidad_operativa')
             ->orderBy('created_at', 'desc')
             ->get();
 

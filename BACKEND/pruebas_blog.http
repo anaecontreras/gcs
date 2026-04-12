@@ -1,6 +1,6 @@
 ### Variables Globales
 @baseUrl = http://127.0.0.1:8000/api
-@token = 219|lm4QqrJqaQ5bsj0GhtlqYLghuB2WXgAXotTfof2E9d4a795b
+@token = 80|FHY5Z54hfbyj1tPkDq3Td56IENmPpR3lj7J7ryen310ea317
 
 ### 1. Listar Blogs (Ordenados del más reciente al más viejo)
 GET {{baseUrl}}/blog/index

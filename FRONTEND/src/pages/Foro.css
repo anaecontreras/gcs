@@ -51,7 +51,7 @@
 }
 
 .tema-meta strong {
-    color: #168128;
+    color: #0652DD;
 }
 
 /* Sección de comentarios */
@@ -101,7 +101,7 @@
 }
 
 .autor-comentario {
-    color: #168128;
+    color: #0652DD;
     font-weight: 500;
     font-size: 0.85rem;
 }
@@ -122,15 +122,15 @@
 }
 
 .bg-success {
-    background-color: rgb(8, 192, 8);
+    background-color: #00E5FF; 
     color: #000000 !important;
     border-radius: 10px;
     margin-right: 0.8rem;
 }
 
 .bg-gris {
-    background-color: rgb(100, 96, 96);
-    color: #000000 !important;
+    background-color: #D50000;
+    color: #fff !important;
     border-radius: 10px;
     margin-right: 0.8rem;
 }

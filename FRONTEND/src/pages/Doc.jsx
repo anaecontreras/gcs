@@ -211,7 +211,7 @@ function Doc({ userData, token }) {
                                             </td>
                                             <td className="td" style={{ fontWeight: '600' }}>{doc.titulo}</td>
                                             <td className="td" style={{ width: '5rem', textAlign: 'left ' }}>v{doc.version}</td>
-                                            <td className="td" style={{ color: '#168128', width: '10rem' }}>
+                                            <td className="td" style={{ color: '#0652DD', width: '10rem' }}>
                                                 {doc.usuario?.name}
                                             </td>
                                             <td className="td fecha-tabla" style={{ width: '8rem' }}>

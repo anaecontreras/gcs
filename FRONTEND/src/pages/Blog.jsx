@@ -68,7 +68,8 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
             item.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
             item.prioridad.toLowerCase().includes(searchTerm.toLowerCase()) ||
             item.estado.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.usuario?.name.toLowerCase().includes(searchTerm.toLowerCase())
+            item.usuario?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.usuario?.unidad_operativa.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
     const lastIndex = currentPage * recordsPerPage;
@@ -175,10 +176,11 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
                         <table className="tabla-custom">
                             <thead>
                                 <tr>
-                                    <th style={{ width: '60rem' }}>Alertas, mantenimientos y novedades del sistema</th>
+                                    <th style={{ width: '40rem' }}>Alertas, mantenimientos y novedades del sistema</th>
                                     <th style={{ width: '6rem' }}>Prioridad</th>
                                     <th style={{ width: '7rem' }}>Estado</th>
                                     <th style={{ width: '7rem', textAlign: 'center' }}>Usuario que reporta</th>
+                                    <th style={{ width: '7rem', textAlign: 'center' }}>Unidad Operacional</th>
                                     <th style={{ width: '10rem' }}>Fecha de Ocurrencia</th>
 
                                     {userData.rol_id !== 4 ?
@@ -200,7 +202,8 @@ function Blog({ isAuthenticated, setIsAuthenticated, userData, token }) {
                                                 </span>
                                             </td>
                                             <td style={{ width: '6rem' }}>{item.estado.toUpperCase()}</td>
-                                            <td style={{ width: '4rem', color: '#168128' }}>{item.usuario?.name}</td>
+                                            <td style={{ width: '8rem', color: '#0652DD' }}>{item.usuario?.name}</td>
+                                            <td style={{ width: '8rem' }}>{item.usuario?.unidad_operativa}</td>
                                             <td className='fecha-tabla' style={{ width: '12rem' }}>
                                                 {formatearFechaCorrecta(item.created_at)}
                                             </td>

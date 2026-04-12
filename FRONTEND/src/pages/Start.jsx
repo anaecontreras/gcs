@@ -9,6 +9,7 @@ import * as Mensajes from '../services/Mensajes';
 import * as Api from '../services/Api';
 import { ImgUser, ImgPassword, ImgSatelite } from '../services/Icons';
 import './Start.css'
+import satelite from '../assets/image/satelite.PNG'
 
 function Start({ setIsAuthenticated, setUserData, setToken }) {
     const [user, setUser] = useState('');
@@ -36,9 +37,47 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
             navigate('/Dashboard');
 
         } catch (error) {
-            Mensajes.showErrorCredenciales(); // O usa error.message si quieres ser más específico
+            Mensajes.showErrorCredenciales();
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleOlvidoContraseña = async (e) => {
+        e.preventDefault();
+
+        // PASO 1: Mostrar modal para enviar correo
+        const resultadoEnvio = await Mensajes.enviarClaveRecuperacion();
+
+        if (resultadoEnvio.isConfirmed) {
+            const { email } = resultadoEnvio.value;
+
+            try {
+                // Aquí llamas a tu API para enviar la clave temporal al correo
+                // await Api.enviarClaveTemporal(email);
+
+                // PASO: Mostrar modal para ingresar clave temporal y nueva contraseña
+                const resultadoRestablecer = await Mensajes.recuperarContrasena(email);
+
+                if (resultadoRestablecer.isConfirmed) {
+                    const { clave_temporal, nueva_clave } = resultadoRestablecer.value;
+
+                    // Aquí llamas a tu API para restablecer la contraseña
+                    // await Api.restablecerPassword({
+                    //     email: email,
+                    //     token: clave_temporal,
+                    //     password: nueva_clave
+                    // });
+
+                    Mensajes.showSuccess('Contraseña restablecida exitosamente');
+
+                    // Opcional: limpiar campos del formulario de login
+                    setUser('');
+                    setPass('');
+                }
+            } catch (error) {
+                Mensajes.showErrorMsg('Error al enviar la clave temporal. Verifica tu correo.');
+            }
         }
     };
 
@@ -46,8 +85,8 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
         <div className='contenedor-ppal-start'>
             <Head />
 
-            <div class="contenedor-login">
-                <div class="div1">
+            <div className="contenedor-login">
+                <div className="div1">
                     <h1 style={{ marginBottom: '0.2rem' }}>Plataforma Web Centralizada</h1>
                     <h1 style={{ marginBottom: '1.5rem', fontSize: '1.3rem' }}>Gestión de Contingencias Satelitales</h1>
 
@@ -71,13 +110,13 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
                         <ButtonLogin tipo="submit" texto="Entrar" btnType="one" />
                     </form>
 
-                    <a href="#" className='olvido'>¿ Olvido su Contraseña ?</a>
+                    <a href="#" className='olvido' onClick={handleOlvidoContraseña}>¿ Olvido su Contraseña ?</a>
 
                     <p className='acepta-politicas'>Al iniciar sesión, acepta las políticas de uso interno de CANTV</p>
                 </div>
 
-                <div class="div2">
-                    <ImgSatelite />
+                <div className="div2">
+                    <img className='imgsatelite' src={satelite} alt="Imagen de satelite" />
 
                     <p>Sistema integral de gestión para las operaciones de la Plataforma Satelital de CANTV. Monitoreo en tiempo real de las sedes Camatagua, Baemari y Caracas.</p>
 
@@ -99,4 +138,4 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
     )
 }
 
-export default Start
+export default Start;

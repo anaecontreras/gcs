@@ -22,3 +22,21 @@
     width: 100% !important;
     margin-bottom: 1rem;
 }
+
+.bg-esta-activo {
+    color: #000000 !important;
+    border-radius: 10px;
+    margin-right: 0.8rem;
+}
+
+.bg-esta-inactivo {
+    color: #EA2027 ;
+    border-radius: 10px;
+    margin-right: 0.8rem;
+}
+
+.loading-text {
+    text-align: center;
+    color: rgb(182, 20, 20);
+    font-size: 0.9rem;
+}

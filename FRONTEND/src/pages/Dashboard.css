@@ -103,14 +103,17 @@
 
 .card a {
     margin-top: 1rem;
-    color: #051ce6;
+    color: var(--bg-form);
     text-decoration: none;
     font-weight: bold;
     font-size: 0.8rem;
 }
 
+.card a:visited {
+    color: var(--bg-form);
+}
+
 .card a:hover {
-    text-decoration: underline;
     color: #2705e6 !important;
     font-size: 1rem;
 }

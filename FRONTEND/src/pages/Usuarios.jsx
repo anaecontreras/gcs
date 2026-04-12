@@ -166,7 +166,7 @@ function Usuarios({ userData, token }) {
                                             </td>
                                             <td className='td'>{user.unidad_operativa}</td>
                                             <td className='td' style={{ textAlign: 'center' }}>
-                                                <span className={`badge ${user.activo ? 'bg-success' : 'bg-gris'}`}>
+                                                <span className={`badge ${user.activo ? 'bg-esta-activo' : 'bg-esta-inactivo'}`}>
                                                     {user.activo ? 'Activo' : 'Inactivo'}
                                                 </span>
                                             </td>

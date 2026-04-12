@@ -39,8 +39,10 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
 
     return (
         <div className="menu-bar">
-            <h2>Plataforma Web Centralizada</h2>
-            <hr />
+            <div className="head-menu">
+                <h2>Plataforma Web Centralizada</h2>
+            </div>
+
             <ul>
                 {tipo === "1" ? (
                     <>
@@ -88,10 +90,6 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
                                 )}
                             </li>
                         </>
-                        <li className='li-menu'><Link to="/Acerca">
-                            <ImgAbout />
-                            Acerca</Link>
-                        </li>
                     </>
                 ) : null}
 
@@ -112,6 +110,10 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
                     <ImgProfile />
                     Perfil</Link>
                 </li>
+                <li className='li-menu'><Link to="/Acerca">
+                    <ImgAbout />
+                    Acerca</Link>
+                </li>
 
 
                 {tipo === "1" ? (
@@ -123,10 +125,10 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
                     </li>
                 ) : null}
             </ul>
-            <hr />
+
             <div className="footer-bar-menu">
-                <h4>Usuario: <strong>{userData ? userData.name : 'Invitado'}</strong></h4>
-                <h4>Rol: <strong>{userData ? userData.rol.rol : "Invitado"}</strong></h4>
+                <h4>Usuario: <span>{userData ? userData.name : 'Invitado'}</span></h4>
+                <h4>Rol: <span>{userData ? userData.rol.rol : "Invitado"}</span></h4>
             </div>
 
         </div>

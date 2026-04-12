@@ -12,7 +12,7 @@
  Target Server Version : 160010 (160010)
  File Encoding         : 65001
 
- Date: 06/02/2026 21:05:07
+ Date: 18/02/2026 21:27:49
 */
 
 
@@ -177,8 +177,13 @@ CREATE TABLE "public"."blogs" (
 -- ----------------------------
 -- Records of blogs
 -- ----------------------------
-INSERT INTO "public"."blogs" VALUES (1, 1, 'Degradación crítica de señal en Banda Ku - Camatagua', 'Alta', 'En Progreso', '2026-02-06 18:35:19', '2026-02-06 18:35:19');
 INSERT INTO "public"."blogs" VALUES (2, 1, 'Interferencia electromagnética en Caracas, causa fue identificada como una fuente externa de RF que fue neutralizada', 'Media', 'Cerrado', '2026-02-06 18:36:39', '2026-02-06 18:36:39');
+INSERT INTO "public"."blogs" VALUES (4, 1, 'Prueba2', 'Baja', 'En Progreso', '2026-02-13 20:48:36', '2026-02-13 20:48:36');
+INSERT INTO "public"."blogs" VALUES (5, 1, 'Prueba3', 'Baja', 'En Progreso', '2026-02-13 20:49:08', '2026-02-13 20:49:08');
+INSERT INTO "public"."blogs" VALUES (6, 1, 'Prueba4', 'Baja', 'En Progreso', '2026-02-13 20:49:19', '2026-02-13 20:49:19');
+INSERT INTO "public"."blogs" VALUES (7, 1, 'Prueba5', 'Baja', 'En Progreso', '2026-02-13 20:51:33', '2026-02-13 20:51:33');
+INSERT INTO "public"."blogs" VALUES (3, 1, 'Prueba1', 'Baja', 'Cerrado', '2026-02-13 20:48:21', '2026-02-16 15:33:05');
+INSERT INTO "public"."blogs" VALUES (1, 1, 'Degradación crítica de señal en Banda Ku - Camatagua', 'Alta', 'Cerrado', '2026-02-06 18:35:19', '2026-02-16 16:05:56');
 
 -- ----------------------------
 -- Table structure for cache
@@ -231,6 +236,10 @@ CREATE TABLE "public"."calendarios" (
 INSERT INTO "public"."calendarios" VALUES (1, 1, 'Actualización de firmware - Equipos de monitoreo', '2026-02-01 08:00:00', '2026-02-01 10:00:00', '2026-02-06 20:25:43', '2026-02-06 20:25:43');
 INSERT INTO "public"."calendarios" VALUES (2, 1, 'Calibración de antenas', '2026-02-07 08:00:00', '2026-02-07 10:00:00', '2026-02-06 20:31:58', '2026-02-06 20:31:58');
 INSERT INTO "public"."calendarios" VALUES (3, 1, 'Mantenimiento preventivo - Sistema de refrigeración', '2026-02-06 16:32:00', '2026-02-06 22:29:00', '2026-02-06 20:32:55', '2026-02-06 20:32:55');
+INSERT INTO "public"."calendarios" VALUES (5, 1, 'Ajustes Base de Antena', '2026-01-02 15:30:00', '2026-01-02 17:30:00', '2026-02-08 15:22:24', '2026-02-08 15:22:24');
+INSERT INTO "public"."calendarios" VALUES (8, 1, 'Prueba', '2025-12-08 16:16:00', '2025-12-18 16:17:00', '2026-02-08 16:17:16', '2026-02-08 16:17:16');
+INSERT INTO "public"."calendarios" VALUES (9, 1, 'Mantenimiento Sala de Pruebas', '2026-03-01 22:27:00', '2026-03-01 23:27:00', '2026-02-13 22:27:59', '2026-02-13 22:27:59');
+INSERT INTO "public"."calendarios" VALUES (10, 1, 'Probando', '2026-03-11 15:46:00', '2026-03-12 15:51:00', '2026-02-16 15:51:36', '2026-02-16 15:51:36');
 
 -- ----------------------------
 -- Table structure for categoriadocs
@@ -269,6 +278,7 @@ CREATE TABLE "public"."comentariosforos" (
 -- Records of comentariosforos
 -- ----------------------------
 INSERT INTO "public"."comentariosforos" VALUES (1, 1, 1, 'Falla persistente en equipo', '2026-02-06 20:22:50', '2026-02-06 20:22:50');
+INSERT INTO "public"."comentariosforos" VALUES (2, 2, 1, 'Se realizaron pruebas y aún hay problemas', '2026-02-08 16:32:57', '2026-02-08 16:32:57');
 
 -- ----------------------------
 -- Table structure for documentos
@@ -291,7 +301,9 @@ CREATE TABLE "public"."documentos" (
 -- Records of documentos
 -- ----------------------------
 INSERT INTO "public"."documentos" VALUES (2, 1, 1, 'Manual Router Cisco', 'documentos/eTAqLNL6TPvkwHAvgbb3cL8wMdLLZzIWzna58kxl.pdf', '1.0', '2026-01-13', '2026-02-06 19:55:11', '2026-02-06 19:55:11');
-INSERT INTO "public"."documentos" VALUES (3, 2, 1, 'Manual Router DLINK', 'documentos/PjfPaZbqcr9aQJCsU2wQt8nhxmvDxYhrBlKV5eDI.pdf', '1.0', '2026-02-02', '2026-02-06 19:57:13', '2026-02-06 19:57:13');
+INSERT INTO "public"."documentos" VALUES (5, 2, 1, 'Prueba 2', 'documentos/zb0nZ1ThgqMdiX9liSsWQmEOim6t7IUV9rlH89Ka.pdf', '2.0', '2026-02-03', '2026-02-14 11:21:41', '2026-02-14 11:21:41');
+INSERT INTO "public"."documentos" VALUES (3, 2, 1, 'Manual Router DLINK 123', 'documentos/PjfPaZbqcr9aQJCsU2wQt8nhxmvDxYhrBlKV5eDI.pdf', '1.0', '2026-02-02', '2026-02-06 19:57:13', '2026-02-14 12:31:36');
+INSERT INTO "public"."documentos" VALUES (6, 2, 1, 'Prueba', 'documentos/Jmuw19TfPZ7SM9BTVr0l1CGuEkeaQaKRhuToyUbk.pdf', '1.0', '2026-02-16', '2026-02-16 15:38:28', '2026-02-16 15:38:28');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -408,6 +420,138 @@ INSERT INTO "public"."logs" VALUES (34, 'admin@gmail.com', 'Registro de usuario:
 INSERT INTO "public"."logs" VALUES (35, 'admin@gmail.com', 'Registro de usuario: opera@gmail.com, rol: 3', 'users', 4, '2026-02-06 21:02:50', '2026-02-06 21:02:50');
 INSERT INTO "public"."logs" VALUES (36, 'admin@gmail.com', 'Registro de usuario: visita@gmail.com, rol: 4', 'users', 5, '2026-02-06 21:03:54', '2026-02-06 21:03:54');
 INSERT INTO "public"."logs" VALUES (37, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-06 21:04:04', '2026-02-06 21:04:04');
+INSERT INTO "public"."logs" VALUES (38, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-06 21:06:54', '2026-02-06 21:06:54');
+INSERT INTO "public"."logs" VALUES (39, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-06 21:15:53', '2026-02-06 21:15:53');
+INSERT INTO "public"."logs" VALUES (40, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 11:37:47', '2026-02-08 11:37:47');
+INSERT INTO "public"."logs" VALUES (41, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 12:25:18', '2026-02-08 12:25:18');
+INSERT INTO "public"."logs" VALUES (42, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 12:39:50', '2026-02-08 12:39:50');
+INSERT INTO "public"."logs" VALUES (43, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 12:46:26', '2026-02-08 12:46:26');
+INSERT INTO "public"."logs" VALUES (44, 'admin@gmail.com', 'Registro de Tema de Foro: Consulta sobre compatibilidad de firmware v2.5 con equipos de monitoreo', 'temasforos', 2, '2026-02-08 14:43:01', '2026-02-08 14:43:01');
+INSERT INTO "public"."logs" VALUES (45, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 14:49:29', '2026-02-08 14:49:29');
+INSERT INTO "public"."logs" VALUES (46, 'admin@gmail.com', 'Registro en calendario: Actualización de firmware - Equipos de Pruebas', 'calendarios', 4, '2026-02-08 15:21:32', '2026-02-08 15:21:32');
+INSERT INTO "public"."logs" VALUES (47, 'admin@gmail.com', 'Registro en calendario: Ajustes Base de Antena', 'calendarios', 5, '2026-02-08 15:22:24', '2026-02-08 15:22:24');
+INSERT INTO "public"."logs" VALUES (48, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 15:31:25', '2026-02-08 15:31:25');
+INSERT INTO "public"."logs" VALUES (49, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 15:43:50', '2026-02-08 15:43:50');
+INSERT INTO "public"."logs" VALUES (50, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 15:45:17', '2026-02-08 15:45:17');
+INSERT INTO "public"."logs" VALUES (51, 'admin@gmail.com', 'Edición en calendario: ID 4', 'calendarios', 4, '2026-02-08 15:59:23', '2026-02-08 15:59:23');
+INSERT INTO "public"."logs" VALUES (52, 'admin@gmail.com', 'Edición en calendario: ID 4', 'calendarios', 4, '2026-02-08 15:59:34', '2026-02-08 15:59:34');
+INSERT INTO "public"."logs" VALUES (53, 'admin@gmail.com', 'Edición en calendario: ID 4', 'calendarios', 4, '2026-02-08 16:03:16', '2026-02-08 16:03:16');
+INSERT INTO "public"."logs" VALUES (54, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 16:05:55', '2026-02-08 16:05:55');
+INSERT INTO "public"."logs" VALUES (55, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 16:07:23', '2026-02-08 16:07:23');
+INSERT INTO "public"."logs" VALUES (56, 'admin@gmail.com', 'Eliminación en calendario: Actualización de firmware - Equipos de Pruebas', 'calendarios', 4, '2026-02-08 16:10:33', '2026-02-08 16:10:33');
+INSERT INTO "public"."logs" VALUES (57, 'admin@gmail.com', 'Registro en calendario: Mantenimiento Sala de Baterias', 'calendarios', 6, '2026-02-08 16:11:49', '2026-02-08 16:11:49');
+INSERT INTO "public"."logs" VALUES (58, 'admin@gmail.com', 'Edición en calendario: ID 6', 'calendarios', 6, '2026-02-08 16:12:54', '2026-02-08 16:12:54');
+INSERT INTO "public"."logs" VALUES (59, 'admin@gmail.com', 'Edición en calendario: ID 6', 'calendarios', 6, '2026-02-08 16:13:02', '2026-02-08 16:13:02');
+INSERT INTO "public"."logs" VALUES (60, 'admin@gmail.com', 'Eliminación en calendario: Mantenimiento Sala de Baterias', 'calendarios', 6, '2026-02-08 16:13:15', '2026-02-08 16:13:15');
+INSERT INTO "public"."logs" VALUES (61, 'admin@gmail.com', 'Registro en calendario: Mantenimiento Sala de Baterias', 'calendarios', 7, '2026-02-08 16:13:59', '2026-02-08 16:13:59');
+INSERT INTO "public"."logs" VALUES (62, 'admin@gmail.com', 'Edición de Tema de Foro: ID 1', 'temasforos', 1, '2026-02-08 16:15:59', '2026-02-08 16:15:59');
+INSERT INTO "public"."logs" VALUES (63, 'admin@gmail.com', 'Registro en calendario: Prueba', 'calendarios', 8, '2026-02-08 16:17:16', '2026-02-08 16:17:16');
+INSERT INTO "public"."logs" VALUES (64, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 16:23:00', '2026-02-08 16:23:00');
+INSERT INTO "public"."logs" VALUES (65, 'admin@gmail.com', 'Deshabilitó al usuario maximo@gmail.com', 'users', 2, '2026-02-08 16:29:12', '2026-02-08 16:29:12');
+INSERT INTO "public"."logs" VALUES (66, 'admin@gmail.com', 'Habilitó al usuario maximo@gmail.com', 'users', 2, '2026-02-08 16:29:17', '2026-02-08 16:29:17');
+INSERT INTO "public"."logs" VALUES (67, 'admin@gmail.com', 'Deshabilitó al usuario maximo@gmail.com', 'users', 2, '2026-02-08 16:29:27', '2026-02-08 16:29:27');
+INSERT INTO "public"."logs" VALUES (68, 'admin@gmail.com', 'Habilitó al usuario maximo@gmail.com', 'users', 2, '2026-02-08 16:31:43', '2026-02-08 16:31:43');
+INSERT INTO "public"."logs" VALUES (69, 'admin@gmail.com', 'Registro de Comentario en Tema ID: 2', 'comentariosforos', 2, '2026-02-08 16:32:57', '2026-02-08 16:32:57');
+INSERT INTO "public"."logs" VALUES (70, 'admin@gmail.com', 'Edición en calendario: ID 7', 'calendarios', 7, '2026-02-08 16:33:56', '2026-02-08 16:33:56');
+INSERT INTO "public"."logs" VALUES (71, 'admin@gmail.com', 'Edición en calendario: ID 7', 'calendarios', 7, '2026-02-08 16:34:05', '2026-02-08 16:34:05');
+INSERT INTO "public"."logs" VALUES (72, 'admin@gmail.com', 'Eliminación en calendario: Mantenimiento Sala de Baterias', 'calendarios', 7, '2026-02-08 16:34:11', '2026-02-08 16:34:11');
+INSERT INTO "public"."logs" VALUES (73, 'admin@gmail.com', 'Deshabilitó al usuario visita@gmail.com', 'users', 5, '2026-02-08 16:35:14', '2026-02-08 16:35:14');
+INSERT INTO "public"."logs" VALUES (74, 'admin@gmail.com', 'Habilitó al usuario visita@gmail.com', 'users', 5, '2026-02-08 16:35:22', '2026-02-08 16:35:22');
+INSERT INTO "public"."logs" VALUES (75, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-08 16:36:53', '2026-02-08 16:36:53');
+INSERT INTO "public"."logs" VALUES (76, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 16:38:49', '2026-02-08 16:38:49');
+INSERT INTO "public"."logs" VALUES (77, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-08 16:40:11', '2026-02-08 16:40:11');
+INSERT INTO "public"."logs" VALUES (78, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 18:16:52', '2026-02-08 18:16:52');
+INSERT INTO "public"."logs" VALUES (79, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-08 18:16:56', '2026-02-08 18:16:56');
+INSERT INTO "public"."logs" VALUES (80, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 18:53:53', '2026-02-08 18:53:53');
+INSERT INTO "public"."logs" VALUES (81, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-08 18:56:41', '2026-02-08 18:56:41');
+INSERT INTO "public"."logs" VALUES (82, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 19:11:45', '2026-02-08 19:11:45');
+INSERT INTO "public"."logs" VALUES (83, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 20:38:58', '2026-02-08 20:38:58');
+INSERT INTO "public"."logs" VALUES (84, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-08 20:39:03', '2026-02-08 20:39:03');
+INSERT INTO "public"."logs" VALUES (85, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 20:39:44', '2026-02-08 20:39:44');
+INSERT INTO "public"."logs" VALUES (86, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 20:48:31', '2026-02-08 20:48:31');
+INSERT INTO "public"."logs" VALUES (87, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 20:50:36', '2026-02-08 20:50:36');
+INSERT INTO "public"."logs" VALUES (88, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-08 21:12:59', '2026-02-08 21:12:59');
+INSERT INTO "public"."logs" VALUES (89, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 21:13:21', '2026-02-08 21:13:21');
+INSERT INTO "public"."logs" VALUES (90, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-08 21:13:28', '2026-02-08 21:13:28');
+INSERT INTO "public"."logs" VALUES (91, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 21:13:50', '2026-02-08 21:13:50');
+INSERT INTO "public"."logs" VALUES (92, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-08 21:45:08', '2026-02-08 21:45:08');
+INSERT INTO "public"."logs" VALUES (93, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-08 22:06:20', '2026-02-08 22:06:20');
+INSERT INTO "public"."logs" VALUES (94, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 17:28:30', '2026-02-13 17:28:30');
+INSERT INTO "public"."logs" VALUES (95, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 19:28:33', '2026-02-13 19:28:33');
+INSERT INTO "public"."logs" VALUES (96, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 19:43:57', '2026-02-13 19:43:57');
+INSERT INTO "public"."logs" VALUES (97, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-13 19:50:48', '2026-02-13 19:50:48');
+INSERT INTO "public"."logs" VALUES (98, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 19:50:59', '2026-02-13 19:50:59');
+INSERT INTO "public"."logs" VALUES (99, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 19:55:59', '2026-02-13 19:55:59');
+INSERT INTO "public"."logs" VALUES (100, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-13 20:01:24', '2026-02-13 20:01:24');
+INSERT INTO "public"."logs" VALUES (101, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 20:01:37', '2026-02-13 20:01:37');
+INSERT INTO "public"."logs" VALUES (102, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 20:08:19', '2026-02-13 20:08:19');
+INSERT INTO "public"."logs" VALUES (103, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 20:29:58', '2026-02-13 20:29:58');
+INSERT INTO "public"."logs" VALUES (104, 'admin@gmail.com', 'Registro de Blog: Prueba1', 'blogs', 3, '2026-02-13 20:48:21', '2026-02-13 20:48:21');
+INSERT INTO "public"."logs" VALUES (105, 'admin@gmail.com', 'Registro de Blog: Prueba2', 'blogs', 4, '2026-02-13 20:48:36', '2026-02-13 20:48:36');
+INSERT INTO "public"."logs" VALUES (106, 'admin@gmail.com', 'Registro de Blog: Prueba3', 'blogs', 5, '2026-02-13 20:49:08', '2026-02-13 20:49:08');
+INSERT INTO "public"."logs" VALUES (107, 'admin@gmail.com', 'Registro de Blog: Prueba4', 'blogs', 6, '2026-02-13 20:49:19', '2026-02-13 20:49:19');
+INSERT INTO "public"."logs" VALUES (108, 'admin@gmail.com', 'Registro de Blog: Prueba5', 'blogs', 7, '2026-02-13 20:51:33', '2026-02-13 20:51:33');
+INSERT INTO "public"."logs" VALUES (109, 'admin@gmail.com', 'Registro de Tema de Foro: Prueba1', 'temasforos', 3, '2026-02-13 20:54:50', '2026-02-13 20:54:50');
+INSERT INTO "public"."logs" VALUES (110, 'admin@gmail.com', 'Registro de Tema de Foro: Prueba2', 'temasforos', 4, '2026-02-13 20:54:58', '2026-02-13 20:54:58');
+INSERT INTO "public"."logs" VALUES (111, 'admin@gmail.com', 'Registro de Tema de Foro: Prueba3', 'temasforos', 5, '2026-02-13 20:55:11', '2026-02-13 20:55:11');
+INSERT INTO "public"."logs" VALUES (112, 'admin@gmail.com', 'Registro en calendario: Mantenimiento Sala de Pruebas', 'calendarios', 9, '2026-02-13 22:27:59', '2026-02-13 22:27:59');
+INSERT INTO "public"."logs" VALUES (113, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-13 23:17:28', '2026-02-13 23:17:28');
+INSERT INTO "public"."logs" VALUES (114, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-13 23:17:40', '2026-02-13 23:17:40');
+INSERT INTO "public"."logs" VALUES (115, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-14 11:14:27', '2026-02-14 11:14:27');
+INSERT INTO "public"."logs" VALUES (116, 'admin@gmail.com', 'Creado documento: Prueba1', 'documento', 4, '2026-02-14 11:21:15', '2026-02-14 11:21:15');
+INSERT INTO "public"."logs" VALUES (117, 'admin@gmail.com', 'Creado documento: Prueba 2', 'documento', 5, '2026-02-14 11:21:41', '2026-02-14 11:21:41');
+INSERT INTO "public"."logs" VALUES (118, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-14 11:28:52', '2026-02-14 11:28:52');
+INSERT INTO "public"."logs" VALUES (119, 'admin@gmail.com', 'Registro de usuario: prueba1@gmail.com, rol: 3', 'users', 6, '2026-02-14 11:40:40', '2026-02-14 11:40:40');
+INSERT INTO "public"."logs" VALUES (120, 'admin@gmail.com', 'Registro de usuario: prueba2@gmail.com, rol: 3', 'users', 7, '2026-02-14 11:41:11', '2026-02-14 11:41:11');
+INSERT INTO "public"."logs" VALUES (121, 'admin@gmail.com', 'Registro de usuario: prueba3@gmail.com, rol: 3', 'users', 8, '2026-02-14 11:41:45', '2026-02-14 11:41:45');
+INSERT INTO "public"."logs" VALUES (122, 'admin@gmail.com', 'Registro de usuario: prueba4@gmail.com, rol: 3', 'users', 9, '2026-02-14 11:42:14', '2026-02-14 11:42:14');
+INSERT INTO "public"."logs" VALUES (123, 'admin@gmail.com', 'Editado documento ID: 3. Se cambió archivo: NO', 'documento', 3, '2026-02-14 12:31:36', '2026-02-14 12:31:36');
+INSERT INTO "public"."logs" VALUES (124, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-14 12:56:11', '2026-02-14 12:56:11');
+INSERT INTO "public"."logs" VALUES (125, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-14 12:57:20', '2026-02-14 12:57:20');
+INSERT INTO "public"."logs" VALUES (126, 'admin@gmail.com', 'Deshabilitó al usuario prueba1@gmail.com', 'users', 6, '2026-02-14 13:04:54', '2026-02-14 13:04:54');
+INSERT INTO "public"."logs" VALUES (127, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-14 13:11:54', '2026-02-14 13:11:54');
+INSERT INTO "public"."logs" VALUES (128, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-14 13:12:59', '2026-02-14 13:12:59');
+INSERT INTO "public"."logs" VALUES (129, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 11:42:03', '2026-02-16 11:42:03');
+INSERT INTO "public"."logs" VALUES (130, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 13:05:20', '2026-02-16 13:05:20');
+INSERT INTO "public"."logs" VALUES (131, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 13:29:06', '2026-02-16 13:29:06');
+INSERT INTO "public"."logs" VALUES (132, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 15:31:50', '2026-02-16 15:31:50');
+INSERT INTO "public"."logs" VALUES (133, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 15:32:48', '2026-02-16 15:32:48');
+INSERT INTO "public"."logs" VALUES (134, 'admin@gmail.com', 'Edición de Blog: ID 3 - Prueba1', 'blogs', 3, '2026-02-16 15:33:05', '2026-02-16 15:33:05');
+INSERT INTO "public"."logs" VALUES (135, 'admin@gmail.com', 'Creado documento: Prueba', 'documento', 6, '2026-02-16 15:38:28', '2026-02-16 15:38:28');
+INSERT INTO "public"."logs" VALUES (136, 'admin@gmail.com', 'Edición de Tema de Foro: ID 2', 'temasforos', 2, '2026-02-16 15:42:26', '2026-02-16 15:42:26');
+INSERT INTO "public"."logs" VALUES (137, 'admin@gmail.com', 'Registro en calendario: Probando', 'calendarios', 10, '2026-02-16 15:51:36', '2026-02-16 15:51:36');
+INSERT INTO "public"."logs" VALUES (138, 'admin@gmail.com', 'Eliminado documento y archivo físico: Prueba1', 'documento', 4, '2026-02-16 16:04:40', '2026-02-16 16:04:40');
+INSERT INTO "public"."logs" VALUES (139, 'admin@gmail.com', 'Edición de Blog: ID 1 - Degradación crítica de señal en Banda Ku - Camatagua', 'blogs', 1, '2026-02-16 16:05:56', '2026-02-16 16:05:56');
+INSERT INTO "public"."logs" VALUES (140, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 17:54:19', '2026-02-16 17:54:19');
+INSERT INTO "public"."logs" VALUES (141, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 17:56:01', '2026-02-16 17:56:01');
+INSERT INTO "public"."logs" VALUES (142, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-16 18:01:22', '2026-02-16 18:01:22');
+INSERT INTO "public"."logs" VALUES (143, 'admin@gmail.com', 'Login fallido: contraseña incorrecta', 'users', 1, '2026-02-16 18:02:16', '2026-02-16 18:02:16');
+INSERT INTO "public"."logs" VALUES (144, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 18:02:24', '2026-02-16 18:02:24');
+INSERT INTO "public"."logs" VALUES (145, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-16 18:14:53', '2026-02-16 18:14:53');
+INSERT INTO "public"."logs" VALUES (146, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 18:15:52', '2026-02-16 18:15:52');
+INSERT INTO "public"."logs" VALUES (147, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 18:18:26', '2026-02-16 18:18:26');
+INSERT INTO "public"."logs" VALUES (148, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 18:44:57', '2026-02-16 18:44:57');
+INSERT INTO "public"."logs" VALUES (149, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 19:02:39', '2026-02-16 19:02:39');
+INSERT INTO "public"."logs" VALUES (150, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 19:04:05', '2026-02-16 19:04:05');
+INSERT INTO "public"."logs" VALUES (151, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 19:35:55', '2026-02-16 19:35:55');
+INSERT INTO "public"."logs" VALUES (152, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 19:37:08', '2026-02-16 19:37:08');
+INSERT INTO "public"."logs" VALUES (153, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 21:32:56', '2026-02-16 21:32:56');
+INSERT INTO "public"."logs" VALUES (154, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-16 21:40:53', '2026-02-16 21:40:53');
+INSERT INTO "public"."logs" VALUES (155, 'admin@gmail.com', 'Login fallido: contraseña incorrecta', 'users', 1, '2026-02-16 21:41:06', '2026-02-16 21:41:06');
+INSERT INTO "public"."logs" VALUES (156, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 21:41:12', '2026-02-16 21:41:12');
+INSERT INTO "public"."logs" VALUES (157, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 21:48:03', '2026-02-16 21:48:03');
+INSERT INTO "public"."logs" VALUES (158, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 21:53:24', '2026-02-16 21:53:24');
+INSERT INTO "public"."logs" VALUES (159, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 21:54:46', '2026-02-16 21:54:46');
+INSERT INTO "public"."logs" VALUES (160, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-16 22:03:55', '2026-02-16 22:03:55');
+INSERT INTO "public"."logs" VALUES (161, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 22:04:05', '2026-02-16 22:04:05');
+INSERT INTO "public"."logs" VALUES (162, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-16 22:13:40', '2026-02-16 22:13:40');
+INSERT INTO "public"."logs" VALUES (163, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 22:13:48', '2026-02-16 22:13:48');
+INSERT INTO "public"."logs" VALUES (164, 'admin@gmail.com', 'Cambio su contraseña', 'users', 1, '2026-02-16 22:14:21', '2026-02-16 22:14:21');
+INSERT INTO "public"."logs" VALUES (165, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 22:17:24', '2026-02-16 22:17:24');
+INSERT INTO "public"."logs" VALUES (166, 'admin@gmail.com', 'Cambio su contraseña', 'users', 1, '2026-02-16 22:21:47', '2026-02-16 22:21:47');
+INSERT INTO "public"."logs" VALUES (167, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-16 22:21:54', '2026-02-16 22:21:54');
+INSERT INTO "public"."logs" VALUES (168, 'admin@gmail.com', 'Login exitoso', 'users', 1, '2026-02-16 22:22:04', '2026-02-16 22:22:04');
+INSERT INTO "public"."logs" VALUES (169, 'admin@gmail.com', 'Logout', 'users', 1, '2026-02-16 22:27:32', '2026-02-16 22:27:32');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -472,11 +616,6 @@ CREATE TABLE "public"."personal_access_tokens" (
 -- ----------------------------
 -- Records of personal_access_tokens
 -- ----------------------------
-INSERT INTO "public"."personal_access_tokens" VALUES (1, 'App\Models\User', 1, 'auth_token', '2603ef7f5cc8740b9527e46605e50b32fc1455b9d451c7ba170d4dfb363524c0', '["*"]', NULL, NULL, '2026-02-06 18:14:13', '2026-02-06 18:14:13');
-INSERT INTO "public"."personal_access_tokens" VALUES (2, 'App\Models\User', 1, 'auth_token', '6e6b64d2375b5a7fd701e9d283f7994df938b164067f88e0240dd67f565b1b36', '["*"]', NULL, NULL, '2026-02-06 18:14:53', '2026-02-06 18:14:53');
-INSERT INTO "public"."personal_access_tokens" VALUES (6, 'App\Models\User', 1, 'auth_token', 'dc8cc0d6237a8773443c701c1ec778e3e0b3ba6277c441f3eeca1c0e4cb73af5', '["*"]', '2026-02-06 19:33:19', NULL, '2026-02-06 18:50:02', '2026-02-06 19:33:19');
-INSERT INTO "public"."personal_access_tokens" VALUES (7, 'App\Models\User', 1, 'auth_token', 'ecb571fb893afba89367d00b96d483d22fe883b4901fd4f98e4edc4ac0effb4d', '["*"]', '2026-02-06 18:58:26', NULL, '2026-02-06 18:57:23', '2026-02-06 18:58:26');
-INSERT INTO "public"."personal_access_tokens" VALUES (10, 'App\Models\User', 1, 'auth_token', 'd8f1ceeb30939eef25ee1012fe64d66cd8421fc33945df9fd6e60b4c5bcae1ab', '["*"]', '2026-02-06 20:34:36', NULL, '2026-02-06 19:46:53', '2026-02-06 20:34:36');
 
 -- ----------------------------
 -- Table structure for rol
@@ -533,7 +672,11 @@ CREATE TABLE "public"."temasforos" (
 -- ----------------------------
 -- Records of temasforos
 -- ----------------------------
-INSERT INTO "public"."temasforos" VALUES (1, 1, 'ERROR: Código de falla E-401 en modulador de Baemari', 'Abierto', '2026-02-06 20:21:21', '2026-02-06 20:21:21');
+INSERT INTO "public"."temasforos" VALUES (1, 1, 'ERROR: Código de falla E-401 en modulador de Baemari', 'Cerrado', '2026-02-06 20:21:21', '2026-02-08 16:15:59');
+INSERT INTO "public"."temasforos" VALUES (3, 1, 'Prueba1', 'Abierto', '2026-02-13 20:54:50', '2026-02-13 20:54:50');
+INSERT INTO "public"."temasforos" VALUES (4, 1, 'Prueba2', 'Abierto', '2026-02-13 20:54:58', '2026-02-13 20:54:58');
+INSERT INTO "public"."temasforos" VALUES (5, 1, 'Prueba3', 'Abierto', '2026-02-13 20:55:11', '2026-02-13 20:55:11');
+INSERT INTO "public"."temasforos" VALUES (2, 1, 'Consulta sobre compatibilidad de firmware v2.5 con equipos de monitoreo', 'Cerrado', '2026-02-08 14:43:01', '2026-02-16 15:42:26');
 
 -- ----------------------------
 -- Table structure for users
@@ -557,25 +700,29 @@ CREATE TABLE "public"."users" (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO "public"."users" VALUES (1, 1, 'admin@gmail.com', '$2y$12$Uj7nDQeSe.nBP6kYjdxEmeoQ9bgthwNqy9SN2Z8U60jLsLfeq79R2', 'Usuario Admin', 'Dev', 't', NULL, NULL, '2026-02-06 18:13:35', '2026-02-06 18:13:35');
-INSERT INTO "public"."users" VALUES (2, 1, 'maximo@gmail.com', '$2y$12$tQbX7eB0iHyHliZarDbiIOQXyqEuLqy.iZPe9r94.nv9XVcJXjoMu', 'Máximo Décimo Meridio', 'CANTV Av Libertador', 't', NULL, NULL, '2026-02-06 21:00:40', '2026-02-06 21:00:40');
 INSERT INTO "public"."users" VALUES (3, 2, 'super@gmail.com', '$2y$12$/1F6yOX/01mbHa/EvzRcp.tMMGlHpALUyV31bFkyuYT1Y4b4Rq5Gm', 'Marco Aurelio', 'CANTV Camatagua', 't', NULL, NULL, '2026-02-06 21:01:51', '2026-02-06 21:01:51');
 INSERT INTO "public"."users" VALUES (4, 3, 'opera@gmail.com', '$2y$12$zTOBHQuYyt.UTrTyriF33eNIEhKwGmRV7beV47RBXsdPTpTJysZdO', 'El senador Graco', 'CANTV Baemari', 't', NULL, NULL, '2026-02-06 21:02:50', '2026-02-06 21:02:50');
-INSERT INTO "public"."users" VALUES (5, 4, 'visita@gmail.com', '$2y$12$M8Ebsih3CkgsEqSL2UZ3BeFEDfPpRHdDGV5lruwYUahJuAipHdxK.', 'Gaio', 'CANTV Administrativo', 't', NULL, NULL, '2026-02-06 21:03:54', '2026-02-06 21:03:54');
+INSERT INTO "public"."users" VALUES (2, 1, 'maximo@gmail.com', '$2y$12$tQbX7eB0iHyHliZarDbiIOQXyqEuLqy.iZPe9r94.nv9XVcJXjoMu', 'Máximo Décimo Meridio', 'CANTV Av Libertador', 't', NULL, NULL, '2026-02-06 21:00:40', '2026-02-08 16:31:43');
+INSERT INTO "public"."users" VALUES (5, 4, 'visita@gmail.com', '$2y$12$M8Ebsih3CkgsEqSL2UZ3BeFEDfPpRHdDGV5lruwYUahJuAipHdxK.', 'Gaio', 'CANTV Administrativo', 't', NULL, NULL, '2026-02-06 21:03:54', '2026-02-08 16:35:22');
+INSERT INTO "public"."users" VALUES (7, 3, 'prueba2@gmail.com', '$2y$12$E72RkYp5eIKc66zHGvluteEdUBMxEzZOPPH2U6gCWfb.HJlZF/6.q', 'prueba2', 'Camatagua', 't', NULL, NULL, '2026-02-14 11:41:11', '2026-02-14 11:41:11');
+INSERT INTO "public"."users" VALUES (8, 3, 'prueba3@gmail.com', '$2y$12$zpaNb8cs4OzOPUPdEQSX7uWD1JbWSXd1JAupe4w.gf0AgQ2krjbmW', 'prueba3', 'Caracas 3', 't', NULL, NULL, '2026-02-14 11:41:45', '2026-02-14 11:41:45');
+INSERT INTO "public"."users" VALUES (9, 3, 'prueba4@gmail.com', '$2y$12$ZbEyj11ogsBj/A/t6MLkL.KwaHE0Kz17whUkh9Hspa.7zDXcmiZNK', 'prueba4', 'Caracas 3', 't', NULL, NULL, '2026-02-14 11:42:14', '2026-02-14 11:42:14');
+INSERT INTO "public"."users" VALUES (6, 3, 'prueba1@gmail.com', '$2y$12$otdFUlFI4MgQe1tTVjH0Oe.wXp4C0R3geSxu.YYTPAPB9y6JFDgQK', 'prueba1', 'Caracas', 'f', NULL, NULL, '2026-02-14 11:40:40', '2026-02-14 13:04:54');
+INSERT INTO "public"."users" VALUES (1, 1, 'admin@gmail.com', '$2y$12$GgrYsYBtDboZJkFwH8XfPOJOQtm2LtCBqTCrG/kAbGQjGW7vrNYNC', 'Administrador', 'Artigas', 't', NULL, NULL, '2026-02-06 18:13:35', '2026-02-16 22:21:47');
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."blogs_id_seq"
 OWNED BY "public"."blogs"."id";
-SELECT setval('"public"."blogs_id_seq"', 2, true);
+SELECT setval('"public"."blogs_id_seq"', 7, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."calendarios_id_seq"
 OWNED BY "public"."calendarios"."id";
-SELECT setval('"public"."calendarios_id_seq"', 3, true);
+SELECT setval('"public"."calendarios_id_seq"', 10, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -589,14 +736,14 @@ SELECT setval('"public"."categoriadocs_id_seq"', 1, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."comentariosforos_id_seq"
 OWNED BY "public"."comentariosforos"."id";
-SELECT setval('"public"."comentariosforos_id_seq"', 1, true);
+SELECT setval('"public"."comentariosforos_id_seq"', 2, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."documentos_id_seq"
 OWNED BY "public"."documentos"."id";
-SELECT setval('"public"."documentos_id_seq"', 3, true);
+SELECT setval('"public"."documentos_id_seq"', 6, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -617,7 +764,7 @@ SELECT setval('"public"."jobs_id_seq"', 1, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."logs_id_seq"
 OWNED BY "public"."logs"."id";
-SELECT setval('"public"."logs_id_seq"', 37, true);
+SELECT setval('"public"."logs_id_seq"', 169, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -631,7 +778,7 @@ SELECT setval('"public"."migrations_id_seq"', 12, true);
 -- ----------------------------
 ALTER SEQUENCE "public"."personal_access_tokens_id_seq"
 OWNED BY "public"."personal_access_tokens"."id";
-SELECT setval('"public"."personal_access_tokens_id_seq"', 13, true);
+SELECT setval('"public"."personal_access_tokens_id_seq"', 77, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -645,14 +792,14 @@ SELECT setval('"public"."rol_id_seq"', 1, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."temasforos_id_seq"
 OWNED BY "public"."temasforos"."id";
-SELECT setval('"public"."temasforos_id_seq"', 1, true);
+SELECT setval('"public"."temasforos_id_seq"', 5, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."users_id_seq"
 OWNED BY "public"."users"."id";
-SELECT setval('"public"."users_id_seq"', 5, true);
+SELECT setval('"public"."users_id_seq"', 9, true);
 
 -- ----------------------------
 -- Primary Key structure for table blogs

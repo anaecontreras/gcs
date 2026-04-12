@@ -752,3 +752,120 @@ export const confirmarEliminarEvento = (titulo) => {
         cancelButtonText: 'No, cancelar'
     });
 };
+
+// PRIMER MODAL: SOLO PARA ENVIAR EL CORREO Y SOLICITAR CLAVE TEMPORAL
+export const enviarClaveRecuperacion = () => {
+    return Swal.fire({
+        title: 'Recuperar Contraseña',
+        html: `
+            <div style="text-align: left; font-size: 0.9rem;">
+                <label style="font-weight: bold;">Correo Electrónico:</label>
+                <input id="email" class="swal2-input" type="email" placeholder="usuario@ejemplo.com" style="width: 85%; margin-top: 10px;" autocomplete="off">
+                
+                <p style="font-size: 0.8rem; color: #666; margin-top: 15px; text-align: center;">
+                    Se enviará una clave temporal de recuperación a tu correo electrónico
+                </p>
+            </div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Enviar Clave',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        width: 450,
+        preConfirm: () => {
+            const email = document.getElementById('email').value.trim();
+
+            // Validar email
+            if (!email) {
+                Swal.showValidationMessage('Por favor ingresa tu correo electrónico');
+                return false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                Swal.showValidationMessage('Por favor ingresa un correo electrónico válido');
+                return false;
+            }
+
+            return { email: email };
+        }
+    });
+};
+
+// SEGUNDO MODAL: PARA INGRESAR CLAVE TEMPORAL Y NUEVA CONTRASEÑA
+export const recuperarContrasena = (email) => {
+    return Swal.fire({
+        title: 'Restablecer Contraseña',
+        html: `
+            <div style="text-align: left; font-size: 0.9rem;">
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px; text-align: center;">
+                    Luego de haber recibido en su correo: <strong>${email}</strong>, la clave temporal de recuperación, por favor ingrese lo siguiente:
+                </p>
+                
+                <hr />
+
+                <label style="font-weight: bold;">Clave Temporal de Recuperación:</label>
+                <input id="recuTempClave" class="swal2-input" type="text" placeholder="Ingrese la clave temporal recibida" style="width: 85%; margin-top: 10px;" autocomplete="off">
+
+                <label style="font-weight: bold; margin-top: 10px;">Nueva Contraseña:</label>
+                <input id="nuevaClaveAcceso" class="swal2-input" type="password" placeholder="Ingrese una nueva contraseña" style="width: 85%; margin-top: 10px;" autocomplete="new-password">
+
+                <label style="font-weight: bold; margin-top: 10px;">Confirmar Nueva Contraseña:</label>
+                <input id="nuevaClaveAccesoConf" class="swal2-input" type="password" placeholder="Confirmar la nueva contraseña" style="width: 85%; margin-top: 10px;" autocomplete="new-password">
+            </div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Restablecer Contraseña',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        width: 450,
+        didOpen: () => {
+            // Limpiar campos cuando se abre el modal
+            const claveTempInput = document.getElementById('recuTempClave');
+            if (claveTempInput) claveTempInput.value = '';
+
+            const nuevaClaveInput = document.getElementById('nuevaClaveAcceso');
+            if (nuevaClaveInput) nuevaClaveInput.value = '';
+
+            const confirmarInput = document.getElementById('nuevaClaveAccesoConf');
+            if (confirmarInput) confirmarInput.value = '';
+        },
+        preConfirm: () => {
+            const claveTemporal = document.getElementById('recuTempClave').value.trim();
+            const nuevaClave = document.getElementById('nuevaClaveAcceso').value;
+            const confirmarClave = document.getElementById('nuevaClaveAccesoConf').value;
+
+            // Validar clave temporal
+            if (!claveTemporal) {
+                Swal.showValidationMessage('Por favor ingresa la clave temporal de recuperación');
+                return false;
+            }
+
+            // Validar nueva contraseña
+            if (!nuevaClave) {
+                Swal.showValidationMessage('Por favor ingresa una nueva contraseña');
+                return false;
+            }
+
+            if (nuevaClave.length < 8) {
+                Swal.showValidationMessage('La nueva contraseña debe tener al menos 8 caracteres');
+                return false;
+            }
+
+            // Validar confirmación
+            if (nuevaClave !== confirmarClave) {
+                Swal.showValidationMessage('Las contraseñas no coinciden');
+                return false;
+            }
+
+            // Retornar todos los datos
+            return {
+                email: email,
+                clave_temporal: claveTemporal,
+                nueva_clave: nuevaClave
+            };
+        }
+    });
+};

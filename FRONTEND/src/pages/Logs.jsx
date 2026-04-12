@@ -129,7 +129,7 @@ function Logs({ userData, token }) {
                                     currentRecords.map((log) => (
                                         <tr key={log.id}>
                                             {/* <td className='td'>{log.id}</td> */}
-                                            <td className='td' style={{ color: '#168128', fontSize: '0.85rem' }}>
+                                            <td className='td' style={{ color: '#183592', fontSize: '0.85rem' }}>
                                                 {log.usuario_correo}
                                             </td>
                                             <td className='td'>{log.accion}</td>

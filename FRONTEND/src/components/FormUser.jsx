@@ -126,9 +126,9 @@ function FormUser({ userData, token, setUserData, setToken }) {
       <form className="form" onSubmit={handleSubmit}>
         <p className="title">Perfil de Usuario</p>
         <label>
-          {isEditing ? "" : "Nombre"}
+          Nombre
           <input
-            disabled={!isEditing}
+            disabled='false'
             required
             name="name"
             type="text"
@@ -136,13 +136,12 @@ function FormUser({ userData, token, setUserData, setToken }) {
             onChange={handleChange}
             value={formData.name}
           />
-          {isEditing ? <span>Nombre</span> : ""}
         </label>
 
         <label>
-          {isEditing ? "" : "Sede"}
+          Sede
           <input
-            disabled={!isEditing}
+            disabled='false'
             required
             name="sede"
             type="text"
@@ -150,7 +149,6 @@ function FormUser({ userData, token, setUserData, setToken }) {
             onChange={handleChange}
             value={formData.sede}
           />
-          {isEditing ? <span>Sede</span> : ""}
         </label>
 
         <label>
@@ -280,7 +278,7 @@ const StyledWrapper = styled.div`
   }
 
   .form label .input:valid + span {
-    color: green;
+    color: #183592;
   }
 
   .submit {
