@@ -635,3 +635,48 @@ export const getDashboardStats = async (token) => {
         throw error;
     }
 };
+
+// Añadir a Api.js
+
+export const enviarClaveTemporal = async (email) => {
+    try {
+        const response = await fetch(`${BASE_URL}/auth/send-recovery-code`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Error al enviar el código');
+        return data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const restablecerPassword = async (datos) => {
+    try {
+        const response = await fetch(`${BASE_URL}/auth/reset-password`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(datos)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            // Si el servidor responde 400 o 500, lanzamos el error
+            throw new Error(data.message || 'Error en el servidor');
+        }
+
+        // SI EL STATUS ES 200, ESTO SE RETORNA
+        return data;
+    } catch (error) {
+        throw error;
+    }
+};

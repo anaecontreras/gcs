@@ -1,6 +1,5 @@
 <?php
 
-// app/Http/Controllers/LogController.php
 namespace App\Http\Controllers;
 
 use App\Models\Log;
@@ -8,15 +7,18 @@ use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
-    // No debe estar protegido por middleware
+    /**
+     * Endpoint público para registrar eventos de auditoría.
+     * Diseñado para recibir logs desde contextos no autenticados (ej: intentos de login fallidos).
+     */
     public function intentoLogin(Request $request)
     {
-        // Espera: usuario_correo, accion, entidad_afectada, entidad_id
+        // Creamos el registro con los datos que llegan: entidad_afectada tiene 'users' por defecto si no se especifica
         $log = Log::create([
             'usuario_correo'   => $request->input('usuario_correo'),
             'accion'           => $request->input('accion'),
             'entidad_afectada' => $request->input('entidad_afectada', 'users'),
-            'entidad_id'       => $request->input('entidad_id'), // puede ser null
+            'entidad_id'       => $request->input('entidad_id'), // puede ser null cuando el usuario aún no existe
         ]);
 
         return response()->json([
@@ -25,9 +27,13 @@ class LogController extends Controller
         ], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * Listado de logs para revisión administrativa.
+     * Traemos solo los campos necesarios para mantener la respuesta ligera y útil.
+     */
     public function index()
     {
-        // Obtener todos los logs
+        // Selección mínima: lo justo para que un admin pueda auditar sin exponer datos innecesarios
         $logs = Log::select('id', 'accion', 'usuario_correo', 'entidad_afectada', 'entidad_id', 'created_at')
             ->get();
 

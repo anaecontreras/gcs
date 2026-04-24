@@ -3,7 +3,7 @@ POST http://127.0.0.1:8000/api/auth/login
 content-type: application/json
 
 {
-    "email": "admin@gmail.com",
+    "email": "emmanuel.sierra@gmail.com",
     "password": "12345678"
 }
 
@@ -76,9 +76,27 @@ Authorization: Bearer 176|4Opl9QjI81aEqVpos98wvw1fg0izvxaMb8mGGAnMdd0139cb
 ### Listar todos los usuarios registrados
 GET http://127.0.0.1:8000/api/auth/showUsers
 Content-Type: application/json
-Authorization: Bearer 7|Khctt0Gphp4a099jQbpIMszIarBr1KqJ2sfUxnAe7e222212
+Authorization: Bearer 119|WKPBKhprkik39VbGCdizkqKv6Q3tJ0ynoDLq1E25d2906198
 
 ### Logout de usuario
 POST http://127.0.0.1:8000/api/auth/logout
 Content-Type: application/json
-Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+Authorization: Bearer 121|3A5JVbakgCggfe7nbUiSbOhGilSs7QJcZcS9Yh2U5faf0a8d
+
+### solicitud de código de recuperación
+POST http://127.0.0.1:8000/api/auth/send-recovery-code
+content-type: application/json
+
+{
+    "email": "emmanuel.sierra@gmail.com"
+}
+
+### restablecimiento de contraseña
+POST http://127.0.0.1:8000/api/auth/reset-password
+content-type: application/json
+
+{
+    "email": "emmanuel.sierra@gmail.com",
+    "temp_code": "164910",
+    "new_password": "12345678"
+}

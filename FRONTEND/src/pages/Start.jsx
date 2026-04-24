@@ -43,41 +43,49 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
         }
     };
 
+    // Modificar en Start.jsx
+
     const handleOlvidoContraseña = async (e) => {
         e.preventDefault();
 
-        // PASO 1: Mostrar modal para enviar correo
-        const resultadoEnvio = await Mensajes.enviarClaveRecuperacion();
+        const resEmail = await Mensajes.enviarClaveRecuperacion();
+        if (!resEmail.isConfirmed || !resEmail.value?.email) return;
 
-        if (resultadoEnvio.isConfirmed) {
-            const { email } = resultadoEnvio.value;
+        const correo = resEmail.value.email;
 
-            try {
-                // Aquí llamas a tu API para enviar la clave temporal al correo
-                // await Api.enviarClaveTemporal(email);
+        try {
+            setLoading(true);
+            await Api.enviarClaveTemporal(correo);
+            setLoading(false);
 
-                // PASO: Mostrar modal para ingresar clave temporal y nueva contraseña
-                const resultadoRestablecer = await Mensajes.recuperarContrasena(email);
+            const resReset = await Mensajes.recuperarContrasena(correo);
 
-                if (resultadoRestablecer.isConfirmed) {
-                    const { clave_temporal, nueva_clave } = resultadoRestablecer.value;
+            if (resReset.isConfirmed && resReset.value) {
+                setLoading(true);
 
-                    // Aquí llamas a tu API para restablecer la contraseña
-                    // await Api.restablecerPassword({
-                    //     email: email,
-                    //     token: clave_temporal,
-                    //     password: nueva_clave
-                    // });
+                // Mapeo directo de lo que confirmamos en el REST Client
+                const payload = {
+                    email: correo,
+                    temp_code: resReset.value.clave_temporal,
+                    new_password: resReset.value.nueva_clave
+                };
 
-                    Mensajes.showSuccess('Contraseña restablecida exitosamente');
+                // LLAMADA A LA API
+                const data = await Api.restablecerPassword(payload);
 
-                    // Opcional: limpiar campos del formulario de login
-                    setUser('');
-                    setPass('');
-                }
-            } catch (error) {
-                Mensajes.showErrorMsg('Error al enviar la clave temporal. Verifica tu correo.');
+                setLoading(false);
+
+                // MENSAJE DE ÉXITO (Si llegamos aquí, la promesa se cumplió)
+                await Mensajes.showSuccess(data.message || "¡Contraseña cambiada!");
+
+                setUser(correo);
+                setPass('');
             }
+        } catch (error) {
+            setLoading(false);
+            console.error("ERROR DETECTADO:", error);
+            // Mostramos el error real que viene de la API o de JS
+            Mensajes.showErrorMsg(error.message || "Falla en la comunicación con el servidor");
         }
     };
 

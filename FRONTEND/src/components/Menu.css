@@ -1,8 +1,8 @@
 .izquierda .menu-bar,
 .menu-bar {
-    margin-top: 0.5rem;
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
     background-color: var(--bg-basic);
-    
 
     border-radius: 5px;
     font-size: 0.9rem;
@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin: 0;
+    margin: 0.5rem 0;
     padding-left: 1rem;
     list-style: none;
     height: 100%;
@@ -75,6 +75,7 @@
     background-color: var(--bg-form);
     border-radius: 3px;
     width: 11rem;
+
     .icono-menu-dashboard {
         margin-right: 0.5rem;
         fill: #fff;
@@ -99,7 +100,7 @@
     min-width: 150px;
     list-style: none;
     padding: 0;
-    margin:0;
+    margin: 0;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     z-index: 1000;
@@ -162,4 +163,3 @@
     fill: #0918e7;
     width: 1.3rem;
 }
-

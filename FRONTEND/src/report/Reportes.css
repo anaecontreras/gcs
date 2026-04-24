@@ -1,29 +1,79 @@
+/* Contenedor principal: flujo normal, sin trucos de posicionamiento */
 .contenedor-ppal-reporte {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    min-height: auto;
+    /* Espacio opcional al final de la página */
+    overflow: hidden;
 }
 
+/* Envoltorio del reporte: aquí vive el fondo, solo en esta sección */
+.wrapper-fondo-reporte {
+    position: relative;
+    /* Para que el fondo absoluto se posicione respecto a este contenedor */
+    width: 95%;
+    height: 27rem;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    /* Espacio alrededor del área con fondo */
+    margin-top: 1rem;
+    /* Separación respecto a la BarraMenu */
+}
+
+/* Fondo local: solo cubre este wrapper, no toda la pantalla */
+.fondo-reporte-local {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+    /* No bloquea interacciones con los elementos de arriba */
+    border-radius: 12px;
+    /* Opcional: bordes redondeados para que el fondo siga la forma de la tarjeta */
+}
+
+/* Tarjeta de reporte: altura fija, scroll interno si hace falta */
 .contenedor-medio-reporte {
-    flex: 1;
+    position: relative;
+    z-index: 1;
+    /* Por encima del fondo local */
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    margin-top: 5rem;
     padding: 1rem 2rem 2rem 2rem;
     border: 1px solid rgba(9, 16, 46, 0.2);
     border-radius: 10px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+
+    height: 250px;
+    /* Altura fija solicitada */
+    overflow-y: auto;
+    /* Scroll solo dentro de esta caja si el contenido crece */
+
+    /* Ancho controlado para mejor lectura */
+    width: 90%;
+    max-width: 900px;
+    box-sizing: border-box;
 }
 
 .fila-filtros {
     display: flex;
     align-items: flex-end;
     gap: 15px;
-    margin-top: 15px;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .grupo-input {
@@ -41,6 +91,7 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    min-width: 180px;
 }
 
 .btn-generar {
@@ -51,8 +102,26 @@
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .btn-generar:hover {
     background-color: #218838;
+}
+
+/* Responsive: en móviles, apilamos los controles */
+@media (max-width: 768px) {
+    .fila-filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-fecha {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .btn-generar {
+        width: 100%;
+    }
 }

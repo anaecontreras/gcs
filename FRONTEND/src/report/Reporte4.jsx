@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Head from '../components/Head';
-import Foot from '../components/Foot';
 import * as Api from '../services/Api';
 import * as Mensajes from '../services/Mensajes';
 
@@ -8,6 +7,11 @@ import * as Mensajes from '../services/Mensajes';
 import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable';
 import BarraMenu from '../components/BarraMenu';
+
+import './Reportes.css';
+
+// Importamos la misma imagen de fondo que usa Reporte1 para mantener consistencia visual
+import fondoReportes from '../assets/image/img_reportes.webp';
 
 function Reporte4({ userData, token }) {
     const [fechaInicio, setFechaInicio] = useState('');
@@ -89,39 +93,49 @@ function Reporte4({ userData, token }) {
             <Head />
             <BarraMenu tipo="2" userData={userData} token={token} />
 
-            <div className="contenedor-medio-reporte">
-                <h1>Reporte de Historial Actividades</h1>
-                <h3>(Seleccione un rango de fecha)</h3>
+            {/* Envoltorio con fondo: misma estructura que Reporte1 para consistencia */}
+            <div className="wrapper-fondo-reporte">
+                {/* Capa de fondo con la imagen importada */}
+                <div
+                    className="fondo-reporte-local"
+                    style={{ backgroundImage: `url(${fondoReportes})` }}
+                ></div>
 
-                <div className="seccion-reportes">
-                    <div className="fila-filtros">
-                        <div className="grupo-input">
-                            <label>Fecha inicio reporte:</label>
-                            <input
-                                type="date"
-                                className="input-fecha"
-                                value={fechaInicio}
-                                onChange={(e) => setFechaInicio(e.target.value)}
-                            />
+                {/* Tarjeta de contenido: va encima del fondo, con altura fija */}
+                <div className="contenedor-medio-reporte">
+                    <h1>Reporte de Historial Actividades</h1>
+                    <h3>(Seleccione un rango de fecha)</h3>
+
+                    <div className="seccion-reportes">
+                        <div className="fila-filtros">
+                            <div className="grupo-input">
+                                <label>Fecha inicio reporte:</label>
+                                <input
+                                    type="date"
+                                    className="input-fecha"
+                                    value={fechaInicio}
+                                    onChange={(e) => setFechaInicio(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="grupo-input">
+                                <label>Fecha fin reporte:</label>
+                                <input
+                                    type="date"
+                                    className="input-fecha"
+                                    value={fechaFin}
+                                    onChange={(e) => setFechaFin(e.target.value)}
+                                />
+                            </div>
+
+                            <button
+                                className="btn-generar"
+                                onClick={generarPDF}
+                                disabled={loading}
+                            >
+                                {loading ? 'Procesando...' : 'Generar Reporte en PDF'}
+                            </button>
                         </div>
-
-                        <div className="grupo-input">
-                            <label>Fecha fin reporte:</label>
-                            <input
-                                type="date"
-                                className="input-fecha"
-                                value={fechaFin}
-                                onChange={(e) => setFechaFin(e.target.value)}
-                            />
-                        </div>
-
-                        <button
-                            className="btn-generar"
-                            onClick={generarPDF}
-                            disabled={loading}
-                        >
-                            {loading ? 'Procesando...' : 'Generar Reporte en PDF'}
-                        </button>
                     </div>
                 </div>
             </div>

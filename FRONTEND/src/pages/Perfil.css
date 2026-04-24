@@ -3,6 +3,37 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 100vh;
+    height: 95vh;
     width: 100%;
+}
+
+.contenedor-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    margin-top: 1rem;
+    width: 99%;
+    height: 520px;
+    background-image: url('../assets/image/perfil.webp');
+    opacity: 0.75;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Necesitas un pseudo-elemento para la opacidad */
+.contenedor-form::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0.75;
+    /* Capa oscura para opacidad */
+    z-index: -1;
+    border-radius: 15px;
 }

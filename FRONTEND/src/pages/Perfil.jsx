@@ -5,11 +5,15 @@ import FormUser from './../components/FormUser';
 
 function Perfil({ userData, token, setUserData, setToken }) {
     return (
-        <div className="contenedor-ppal">
+        <div className="contenedor-ppal-perfil">
             <Head />
             <BarraMenu tipo="2" userData={userData} />
 
-            <FormUser userData={userData} token={token} setUserData={setUserData} setToken={setToken} />
+            <div className="contenedor-form">
+                <FormUser userData={userData} token={token} setUserData={setUserData} setToken={setToken} />
+            </div>
+
+
 
         </div>
     )

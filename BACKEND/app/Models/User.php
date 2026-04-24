@@ -13,14 +13,19 @@ use DateTimeInterface;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    // Aqui agregue HasApiTokens para manejo de tokens con Laravel Sanctum
+    // Traits base: Notifiable para correos, HasApiTokens para autenticación vía Sanctum
     use HasFactory, Notifiable, HasApiTokens;
 
-    // Agregado para manejo de horas
+    /**
+     * Formato consistente para fechas en respuestas JSON.
+     * Así el frontend recibe siempre el mismo formato sin tener que adaptar cada llamada.
+     */
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
     }
+    
+    // Forzamos el formato de fechas en serialización para que coincida con lo que espera el frontend
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
@@ -28,7 +33,8 @@ class User extends Authenticatable
 
 
     /**
-     * The attributes that are mass assignable.
+     * Campos que pueden asignarse masivamente.
+     * Solo estos pasan del request al modelo: protegemos contra inyección de datos no autorizados.
      *
      * @var list<string>
      */
@@ -42,7 +48,8 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Atributos que nunca deben exponerse en respuestas JSON.
+     * Password y remember_token se quedan en el servidor, por seguridad.
      *
      * @var list<string>
      */
@@ -52,7 +59,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Configuración adicional de casts: password se hashea automáticamente, email_verified_at se maneja como datetime.
      *
      * @return array<string, string>
      */
@@ -64,29 +71,46 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Cada usuario tiene un rol asignado.
+     * Esta relación nos permite verificar permisos y filtrar listados por tipo de usuario.
+     */
     public function rol()
     {
-        // Relación donde 'rol_id' en la tabla users apunta al 'id' de la tabla rol
         return $this->belongsTo(Roles::class, 'rol_id');
     }
 
-    // app/Models/User.php
-
+    /**
+     * Documentos creados por este usuario.
+     * Así podemos listar sus aportes o validar si tiene archivos antes de permitir ciertas acciones.
+     */
     public function documentos()
     {
         return $this->hasMany(Documento::class, 'usuario_creador_id');
     }
 
+    /**
+     * Reportes/alertas que este usuario ha generado.
+     * Útil para dashboards personales o auditoría de actividad.
+     */
     public function blogs()
     {
         return $this->hasMany(Blog::class, 'usuario_reporte_id');
     }
 
+    /**
+     * Eventos que este usuario agendó en el calendario.
+     * Nos permite mostrar su agenda o filtrar por responsable.
+     */
     public function eventosCalendario()
     {
         return $this->hasMany(Calendario::class, 'usuario_creador_id');
     }
 
+    /**
+     * Temas de foro iniciados por este usuario.
+     * Así podemos rastrear su participación o aplicar moderación específica.
+     */
     public function temasForo()
     {
         return $this->hasMany(TemasForo::class, 'usuario_creador_id');

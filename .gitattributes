@@ -1,0 +1,14 @@
+# Configuración para todo el repositorio
+* text=auto eol=lf
+
+# Reglas de diff (aplican a cualquier ubicación)
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+
+# Archivos a excluir en exportación ZIP
+/.github export-ignore
+/CHANGELOG.md export-ignore
+/.styleci.yml export-ignore

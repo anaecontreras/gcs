@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class RolController extends Controller
 {
+    /**
+     * Listado ligero de roles.
+     * Solo traemos lo que realmente se muestra en los selectores del frontend.
+     */
     public function index()
     {
-        // Obtener todos los roles
+        // Campos mínimos: evitamos cargar información que no se va a usar en la vista
         $roles = Roles::select('id', 'rol')
             ->get();
 
@@ -21,10 +25,15 @@ class RolController extends Controller
         ], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * Crea un nuevo rol en el sistema.
+     * Validamos unicidad para evitar duplicados que puedan confundir al asignar permisos.
+     */
     public function store(Request $request)
     {
         $user = $request->user();
 
+        // El nombre del rol debe ser único: así prevenimos conflictos al momento de asignar roles a usuarios
         $validator = Validator::make($request->all(), [
             'rol' => 'required|string|max:50|unique:rol',
         ]);
@@ -38,9 +47,9 @@ class RolController extends Controller
 
         $rol = Roles::create($request->only(['rol']));
 
-        // 👇 Registrar el log de la acción
+        // Auditoría: registramos quién creó el rol y con qué nombre, por si hay que rastrear cambios de permisos después
         Log::create([
-            'usuario_correo'   => $user->email, // Quién hizo el registro
+            'usuario_correo'   => $user->email,
             'accion'           => "Registro de rol: {$rol->rol}",
             'entidad_afectada' => 'roles',
             'entidad_id'       => $rol->id,
@@ -49,9 +58,13 @@ class RolController extends Controller
         return response()->json(['message' => 'Rol creado exitosamente', 'rol' => $rol], 201, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * Actualiza un rol existente.
+     * La validación de unicidad excluye el propio registro para no lanzar falso positivo al editar.
+     */
     public function edit(Request $request)
     {
-        // 1. Validar la entrada
+        // Validamos que el ID exista y que el nuevo nombre no colisione con otro rol (excepto el que estamos editando)
         $validator = Validator::make($request->all(), [
             'id'  => 'required|exists:rol,id',
             'rol' => 'required|string|max:50|unique:rol,rol,' . $request->id,
@@ -64,13 +77,14 @@ class RolController extends Controller
             ], 422, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
-        // 2. Buscar y actualizar
         $rol = Roles::find($request->id);
+        
+        // Actualización directa: solo el campo 'rol' cambia, mantenemos el resto intacto por seguridad
         $rol->update([
             'rol' => $request->rol
         ]);
 
-        // 3. Registrar Log
+        // Log post-cambio: capturamos el valor final para tener historial de modificaciones en permisos críticos
         Log::create([
             'usuario_correo'   => $request->user()->email,
             'accion'           => "Edición de rol: ID {$rol->id} a nombre {$rol->rol}",
@@ -81,9 +95,13 @@ class RolController extends Controller
         return response()->json(['message' => 'Rol actualizado exitosamente', 'rol' => $rol], 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * Elimina un rol del sistema.
+     * Registramos la acción antes de borrar para no perder el nombre en el historial de auditoría.
+     */
     public function destroy(Request $request, $id)
     {
-        // 1. Validar que el ID sea numérico y exista en la tabla 'rol'
+        // Validamos que el ID corresponda a un rol real antes de intentar cualquier operación
         $validator = Validator::make(['id' => $id], [
             'id' => 'required|integer|exists:rol,id'
         ]);
@@ -95,10 +113,9 @@ class RolController extends Controller
             ], 404, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_UNESCAPED_UNICODE);
         }
 
-        // 2. Buscar el objeto
         $rol = Roles::find($id);
 
-        // 3. Registrar el log ANTES de eliminar (para tener los datos del rol)
+        // Log primero: si borramos el registro antes, perdemos el nombre del rol para el registro de auditoría
         Log::create([
             'usuario_correo'   => $request->user()->email,
             'accion'           => "Eliminación de rol: {$rol->rol}",
@@ -106,7 +123,6 @@ class RolController extends Controller
             'entidad_id'       => $rol->id,
         ]);
 
-        // 4. Eliminar definitivamente
         $rol->delete();
 
         return response()->json([

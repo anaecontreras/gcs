@@ -24,4 +24,5 @@ yarn-error.log
 /.vscode
 /.zed
 /_viejo
-/info
+/doc
+/pruebas_http

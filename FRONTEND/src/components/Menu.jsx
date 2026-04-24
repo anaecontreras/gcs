@@ -46,10 +46,10 @@ function Menu({ setIsAuthenticated, tipo, userData, token }) {
             <ul>
                 {tipo === "1" ? (
                     <>
-                        <li className='li-menu'><Link to="/Dashboard">
+                        {/* <li className='li-menu'><Link to="/Dashboard">
                             <ImgDashboard />
                             Dashboard</Link>
-                        </li>
+                        </li> */}
                         <li className='li-menu'><Link to="/Blog">
                             <ImgContingencia />
                             Contingencia</Link>

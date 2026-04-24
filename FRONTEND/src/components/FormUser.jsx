@@ -32,6 +32,11 @@ function FormUser({ userData, token, setUserData, setToken }) {
     }));
   };
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setIsEditing(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isEditing) { setIsEditing(true); return; }
@@ -152,7 +157,7 @@ function FormUser({ userData, token, setUserData, setToken }) {
         </label>
 
         <label>
-          {isEditing ? "" : "Contraseña Actual"}
+          Contraseña Actual
           <input
             disabled={!isEditing}
             name="password_actual"
@@ -160,12 +165,12 @@ function FormUser({ userData, token, setUserData, setToken }) {
             className="input"
             onChange={handleChange}
             value={formData.password_actual}
+            placeholder={isEditing ? "Ingrese Contraseña Actual" : ""}
           />
-          {isEditing ? <span>Contraseña Actual</span> : ""}
         </label>
 
         <label>
-          {isEditing ? "" : "Nueva Contraseña"}
+          Nueva Contraseña
           <input
             disabled={!isEditing}
             name="password"
@@ -173,12 +178,12 @@ function FormUser({ userData, token, setUserData, setToken }) {
             className="input"
             onChange={handleChange}
             value={formData.password}
+            placeholder={isEditing ? "Ingrese Nueva Contraseña" : ""}
           />
-          {isEditing ? <span>Nueva Contraseña</span> : ""}
         </label>
 
         <label>
-          {isEditing ? "" : "Confirmar Contraseña"}
+          Confirmar Contraseña
           <input
             disabled={!isEditing}
             name="confirmPassword"
@@ -186,13 +191,17 @@ function FormUser({ userData, token, setUserData, setToken }) {
             className="input"
             onChange={handleChange}
             value={formData.confirmPassword}
+            placeholder={isEditing ? "Ingrese Confirmación de Nueva Contraseña" : ""}
           />
-          {isEditing ? <span>Confirmar contraseña</span> : ""}
         </label>
 
-        <button type="submit" className={`submit ${isEditing ? 'btn-save' : ''}`}>
-          {isEditing ? 'Guardar Cambios' : 'Editar Perfil'}
-        </button>
+        <div className='container-btn'>
+          <button type="submit" className={`submit ${isEditing ? 'btn-save' : ''}`}>
+            {isEditing ? 'Guardar Cambios' : 'Editar Perfil'}
+          </button>
+          {isEditing && <button type="button" className="btn-cancel" onClick={handleCancel}>Cancelar</button>}
+        </div>
+
       </form>
     </StyledWrapper>
   );
@@ -202,46 +211,23 @@ const StyledWrapper = styled.div`
   .form {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     width: 550px;
     background-color: #fff;
-    padding: 5px 20px;
+    padding: 0 20px;
     border-radius: 20px;
     position: relative;
-    margin-top: 0;
+    margin: 1rem 0 0 0;
   }
 
   .title {
     font-size: 28px;
-    color: royalblue;
+    color: #000000;
     font-weight: 600;
-    letter-spacing: -1px;
     position: relative;
     display: flex;
     align-items: center;
-    padding-left: 30px;
-  }
-
-  .title::before,.title::after {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    left: 0px;
-    background-color: royalblue;
-  }
-
-  .title::before {
-    width: 18px;
-    height: 18px;
-    background-color: royalblue;
-  }
-
-  .title::after {
-    width: 18px;
-    height: 18px;
-    animation: pulse 1s linear infinite;
+    margin: 10px 0 10px 0;
   }
 
   .form label {
@@ -266,6 +252,13 @@ const StyledWrapper = styled.div`
     transition: 0.3s ease;
   }
 
+  .form label .input::placeholder {
+    color: #cc1010;
+    font-size: 1em;
+    font-style: italic;
+    opacity: 0.7;
+  }
+
   .form label .input:placeholder-shown + span {
     top: 15px;
     font-size: 0.9em;
@@ -281,7 +274,16 @@ const StyledWrapper = styled.div`
     color: #183592;
   }
 
+  .container-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
   .submit {
+    width: 12rem;
     border: none;
     outline: none;
     background-color: royalblue;
@@ -291,6 +293,22 @@ const StyledWrapper = styled.div`
     font-size: 16px;
     transform: .3s ease;
     margin-top: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+
+  .btn-cancel {
+    width: 12rem;
+    border: none;
+    outline: none;
+    background-color: #d42121;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     cursor: pointer;
   }
 

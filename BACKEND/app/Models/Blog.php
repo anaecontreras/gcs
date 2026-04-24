@@ -9,8 +9,10 @@ class Blog extends Model
 {
     use HasFactory;
 
+    // Tabla explícita: nos asegura que el modelo apunte al lugar correcto incluso si cambian las convenciones de naming
     protected $table = 'blogs';
 
+    // Campos permitidos para asignación masiva: protegemos contra que el cliente envíe datos que no debe tocar
     protected $fillable = [
         'usuario_reporte_id',
         'titulo',
@@ -18,9 +20,12 @@ class Blog extends Model
         'estado'
     ];
 
+    /**
+     * Vincula cada blog con el usuario que lo reportó.
+     * Así podemos mostrar autoría en el frontend y aplicar filtros por responsable cuando haga falta.
+     */
     public function usuario()
     {
-        // Relación donde 'usuario_reporte_id' apunta al 'id' de la tabla users
         return $this->belongsTo(User::class, 'usuario_reporte_id');
     }
 }
