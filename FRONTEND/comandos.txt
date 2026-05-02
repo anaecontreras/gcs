@@ -1,4 +1,0 @@
-npm i react-router-dom
-npm install sweetalert2
-npm install jspdf jspdf-autotable
-npm install styled-components
