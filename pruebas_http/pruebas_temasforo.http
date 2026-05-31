@@ -1,0 +1,35 @@
+@baseUrl = http://127.0.0.1:8000/api
+@token = 219|lm4QqrJqaQ5bsj0GhtlqYLghuB2WXgAXotTfof2E9d4a795b
+
+### Listar Temas
+GET {{baseUrl}}/temas-foro
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Crear Nuevo Tema
+POST {{baseUrl}}/temas-foro/store
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "titulo": "Peliculas de Dibujos Animados, dinos la mejor",
+    "estado": "Abierto"
+}
+
+### Editar Tema
+POST {{baseUrl}}/temas-foro/edit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": 7,
+    "titulo": "Novelas Coreanas",
+    "estado": "Abierto"
+}
+
+### Eliminar Tema
+DELETE {{baseUrl}}/temas-foro/delete/8
+Authorization: Bearer {{token}}
+Accept: application/json

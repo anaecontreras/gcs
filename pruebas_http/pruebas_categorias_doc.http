@@ -1,0 +1,30 @@
+### Lista de categorias de documentos
+GET http://127.0.0.1:8000/api/categoriadoc/index 
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+### Registro de categoria de documento
+POST http://127.0.0.1:8000/api/categoriadoc/store 
+content-type: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+{
+    "nombre_categoria": "Ana"
+}
+
+### Edición de categoría de documento
+POST http://127.0.0.1:8000/api/categoriadoc/edit
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb
+
+{
+    "id": 5, 
+    "nombre_categoria": "Ana y Diana"
+}
+
+### Eliminar una categoría
+DELETE http://127.0.0.1:8000/api/categoriadoc/delete/5
+Accept: application/json
+Authorization: Bearer 103|DD0ZQ5ki0WKO4XJhcVftsyizUeqqXnR8sXtFN4va6ac8dfbb

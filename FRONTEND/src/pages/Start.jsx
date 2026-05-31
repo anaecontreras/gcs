@@ -95,8 +95,8 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
 
             <div className="contenedor-login">
                 <div className="div1">
-                    <h1 style={{ marginBottom: '0.2rem' }}>Plataforma Web Centralizada</h1>
-                    <h1 style={{ marginBottom: '1.5rem', fontSize: '1.3rem' }}>Gestión de Contingencias Satelitales</h1>
+                    <h1 className='title-login'>Plataforma Web Centralizada</h1>
+                    <h1 className='subtitle-login'>Gestión de Contingencias Satelitales</h1>
 
                     <form onSubmit={handleLogin} className='form-login'>
                         <InputLogin
@@ -126,16 +126,16 @@ function Start({ setIsAuthenticated, setUserData, setToken }) {
                 <div className="div2">
                     <img className='imgsatelite' src={satelite} alt="Imagen de satelite" />
 
-                    <p>Sistema integral de gestión para las operaciones de la Plataforma Satelital de CANTV. Monitoreo en tiempo real de las sedes Camatagua, Baemari y Caracas.</p>
+                    <p className='texto-div2'>Sistema integral de gestión para las operaciones de la Plataforma Satelital de CANTV. Monitoreo en tiempo real de las sedes Camatagua, Baemari y Caracas.</p>
 
                     <div className="notificaciones">
                         <div className="noti">
-                            <p>3</p>
-                            <span>Sedes Activas</span>
+                            <p className='texto-noti'>3</p>
+                            <span className='span-noti'>Sedes Activas</span>
                         </div>
                         <div className="noti">
-                            <p>24/7</p>
-                            <span>Monitoreo</span>
+                            <p className='texto-noti'>24/7</p>
+                            <span className='span-noti'>Monitoreo</span>
                         </div>
                     </div>
                 </div>

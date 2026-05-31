@@ -1,0 +1,102 @@
+### Login de usuario
+POST http://127.0.0.1:8000/api/auth/login
+content-type: application/json
+
+{
+    "email": "emmanuel.sierra@gmail.com",
+    "password": "12345678"
+}
+
+### CREAR ADMINISTRADOR INICIAL (Solo si no existe)
+POST http://127.0.0.1:8000/api/auth/init-admin
+Accept: application/json
+Content-Type: application/json
+
+{
+    "password": "12345678"
+}
+
+### PROBAR LOGIN CON EL NUEVO ADMIN
+POST http://127.0.0.1:8000/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "admin12345678"
+}
+
+
+### Registro de usuario
+POST http://127.0.0.1:8000/api/auth/register
+content-type: application/json
+
+{
+    "rol_id": 1,
+    "email": "admin@gmail.com",
+    "password": "12345678",
+    "password_confirmation": "admin",
+    "name": "Usuario Admin",
+    "unidad_operativa": "Dev"
+}
+
+### Cambio Contraseña de usuario activo
+POST http://127.0.0.1:8000/api/auth/change-password
+content-type: application/json
+Authorization: Bearer 150|w4MBeHNWVto1pe6rGNGxL4jYs45OlRMvL8ypBszJbb5b1744
+
+{
+    "current_password": "87654321",
+    "new_password": "12345678",
+    "new_password_confirmation": "12345678"
+}
+
+### Cambio Datos Básicos de usuario (rol, name, unidad_operativa)
+POST http://127.0.0.1:8000/api/auth/change-data-basic
+content-type: application/json
+Authorization: Bearer 176|4Opl9QjI81aEqVpos98wvw1fg0izvxaMb8mGGAnMdd0139cb
+
+{
+    "user_id": 3,
+    "name": "Usuario 3 modificado",
+    "rol_id": 3,
+    "unidad-operativa": "Camatagua, edo Aragua"
+}
+
+### Inhabilitar Usuario
+POST http://127.0.0.1:8000/api/auth/disable-user
+Content-Type: application/json
+Accept: application/json  <--- AGREGA ESTA LÍNEA
+Authorization: Bearer 176|4Opl9QjI81aEqVpos98wvw1fg0izvxaMb8mGGAnMdd0139cb
+
+{
+    "user_id": 26
+}
+
+### Listar todos los usuarios registrados
+GET http://127.0.0.1:8000/api/auth/showUsers
+Content-Type: application/json
+Authorization: Bearer 119|WKPBKhprkik39VbGCdizkqKv6Q3tJ0ynoDLq1E25d2906198
+
+### Logout de usuario
+POST http://127.0.0.1:8000/api/auth/logout
+Content-Type: application/json
+Authorization: Bearer 121|3A5JVbakgCggfe7nbUiSbOhGilSs7QJcZcS9Yh2U5faf0a8d
+
+### solicitud de código de recuperación
+POST http://127.0.0.1:8000/api/auth/send-recovery-code
+content-type: application/json
+
+{
+    "email": "emmanuel.sierra@gmail.com"
+}
+
+### restablecimiento de contraseña
+POST http://127.0.0.1:8000/api/auth/reset-password
+content-type: application/json
+
+{
+    "email": "emmanuel.sierra@gmail.com",
+    "temp_code": "164910",
+    "new_password": "12345678"
+}

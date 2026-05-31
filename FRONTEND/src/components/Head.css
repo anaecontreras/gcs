@@ -14,3 +14,15 @@
     width: 8.5rem;
     height: 3.5rem;
 }
+
+@media (max-width: 500px) {
+    .cintillo {
+        width: 12rem;
+        height: 2.8rem;
+    }
+
+    .logo {
+        width: 6.8rem;
+        height: 2.8rem;
+    }
+}

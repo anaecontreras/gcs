@@ -4,6 +4,12 @@
     justify-content: center;
     align-items: center;
 
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .contenedor-login {
@@ -14,6 +20,14 @@
     margin: 0;
     padding-top: 1rem;
     padding-bottom: 1rem;
+
+    flex: 0 1 auto;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: stretch;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    box-sizing: border-box;
 }
 
 .div1,
@@ -27,23 +41,16 @@
     padding: 1rem;
 }
 
-.contenedor-ppal {
-    min-height: 95vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+.title-login {
+    text-align: center;
+    margin-bottom: 0.2rem;
+    font-size: clamp(20px, 6vw, 34px);
 }
 
-.contenedor-login {
-    flex: 0 1 auto;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: stretch;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    box-sizing: border-box;
+.subtitle-login {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: clamp(14px, 6vw, 21px);
 }
 
 .form-login {
@@ -68,19 +75,24 @@
 }
 
 .div2 {
-    /* background-color: var(--bg-form); */
-    background: #8E2DE2;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #8E2DE2;
+    background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
+    background: linear-gradient(to right, #4A00E0, #8E2DE2);
 
     border-radius: 10px;
 }
 
-.div2 p {
+.imgsatelite {
+    width: 12rem;
+    height: auto;
+}
+
+.texto-div2 {
     text-align: center;
     color: #ffffff !important;
     font-size: 1.4rem;
     line-height: 2.1rem;
+    font-size: clamp(10px, 6vw, 20px);
 }
 
 .notificaciones {
@@ -105,26 +117,26 @@
     font-weight: bold;
 }
 
-.noti p {
+.texto-noti {
     margin: 0;
     text-align: center;
     font-size: 3rem;
 }
 
-.noti span {
+.span-noti {
     margin: 0;
     text-align: center;
     font-size: 1rem;
     color: #b9b6b6;
 }
 
-.ImgSatelite {
-    width: 8rem;
-    height: auto;
-    margin-bottom: 1.5rem;
-}
+@media (max-width: 970px) {
+    .contenedor-login {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0;
 
-.imgsatelite {
-    width: 12rem;
-    height: auto;  
+        .div2 {
+            width: 91%;
+        }
+    }
 }
